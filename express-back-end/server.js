@@ -13,6 +13,10 @@ App.use(Express.static('public'));
 const apiRoutes = require('./routes/apiRoutes')
 
 App.use('/api', apiRoutes);
+App.use('/favorites', userRoutes);
+App.use('/categories', categoryRoutes);
+App.use('/products', productRoutes);
+
 
 
 // Sample GET route
