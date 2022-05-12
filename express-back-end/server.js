@@ -10,19 +10,20 @@ App.use(Express.static('public'));
 
 
 // Routers
-const apiRoutes = require('./routes/apiRoutes')
+const apiRoutes = require('./routes/apiRoutes');
+const favoriteRoutes = require('./routes/favoriteRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes');
 
 App.use('/api', apiRoutes);
-App.use('/favorites', userRoutes);
+App.use('/favorites', favoriteRoutes);
 App.use('/categories', categoryRoutes);
 App.use('/products', productRoutes);
 
-
-
 // Sample GET route
-App.get('/', (req, res) => {
-  console.log(res);
-});
+// App.get('/', (req, res) => {
+//   console.log(res);
+// });
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
