@@ -12,7 +12,7 @@ App.use(Express.static('public'));
 // Routers
 const apiRoutes = require('./routes/apiRoutes')
 
-app.use('/api', apiRoutes);
+App.use('/api', apiRoutes);
 
 
 // Sample GET route
