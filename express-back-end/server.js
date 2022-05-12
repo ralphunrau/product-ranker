@@ -8,6 +8,13 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
 
+
+// Routers
+const apiRoutes = require('./routes/apiRoutes')
+
+app.use('/api', apiRoutes);
+
+
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
