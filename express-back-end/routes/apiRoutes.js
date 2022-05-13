@@ -10,7 +10,7 @@ router.get('/products', (req, res) => {
   const params = {
     api_key: process.env.API_KEY,
     type: "search",
-    amazon_domain: "amazon.ca",
+    amazon_domain: "amazon.com",
     search_term: "phone"
   }
   
@@ -19,7 +19,7 @@ router.get('/products', (req, res) => {
     .then(response => {
 
       // print the JSON response from Rainforest API
-      res.send(response.data);
+      res.send(response.data.search_results);
   
     }).catch(error => {
       // catch and print the error
@@ -33,18 +33,15 @@ router.get('/categories', (req, res) => {
   // set up the request parameters
   const params = {
     api_key: process.env.API_KEY,
-    type: "category",
-    url: "https://www.amazon.com/s?bbn=16225009011&rh=n%3A%2116225009011%2Cn%3A502394%2Cn%3A281052",
-    amazon_domain: "amazon.ca",
-    category_id: "1000"
+    type: "standard",
   }
 
   // make the http GET request to Rainforest API
-  axios.get('https://api.rainforestapi.com/request', { params })
+  axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.API_KEY}&domain=amazon.com`)
     .then(response => {
 
       // print the JSON response from Rainforest API
-      console.log('categories response.data:', JSON.stringify(response.data, 0, 2));
+      res.send(response.data);
 
     }).catch(error => {
       // catch and print the error
