@@ -11,13 +11,14 @@
     "seed": "knex seed:run --knexfile db/knexfile.js"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "body-parser": "^1.18.3",
     "dotenv": "^16.0.1",
     "express": "^4.16.4",
     "knex": "^2.0.0",
+    "morgan": "^1.10.0",
     "nodemon": "^1.18.7",
-    "pg": "^8.7.3",
-    "morgan": "^1.10.0"
+    "pg": "^8.7.3"
   },
   "devDependencies": {}
 }
