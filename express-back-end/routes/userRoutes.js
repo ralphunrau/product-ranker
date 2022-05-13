@@ -9,7 +9,7 @@ router.get('', (req, res) => {
       username: 'username',
       email: 'email'
     })
-    .then((users) => res.json(users))
+    .then((users) => res.send(users))
     .catch((error) => console.error(error));
 });
 
