@@ -2,6 +2,7 @@ require('dotenv').config();
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
+const morgan = require('morgan');
 const PORT = process.env.PORT;
 
 // Express Configuration
@@ -9,6 +10,8 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
 
+// setup morgan middleware
+App.use(morgan('dev'));
 
 // Routers
 const apiRoutes = require('./routes/apiRoutes');
