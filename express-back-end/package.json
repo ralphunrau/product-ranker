@@ -19,6 +19,5 @@
     "pg": "^8.7.3",
     "morgan": "^1.10.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
