@@ -11,7 +11,7 @@ router.get('/products', (req, res) => {
     api_key: process.env.API_KEY,
     type: "search",
     amazon_domain: "amazon.com",
-    search_term: search
+    search_term: 'search'
   }
   
   // make the http GET request to Rainforest API
@@ -43,8 +43,8 @@ router.get('/products/:searchTerm', (req, res) => {
     .then(response => {
 
       // print the JSON response from Rainforest API
-      res.send(response.data.search_results);
-  
+      res.json(response.data.search_results);
+      
     }).catch(error => {
       // catch and print the error
       console.log(error);
