@@ -1,7 +1,9 @@
 import '../styles/TierList.scss'
+import Item from './Item'
 
 // import hooks
 import useVisualMode from '../../hooks/useVisualMode'
+import useApplicationData from '../../hooks/useApplicationData'
 
 
 // constants for mode
@@ -9,6 +11,17 @@ import useVisualMode from '../../hooks/useVisualMode'
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
+  const state = useApplicationData();
+
+  const visitProduct = () => {
+    // The code to visit a product page will go here
+  }
+  
+  const sortItemsIntoTierList = () => {
+    // The code to sort an item into the correct tier list will go here
+  }
+
+  const fakeImage = 'https://www.gannett-cdn.com/presto/2021/10/06/USAT/002fd519-2817-4df5-b8bc-df6a9d2021d5-Wendys_cereal_box_3D.png'
 
   return (
     <div id="tier-list">
@@ -38,7 +51,7 @@ export default function TierList(props) {
         </div>
         <div id="tier-list-right">
           <div className="tier-list-item">
-            Products will be appended here upon page load.
+            <Item image={fakeImage} visitproduct={visitProduct}/>
           </div>
           <div className="tier-list-item">
             Products will be appended here upon page load.

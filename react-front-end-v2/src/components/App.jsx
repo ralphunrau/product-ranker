@@ -45,7 +45,7 @@ export default function App(props) {
       <button onClick={fetchProducts} >
         Fetch Data
       </button>
-      <TierList />     
+      <TierList />
     </div>
   );
 }

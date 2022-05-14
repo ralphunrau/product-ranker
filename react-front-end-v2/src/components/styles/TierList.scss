@@ -44,15 +44,20 @@
         height: 120px;
         width: 1100px;
         display: flex;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
         font-size: x-large;
+
+        img {
+          height: 100px;
+          width: 100px;
+        }
       }
     }
   }
 
   #tier-list-footer {
-    border: 3px solid black;
+    border: 2px solid black;
     font-size: large;
     height: 110px;
     display: flex;
