@@ -13,14 +13,14 @@ export default function useApplicationData() {
     setState({...state, header: mode});
   }
 
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get('api/products'),
-  //     axios.get('api/categories')
-  //   ]).then((all) => {
-  //     setState(prev => ({...prev, products: all[0].data, categories: all[1].data}));
-  //   })
-  // }, []);
+  useEffect(() => {
+    Promise.all([
+      axios.get('api/products'),
+      axios.get('api/categories')
+    ]).then((all) => {
+      setState(prev => ({...prev, products: all[0].data, categories: all[1].data}));
+    })
+  }, []);
 
   return { state, setHeader };
 }
