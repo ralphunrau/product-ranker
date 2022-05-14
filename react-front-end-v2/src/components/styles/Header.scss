@@ -3,6 +3,6 @@
 .header {
   @include flex-column;
   width: 100%;
-  min-height: 10vh;
+  // min-height: 10vh;
   background-color: $third-color;
 }
