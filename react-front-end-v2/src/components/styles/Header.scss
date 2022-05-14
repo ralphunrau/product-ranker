@@ -3,6 +3,44 @@
 .header {
   @include flex-column;
   width: 100%;
-  // min-height: 10vh;
-  background-color: $third-color;
+  align-items: center;
+
+  .user-form {
+    @include flex-column;
+    background-color: $form-color;
+    border: transparent;
+    border-radius: 5px;
+    padding: 25px;
+    align-items: center;
+    width: 40%;
+    margin-top: 1em;
+
+    .form-input {
+      @include flex-column;
+      width: 100%;
+      margin-bottom: 1em;
+      margin-top: 1em;
+    }
+
+    .form-input--text {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      margin-bottom: 0.5em;
+      margin-top: 0.5em;
+      border-bottom: solid grey;
+    }
+
+    .form-submit {
+      @include flex-row;
+      width: 70%;
+      justify-content: center;
+
+      button {
+        width: 45%;
+        margin-left: 0.1em;
+        margin-right: 0.1em;
+      }
+    }
+  }
 }

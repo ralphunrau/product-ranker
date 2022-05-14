@@ -28,7 +28,8 @@ export default function Register(props) {
   }
 
   return (
-    <main className="login-form">
+    <main className="user-form">
+      <h3>Sign Up</h3>
       <section className="form-input">
         <input
           name="username"
@@ -56,8 +57,7 @@ export default function Register(props) {
         />
       </section>
       <section className="form-submit">
-        <Button confirm onClick={validate} >Login</Button>
-        <Button confirm onClick={props.cancel} >Cancel</Button>
+        <Button confirm onClick={validate} >Register</Button>
       </section>
     </main>
   );

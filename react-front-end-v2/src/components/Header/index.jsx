@@ -20,11 +20,15 @@ export default function Header(props) {
     if(props.mode === HIDDEN && mode !== HIDDEN) transition(HIDDEN);
   })
 
+  const onCancel = () => {
+    back()
+  }
+
   return (
     <header className="header">
       {mode === HIDDEN && <></>}
-      {mode === LOGIN && <Login />}
-      {mode === REGISTER && <Register />}
+      {mode === LOGIN && <Login cancel={onCancel}/>}
+      {mode === REGISTER && <Register cancel={onCancel}/>}
     </header>
   )
 }
