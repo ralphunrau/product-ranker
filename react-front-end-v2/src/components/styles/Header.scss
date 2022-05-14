@@ -1,0 +1,8 @@
+@import "./partials/Mixins.scss";
+
+.header {
+  @include flex-column;
+  width: 100%;
+  min-height: 10vh;
+  background-color: $third-color;
+}

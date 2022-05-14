@@ -1,0 +1,23 @@
+@mixin flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+@mixin align-center {
+  justify-content: center;
+  align-items: center;
+}
+
+$brand-color: #54a0ff;
+$secondary-color: #ff9f43;
+$third-color: #C9E265;
+$alternate-color: #d9e6df65;
+$confirm-color: #10ac84;
+$danger-color: #ee5253;
+$white: #fff;
+$black: #000;
