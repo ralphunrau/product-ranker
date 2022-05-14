@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import Product from './Product';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      message: 'Click the button to load data!'
+      message: 'Click the button to load data!',
+      products: []
     }
   }
 
@@ -18,7 +20,8 @@ class App extends Component {
 
       console.log(response.data.message) // Just the message
       this.setState({
-        message: response.data.message
+        message: response.data.message,
+        products: response.data
       });
     }) 
   }
@@ -36,16 +39,38 @@ class App extends Component {
     }) 
   }
 
+  createProducts = (products) => {
+    return products.map((product) => {
+      // console.log(product.price.raw)
+      return (
+        <Product
+          id={product.asin}
+          title={product.title}
+          link={product.link}
+          image={product.image}
+          rating={product.rating}
+          ratings_total={product.ratings_total}
+          price={product.price.raw}
+        />
+      )
+    })
+  }
+
+
   render() {
     return (
       <div className="App">
         <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchCategories} >
+        <button onClick={this.fetchProducts} >
           Fetch Data
-        </button>        
+        </button>
+        <div>
+          {this.state.products[0] ? this.createProducts(this.state.products) : 'The data will be here upon fetch.'}
+        </div>
       </div>
     );
   }
 }
 
 export default App;
+

@@ -1,4 +1,4 @@
-﻿Example Project TItle
+﻿Example Project Title
 
 
 Project Desc: What problem your app solves
@@ -13,10 +13,9 @@ Target audience: Your app will be useful to whom
 Shoppers can decide on which product to buy when unsure if the product is the best fit for them.
 
 
-User Stories: 
+User Stories:
 
-
-User can can a photo of a product and view product information in the app
+User can see where a product ranks amongst similar products
 User can see related products and see where they tier amongst each other
 User can save their tier lists to their profile
 User can share their saved tier lists to other users
