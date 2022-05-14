@@ -8,21 +8,19 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const {state, setHeader, user } = useApplicationData();
+  const { state, setHeader, user } = useApplicationData();
 
   const fetchProductsBySearch = (searchTerm) => {
 
-    axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+    // axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
+    // .then((response) => {
+    //   // handle success
+    //   console.log('Data from fetchProductsBySearch:', response.data) // The entire response from the Rails API
 
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message,
-        products: response.data
-      });
-    }) 
+    //   console.log('Message;', response.data.message) // Just the message
+
+
+    // }) 
   }
 
   // const fetchCategories = () => {
@@ -45,7 +43,7 @@ export default function App(props) {
       <button onClick={() => fetchProductsBySearch('forks')} >
         Fetch Data
       </button>
-      {<TierList findProducts={() => fetchProductsBySearch('spoons')}/>}
+      <TierList findProducts={fetchProductsBySearch('spoons')} products={state.products}/>
     </div>
   );
 }
