@@ -17,42 +17,42 @@ export default function TierList(props) {
       </header>
       <div id="tier-list-body">
         <div id="tier-list-left">
-          <div class="tier-list-rank">
+          <div className="tier-list-rank">
             S Tier
           </div>
-          <div class="tier-list-rank">
+          <div className="tier-list-rank">
             A Tier
           </div>
-          <div class="tier-list-rank">
+          <div className="tier-list-rank">
             B Tier
           </div>
-          <div class="tier-list-rank">
+          <div className="tier-list-rank">
             C Tier
           </div>
-          <div class="tier-list-rank">
+          <div className="tier-list-rank">
             D Tier
           </div>
-          <div class="tier-list-rank">
+          <div className="tier-list-rank">
             F Tier
           </div>
         </div>
         <div id="tier-list-right">
-          <div class="tier-list-item">
+          <div className="tier-list-item">
             Products will be appended here upon page load.
           </div>
-          <div class="tier-list-item">
+          <div className="tier-list-item">
             Products will be appended here upon page load.
           </div>
-          <div class="tier-list-item">
+          <div className="tier-list-item">
             Products will be appended here upon page load.
           </div>
-          <div class="tier-list-item">
+          <div className="tier-list-item">
             Products will be appended here upon page load.
           </div>
-          <div class="tier-list-item">
+          <div className="tier-list-item">
             Products will be appended here upon page load.
           </div>
-          <div class="tier-list-item">
+          <div className="tier-list-item">
             Products will be appended here upon page load.
           </div>
         </div>
