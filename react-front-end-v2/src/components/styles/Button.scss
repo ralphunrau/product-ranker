@@ -1,0 +1,39 @@
+@import "./partials/Mixins.scss";
+
+.Button {
+  background-color: transparent;
+  opacity: 0.5;
+  &:hover {
+    background-color: $white;
+    border: 2px solid transparent;
+    opacity: 1;
+  }
+}
+
+.button--danger {
+  color: $white;
+  border-color: $alternate-color;
+  background-color: $black;
+  border: none;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  &:hover {
+    cursor: pointer;
+    color: $white;
+    background-color: $danger-color;
+  }
+}
+
+.button--confirm {
+  color: $white;
+  border-color: $alternate-color;
+  background-color: $black;
+  border: none;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  &:hover {
+    cursor: pointer;
+    color: $white;
+    background-color: $confirm-color;
+  }
+}
