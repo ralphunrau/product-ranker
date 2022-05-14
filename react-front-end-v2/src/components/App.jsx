@@ -1,7 +1,7 @@
 import './styles/App.scss';
 import axios from 'axios';
 import Nav from './Nav';
-import Header from './Header/Header';
+import Header from './Header';
 
 import useApplicationData from '../hooks/useApplicationData';
 
