@@ -11,7 +11,31 @@ router.get('/products', (req, res) => {
     api_key: process.env.API_KEY,
     type: "search",
     amazon_domain: "amazon.com",
-    search_term: "phone"
+    search_term: search
+  }
+  
+  // make the http GET request to Rainforest API
+  axios.get('https://api.rainforestapi.com/request', { params })
+    .then(response => {
+
+      // print the JSON response from Rainforest API
+      res.send(response.data.search_results);
+  
+    }).catch(error => {
+      // catch and print the error
+      console.log(error);
+    })
+    
+})
+
+router.get('/products/:searchTerm', (req, res) => {
+
+  // set up the request parameters
+  const params = {
+    api_key: process.env.API_KEY,
+    type: "search",
+    amazon_domain: "amazon.com",
+    search_term: req.params.searchTerm
   }
   
   // make the http GET request to Rainforest API

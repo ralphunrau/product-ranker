@@ -10,8 +10,9 @@ export default function App(props) {
 
   const {state, setHeader, user } = useApplicationData();
 
-  const fetchProducts = () => {
-    axios.get('/api/products') // You can simply make your requests to "/api/whatever you want"
+  const fetchProductsBySearch = (searchTerm) => {
+
+    axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
     .then((response) => {
       // handle success
       console.log(response.data) // The entire response from the Rails API
@@ -41,11 +42,10 @@ export default function App(props) {
     <div className="App">
       <Nav user={user} toggleForm={setHeader} header={state.header} />
       <Header mode={state.header}/>
-      <h1>{ props.message }</h1>
-      <button onClick={fetchProducts} >
+      <button onClick={() => fetchProductsBySearch('forks')} >
         Fetch Data
       </button>
-      <TierList />
+      {<TierList findProducts={() => fetchProductsBySearch('spoons')}/>}
     </div>
   );
 }
