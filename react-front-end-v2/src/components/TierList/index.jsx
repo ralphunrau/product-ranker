@@ -43,28 +43,6 @@ export default function TierList(props) {
     )
   }
 
-  // <div className="tier-list-item-S">
-  //   {allProductsToComponents}
-  // </div>
-  // <div className="tier-list-item-A">
-  //   Products will be appended here upon page load.
-  // </div>
-  // <div className="tier-list-item-B">
-  //   Products will be appended here upon page load.
-  // </div>
-  // <div className="tier-list-item-C">
-  //   Products will be appended here upon page load.
-  // </div>
-  // <div className="tier-list-item-D">
-  //   Products will be appended here upon page load.
-  // </div>
-  // <div className="tier-list-item-F">
-  //   Products will be appended here upon page load.
-  // </div>
-
-  // const products = props.findProducts;
-  // console.log('Products:', props.products);
-
   const allProductsToComponents = props.products.map((product) => {
     return (
       <Item 
@@ -77,8 +55,6 @@ export default function TierList(props) {
       />
     )
   })
-
-  const fakeImage = 'https://www.gannett-cdn.com/presto/2021/10/06/USAT/002fd519-2817-4df5-b8bc-df6a9d2021d5-Wendys_cereal_box_3D.png'
 
   return (
     <div id="tier-list">
