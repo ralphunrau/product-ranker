@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
 import axios from 'axios';
 import './styles/App.scss';
+import Nav from './Nav';
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
-    }
-  }
+export default function App (props) {
 
-  fetchProducts = () => {
+  const fetchProducts = () => {
     axios.get('/api/products') // You can simply make your requests to "/api/whatever you want"
     .then((response) => {
       // handle success
@@ -23,7 +17,7 @@ class App extends Component {
     }) 
   }
 
-  fetchCategories = () => {
+  const fetchCategories = () => {
     axios.get('/api/categories') // You can simply make your requests to "/api/whatever you want"
     .then((response) => {
       // handle success
@@ -36,16 +30,13 @@ class App extends Component {
     }) 
   }
 
-  render() {
-    return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchCategories} >
-          Fetch Data
-        </button>        
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Nav />
+      <h1>{ props.message }</h1>
+      <button onClick={fetchCategories} >
+        Fetch Data
+      </button>        
+    </div>
+  );
 }
-
-export default App;
