@@ -44,6 +44,7 @@ export default function Login(props) {
       </section>
       <section className="form-submit">
         <Button confirm onClick={validate} >Login</Button>
+        <Button confirm onClick={props.cancel} >Cancel</Button>
       </section>
     </main>
   );

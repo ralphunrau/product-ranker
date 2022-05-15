@@ -9,6 +9,7 @@
   .user-form {
     @include flex-column;
     background-color: $form-color;
+    transition: all 0.5s ease-in-out;
     border: transparent;
     border-radius: 5px;
     padding: 25px;
@@ -43,5 +44,9 @@
         margin-right: 0.1em;
       }
     }
+  }
+
+  .user-form:target {
+    height: auto;
   }
 }
