@@ -27,7 +27,6 @@ export default function App(props) {
     <div className="App">
       <Header mode={state.header}/>
       <Body
-        currentCategory={state.currentCategory}
         category={state.category}
         categories={state.categories}
         onChange={setCategory}
