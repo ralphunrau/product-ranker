@@ -1,13 +1,14 @@
 import './styles/App.scss';
 import axios from 'axios';
 import Header from './Header';
-import TierList from './TierList'
+import Body from './Body';
+
 
 import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state, user } = useApplicationData();
+  const { state , setCategory } = useApplicationData();
 
   // const fetchCategories = () => {
   //   axios.get('/api/categories') // You can simply make your requests to "/api/whatever you want"
@@ -25,10 +26,12 @@ export default function App(props) {
   return (
     <div className="App">
       <Header mode={state.header}/>
-      <>
-        
-        <TierList products={state.products}/>
-      </>
+      <Body
+        category={state.category}
+        categories={state.categories}
+        onChange={setCategory}
+        products={state.products}
+      />
     </div>
   );
 }
