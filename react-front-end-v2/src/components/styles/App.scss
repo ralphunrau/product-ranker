@@ -1,38 +1,45 @@
+@import "./partials/Mixins.scss";
+
 .App {
-  text-align: center;
-}
+  @include flex-column;
+  width: 100%;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+  .container {
+    @include flex-row;
+    margin-top: 100px;
+    width: 100%;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+    .categories {
+      height: 100%;
+      display: flex;
+      position: fixed;
+      top: 100px;
+      left: 0;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+      .category-lists {
+        background-color: $form-color;
+        border-right: solid;
+        width: auto;
+      }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+      .side-bar--button {
+        display: flex;
+        position: relative;
+        background-color: $brand-color;
+        color: $white;
+        justify-content: center;
+        border-style: solid solid solid none;
+        border-radius: 5px;
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+        padding: 0.3rem;
+        opacity: 0.7;
+        &:hover {
+          cursor: pointer;
+          opacity: 1;
+        }
+      }
+    }
   }
 }

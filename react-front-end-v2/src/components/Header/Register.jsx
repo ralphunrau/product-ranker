@@ -5,6 +5,7 @@ export default function Register(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passowrdConfirmation, setPasswordConfirmation] = useState('');
   const [error, setError] = useState('');
 
   const validate = () => {
@@ -18,13 +19,18 @@ export default function Register(props) {
       return;
     }
 
-    if (password === '') {
+    if (password === '' || passowrdConfirmation === '') {
       setError('please enter your password');
       return;
     }
 
-    setError(null);
-    props.register(username, email, password)
+    if (password === passowrdConfirmation) {
+      setError(null);
+      props.register(username, email, password)
+    } else {
+      setError('Your password does not match!');
+      return
+    }
   }
 
   return (
@@ -49,10 +55,18 @@ export default function Register(props) {
         />
          <input
           name="password"
-          type="text"
+          type="password"
           placeholder='Password'
           className="form-input--text"
           onChange={event =>  setPassword(event.target.value)}
+          data-testid="user-password"
+        />
+              <input
+          name="passwordConfirmation"
+          type="password"
+          placeholder='Confirm password'
+          className="form-input--text"
+          onChange={event =>  setPasswordConfirmation(event.target.value)}
           data-testid="user-password"
         />
       </section>

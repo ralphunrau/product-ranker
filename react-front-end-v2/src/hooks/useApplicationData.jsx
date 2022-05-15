@@ -6,25 +6,30 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     products: [],
     categories: [],
+    category: null,
     user: {}
   });
 
   const searchTerm = 'hello';
 
-  useEffect(() => {
-    axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
+  const setCategory = (category) => {
+    setState({... state, category})
+  }
 
-      setState(prev => ({...prev, products: response.data}));
+  // useEffect(() => {
+  //   axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
+  //   .then((response) => {
 
-      console.log(state.products);
+  //     setState(prev => ({...prev, products: response.data}));
 
-      // handle success
-      console.log('Data from useApplicationData:', response.data) // The entire response from the Rails API
+  //     console.log(state.products);
+
+  //     // handle success
+  //     console.log('Data from useApplicationData:', response.data) // The entire response from the Rails API
   
-      console.log('Message', response.data.message) // Just the message
-    }) 
-  }, [state.products])
+  //     console.log('Message', response.data.message) // Just the message
+  //   }) 
+  // }, [])
 
   // useEffect(() => {
   //   Promise.all([
@@ -35,5 +40,5 @@ export default function useApplicationData() {
   //   })
   // }, []);
 
-  return { state };
+  return { state, setCategory };
 }

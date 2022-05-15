@@ -1,0 +1,26 @@
+@import "./partials/Mixins.scss";
+
+.category-list {
+  color: $black;
+  width: 15rem;
+  height: 2rem;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $white;
+    cursor: pointer;
+  }
+
+  &--selected {
+    background-color: $secondary-color;
+    color: $white;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+}
