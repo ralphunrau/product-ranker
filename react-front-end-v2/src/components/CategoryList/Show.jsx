@@ -6,14 +6,14 @@ export default function Show(props) {
 
     
 
-    return (
-      <CategoryListItem
-        key={category.id}
-        id={category.id}
-        name={category.name}
-        selected={category.id === props.category}
-        setCategory={(event) => props.onChange(category.id)}
-      />
+  return (
+    <CategoryListItem
+      key={category.id}
+      id={category.id}
+      name={category.name}
+      selected={category.id === props.category}
+      setCategory={(event) => props.onChange(category.id)}
+    />
     )
   })
 
@@ -22,5 +22,4 @@ export default function Show(props) {
       <ul>{categoryListItem}</ul>
     </div>
   )
-
 }
