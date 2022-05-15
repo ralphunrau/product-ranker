@@ -4,6 +4,7 @@ import Item from './Item'
 // import hooks
 import useVisualMode from '../../hooks/useVisualMode'
 import useApplicationData from '../../hooks/useApplicationData'
+import CategoryListItem from '../CategoryList/CategoryListItem'
 
 
 // constants for mode
@@ -11,7 +12,6 @@ import useApplicationData from '../../hooks/useApplicationData'
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
-  const state = useApplicationData();
 
   const visitProduct = () => {
     // The code to visit a product page will go here
@@ -25,16 +25,16 @@ export default function TierList(props) {
           {allProducts.filter(product => product.props.rating >= 4.8 && product.props.rating <= 5)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4.5 && product.props.rating < 4.8)}
+          {allProducts.filter(product => product.props.rating >= 4.65 && product.props.rating < 4.8)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4 && product.props.rating < 4.5)}
+          {allProducts.filter(product => product.props.rating >= 4.3 && product.props.rating < 4.65)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 3 && product.props.rating < 4)}
+          {allProducts.filter(product => product.props.rating >= 4 && product.props.rating < 4.3)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 2 && product.props.rating < 3)}
+          {allProducts.filter(product => product.props.rating >= 2 && product.props.rating < 4)}
         </div>
         <div className="tier-list-item">
           {allProducts.filter(product => product.props.rating >= 0 && product.props.rating < 2)}
@@ -82,7 +82,9 @@ export default function TierList(props) {
             F Tier
           </div>
         </div>
-        {sortItemsIntoTierList(allProductsToComponents)}
+        {/* {sortItemsIntoTierList(allCategoryProductsToComponents)} */}
+        {/* {props.category.id !== null && sortItemsIntoTierList(allProductsToComponents)} */}
+        {/* {props.category.id === null && sortItemsIntoTierList(allCategoryProductsToComponents)} */}
       </div>
       <div id="tier-list-footer">
         <button>

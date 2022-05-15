@@ -7,49 +7,45 @@ export default function useApplicationData() {
     products: [],
     categories: [],
     category: null,
+    currentCategory: [],
     user: {}
   });
 
+  // these are hard coded values for the search/category queries and will be taken by user input in future
   const searchTerm = 'hello';
+  const categoryId = '165797011';
 
   const setCategory = (category) => {
     setState({... state, category})
   }
 
+  const setProductsBySearch = (searchTerm) => {
+    axios.get(`/api/products/${searchTerm}`)
+    .then((res) => {
+      const products = res.data;
+      setState({... state, products})
+    })
+  }
+
+  const getProductsByCategory = (category) => {
+    axios.get(`/api/products/categories/${category}`)
+      .then((res) => {
+        const products = res.data;
+        setState({... state, products})
+      })
+  }
+
   useEffect(() => {
-    // axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
-    // .then((response) => {
-
-    //   setState(prev => ({...prev, products: response.data}));
-
-    //   console.log(state.products);
-
-    //   // handle success
-    //   console.log('Data from useApplicationData:', response.data) // The entire response from the Rails API
-  
-    //   console.log('Message', response.data.message) // Just the message
-
-      
-    // }) 
+    
     Promise.all([
-      axios.get(`/api/products/${searchTerm}`),
       axios.get(`/api/categories`)
     ]).then((response) => {
       console.log("PROMISE ALL RESPONSE", response);
-      const [products, categories] = response;
+      const [categories] = response;
 
-      setState(prev => ({...prev, products: products.data, categories: categories.data}))
+      setState(prev => ({...prev, categories: categories.data}))
     })
   }, [])
 
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get('api/products'),
-  //     axios.get('api/categories')
-  //   ]).then((all) => {
-  //     setState(prev => ({...prev, products: all[0].data, categories: all[1].data}));
-  //   })
-  // }, []);
-
-  return { state, setCategory };
+  return { state, setCategory, setProductsBySearch, getProductsByCategory };
 }
