@@ -5,22 +5,24 @@
   width: 20rem;
   height: 2rem;
   padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   &:hover {
-    background-color: $secondary-color;
+    background-color: $brand-color;
     color: $white;
     cursor: pointer;
   }
 
   &--selected {
-    background-color: $secondary-color;
+    background-color: $brand-color;
     color: $white;
 
     &:hover {
-      background-color: $secondary-color;
+      background-color: $brand-color;
     }
   }
 }

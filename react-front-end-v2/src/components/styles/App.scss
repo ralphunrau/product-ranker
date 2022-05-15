@@ -4,6 +4,10 @@
   @include flex-column;
   width: 100%;
 
+  .category-lists::-webkit-scrollbar {
+    display: none;
+  }
+
   .container {
     @include flex-row;
     margin-top: 100px;
@@ -17,9 +21,10 @@
       left: 0;
 
       .category-lists {
-        background-color: $form-color;
+        background-color: $secondary-color;
         border-right: solid;
         width: auto;
+        overflow-y: scroll;
       }
 
       .side-bar--button {
