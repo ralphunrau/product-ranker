@@ -21,6 +21,7 @@ export default function CategoryList(props) {
       {mode === "SHOW" && 
       <Show
         category={props.category}
+        categories={props.categories}
         onChange={props.onChange}
       />
       }

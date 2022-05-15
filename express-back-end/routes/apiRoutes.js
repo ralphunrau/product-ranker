@@ -65,7 +65,7 @@ router.get('/categories', (req, res) => {
     .then(response => {
 
       // print the JSON response from Rainforest API
-      res.send(response.data);
+      res.send(response.data.categories);
 
     }).catch(error => {
       // catch and print the error
