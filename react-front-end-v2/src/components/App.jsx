@@ -25,7 +25,10 @@ export default function App(props) {
   return (
     <div className="App">
       <Header mode={state.header}/>
-      <TierList products={state.products}/>
+      <>
+        
+        <TierList products={state.products}/>
+      </>
     </div>
   );
 }
