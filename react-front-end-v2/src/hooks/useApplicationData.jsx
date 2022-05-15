@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import fetchProductsBySearch from "../helpers/fetchProductsBySearch";
+// import fetchProductsBySearch from "../helpers/fetchProductsBySearch";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    header: 'HIDDEN',
     products: [],
     categories: [],
     user: {}
   });
-
-  const setHeader = (mode) => {
-    setState({...state, header: mode});
-  }
 
   const searchTerm = 'hello';
 
@@ -40,5 +35,5 @@ export default function useApplicationData() {
   //   })
   // }, []);
 
-  return { state, setHeader };
+  return { state };
 }

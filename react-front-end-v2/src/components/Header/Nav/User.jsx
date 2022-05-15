@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import Button from "../Button";
+import Button from "../../Button";
 
 export default function User(props) {
 

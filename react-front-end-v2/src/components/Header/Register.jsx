@@ -58,6 +58,7 @@ export default function Register(props) {
       </section>
       <section className="form-submit">
         <Button confirm onClick={validate} >Register</Button>
+        <Button confirm onClick={props.cancel} >Cancel</Button>
       </section>
     </main>
   );
