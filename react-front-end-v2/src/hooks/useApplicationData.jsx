@@ -16,20 +16,31 @@ export default function useApplicationData() {
     setState({... state, category})
   }
 
-  // useEffect(() => {
-  //   axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
-  //   .then((response) => {
+  useEffect(() => {
+    // axios.get(`/api/products/${searchTerm}`) // You can simply make your requests to "/api/whatever you want"
+    // .then((response) => {
 
-  //     setState(prev => ({...prev, products: response.data}));
+    //   setState(prev => ({...prev, products: response.data}));
 
-  //     console.log(state.products);
+    //   console.log(state.products);
 
-  //     // handle success
-  //     console.log('Data from useApplicationData:', response.data) // The entire response from the Rails API
+    //   // handle success
+    //   console.log('Data from useApplicationData:', response.data) // The entire response from the Rails API
   
-  //     console.log('Message', response.data.message) // Just the message
-  //   }) 
-  // }, [])
+    //   console.log('Message', response.data.message) // Just the message
+
+      
+    // }) 
+    Promise.all([
+      axios.get(`/api/products/${searchTerm}`),
+      axios.get(`/api/categories`)
+    ]).then((response) => {
+      console.log("PROMISE ALL RESPONSE", response);
+      const [products, categories] = response;
+
+      setState(prev => ({...prev, products: products.data, categories: categories.data}))
+    })
+  }, [])
 
   // useEffect(() => {
   //   Promise.all([
