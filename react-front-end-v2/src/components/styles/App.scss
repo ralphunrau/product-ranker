@@ -28,11 +28,13 @@
       left: 0;
 
       .category-lists {
-        background-color: $secondary-color;
         position: relative;
-        border-right: solid;
+        background-color: $brand-color;
+        position: relative;
+        border-right: solid 1px;
         width: auto;
         overflow-y: scroll;
+        border-top: solid 0.5px $white;
       }
 
       .side-bar--button {
@@ -42,10 +44,10 @@
         justify-content: center;
         border-style: solid solid solid none;
         border-radius: 5px;
-        font-size: 2rem;
-        width: 2rem;
-        height: 2rem;
-        padding: 0.3rem;
+        font-size: 1.4rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0.1rem;
         opacity: 0.7;
         &:hover {
           cursor: pointer;

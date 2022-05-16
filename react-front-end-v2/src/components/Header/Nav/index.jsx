@@ -2,10 +2,12 @@ import '../../styles/Nav.scss'
 
 import User from './User';
 import Guest from './Guest';
+import SeachBar from '../../SearchBar';
 
 import { HIDDEN, LOGIN, REGISTER, SHOW } from '../../../helper/modes';
 
 import useVisualMode from '../../../hooks/useVisualMode';
+import SearchBar from '../../SearchBar';
 
 export default function Nav(props) {
 
@@ -28,8 +30,10 @@ export default function Nav(props) {
   return (
     <nav className="navBar">
       <div className="nav-left">
-        <img src="https://i.imgur.com/BM8SFkP.png" alt='logo' />
-        <h3>Amazonia</h3>
+        <img src='https://i.imgur.com/BM8SFkP.png' alt='logo'/>
+      </div>
+      <div className="nav-search">
+        <SearchBar setSearch={props.onChange} />
       </div>
       <div className="nav-right">
         <section className='user-buttons'>

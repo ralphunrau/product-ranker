@@ -10,11 +10,12 @@ export default function useApplicationData() {
     childCategories: [],
     childCategory: null,
     currentCategory: [],
+    searchTerm: '',
     user: {}
   });
 
   // these are hard coded values for the search/category queries and will be taken by user input in future
-  const searchTerm = 'hello';
+  // const searchTerm = 'hello';
   const categoryId = '165797011';
 
   const setMainCategory = (category) => {
@@ -39,6 +40,10 @@ export default function useApplicationData() {
   const selectCategory = (category) => {
     setState(prev => ({...prev, childCategory: category}));
   }
+
+  const setSearchTerm = (search) => {
+    setState(prev => ({...prev, searchTerm: search}));
+  };
 
   const setProductsBySearch = (searchTerm) => {
     axios.get(`/api/products/${searchTerm}`)
@@ -73,6 +78,7 @@ export default function useApplicationData() {
     setMainCategory,
     setProductsBySearch,
     getProductsByCategory,
-    selectCategory
+    selectCategory,
+    setSearchTerm
   };
 }
