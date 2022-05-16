@@ -1,0 +1,31 @@
+@import "./partials/Mixins.scss";
+
+.child-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $white;
+  color: $black;
+  width: 20rem;
+  height: 1rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: solid 1px;
+  font-size: 0.8rem;
+
+  &:hover {
+    background-color: $brand-color;
+    color: $white;
+    cursor: pointer;
+  }
+
+  &--selected {
+    background-color: $brand-color;
+    color: $white;
+
+    &:hover {
+      background-color: $brand-color;
+    }
+  }
+}

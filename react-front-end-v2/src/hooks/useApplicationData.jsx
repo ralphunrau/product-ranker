@@ -7,6 +7,8 @@ export default function useApplicationData() {
     products: [],
     categories: [],
     category: null,
+    childCategories: [],
+    childCategory: null,
     currentCategory: [],
     user: {}
   });
@@ -16,8 +18,23 @@ export default function useApplicationData() {
   const categoryId = '165797011';
 
   const setCategory = (category) => {
-    setState({... state, category})
+    const newState = {
+      category: state.category === category ? null : category,
+      childCategories: [],
+      childCategory: null
+    }
+    setState(prev => ({...prev, ...newState}));
   }
+
+  const getChildCategories = (category) => {
+    axios.get(`/api/categories/${category}`)
+      .then((res) => {
+        const childCategories = res;
+        console.log('CHILD CATEGORIES!', childCategories)
+
+        setState(prev => ({...prev, childCategories: childCategories.data}))
+      }).catch(err => console.error(err.message));
+  };
 
   const setProductsBySearch = (searchTerm) => {
     axios.get(`/api/products/${searchTerm}`)
@@ -47,5 +64,5 @@ export default function useApplicationData() {
     })
   }, [])
 
-  return { state, setCategory, setProductsBySearch, getProductsByCategory };
+  return { state, setCategory, setProductsBySearch, getChildCategories, getProductsByCategory };
 }

@@ -4,7 +4,6 @@ import Item from './Item'
 // import hooks
 import useVisualMode from '../../hooks/useVisualMode'
 import useApplicationData from '../../hooks/useApplicationData'
-import CategoryListItem from '../CategoryList/CategoryListItem'
 
 
 // constants for mode
