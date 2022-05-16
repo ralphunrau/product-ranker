@@ -26,11 +26,10 @@
 
 .button--confirm {
   color: $white;
-  border-color: $alternate-color;
-  background-color: $black;
+  background-color: $alternate-color;
+  border-radius: 1px;
   border: none;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid $black;
   &:hover {
     cursor: pointer;
     color: $white;

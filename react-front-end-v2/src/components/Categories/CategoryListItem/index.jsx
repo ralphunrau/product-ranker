@@ -6,8 +6,7 @@ import Status from '../../Status';
 
 import useVisualMode from '../../../hooks/useVisualMode';
 
-const HIDDEN = 'HIDDEN';
-const LOADING = 'LOADING';
+import { HIDDEN, LOADING } from '../../../helper/modes'
 
 export default function CategoryListItem(props) {
 
