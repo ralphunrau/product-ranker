@@ -1,10 +1,9 @@
 import Show from './Show';
-import SearchBar from '../SearchBar';
 
 import useVisualMode from '../../hooks/useVisualMode';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars  } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faClose  } from '@fortawesome/free-solid-svg-icons';
 
 import {HIDDEN, SHOW} from '../../helper/modes'
 
@@ -31,7 +30,8 @@ export default function CategoryList(props) {
       />
       }
       <section className="side-bar--button" onClick={toggleBar}>
-        <FontAwesomeIcon icon={faBars} />
+        {mode === HIDDEN && <FontAwesomeIcon icon={faBars} />}
+        {mode === SHOW && <FontAwesomeIcon icon={faClose} />}
       </section>
     </div>
   )
