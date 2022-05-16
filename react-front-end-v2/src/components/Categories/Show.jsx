@@ -24,7 +24,7 @@ export default function Show(props) {
     )
   })
 
-  return (
+  return (        
     <div className="category-lists">
       <ul>{categoryListItem}</ul>
     </div>

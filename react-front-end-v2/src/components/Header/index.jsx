@@ -23,6 +23,7 @@ export default function Header(props) {
     <header className="header">
       <Nav
         toggleForm={toggleForm}
+        onChange={props.setSearch}
         mode={mode}
       />
       {mode === HIDDEN && <></>}

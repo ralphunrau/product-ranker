@@ -1,4 +1,5 @@
 import Show from './Show';
+import SearchBar from '../SearchBar';
 
 import useVisualMode from '../../hooks/useVisualMode';
 
@@ -30,7 +31,7 @@ export default function CategoryList(props) {
       />
       }
       <section className="side-bar--button" onClick={toggleBar}>
-      <FontAwesomeIcon icon={faBars} />
+        <FontAwesomeIcon icon={faBars} />
       </section>
     </div>
   )
