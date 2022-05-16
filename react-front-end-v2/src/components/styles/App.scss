@@ -29,7 +29,7 @@
 
       .category-lists {
         position: relative;
-        background-color: $brand-color;
+        background-color: $third-color;
         position: relative;
         border-right: solid 1px;
         width: auto;
@@ -67,6 +67,7 @@
       animation: rotation 2s linear infinite;
       height: 1rem;
       padding-left: 0.3rem;
+      color: white;
     }
   }
 }

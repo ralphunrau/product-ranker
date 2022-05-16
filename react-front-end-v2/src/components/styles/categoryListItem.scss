@@ -13,17 +13,17 @@
   font-size: 0.8rem;
 
   &:hover {
-    background-color: $white;
-    color: $black;
+    background-color: $brand-color;
+    color: $white;
     cursor: pointer;
   }
 
   &--selected {
-    background-color: $white;
-    color: $black;
+    background-color: $brand-color;
+    color: $white;
 
     &:hover {
-      background-color: $white;
+      background-color: $brand-color;
     }
   }
 }
