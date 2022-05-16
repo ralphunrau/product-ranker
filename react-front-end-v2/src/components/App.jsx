@@ -8,20 +8,12 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state , setCategory } = useApplicationData();
+  const { state , setCategory, getChildCategories } = useApplicationData();
 
-  // const fetchCategories = () => {
-  //   axios.get('/api/categories') // You can simply make your requests to "/api/whatever you want"
-  //   .then((response) => {
-  //     // handle success
-  //     console.log(response.data) // The entire response from the Rails API
-
-  //     console.log(response.data.message) // Just the message
-  //     this.setState({
-  //       message: response.data.message
-  //     });
-  //   }) 
-  // }
+  const setMainCategory = (category) => {
+    setCategory(category);
+    getChildCategories(category);
+  }
 
   return (
     <div className="App">
@@ -29,7 +21,9 @@ export default function App(props) {
       <Body
         category={state.category}
         categories={state.categories}
-        onChange={setCategory}
+        childCategories={state.childCategories}
+        childCategory={state.childCategory}
+        onChange={setMainCategory}
         products={state.products}
       />
     </div>

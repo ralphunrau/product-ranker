@@ -22,6 +22,7 @@
 
       .category-lists {
         background-color: $secondary-color;
+        position: relative;
         border-right: solid;
         width: auto;
         overflow-y: scroll;
@@ -29,7 +30,6 @@
 
       .side-bar--button {
         display: flex;
-        position: relative;
         background-color: $brand-color;
         color: $white;
         justify-content: center;
@@ -45,6 +45,15 @@
           opacity: 1;
         }
       }
+    }
+
+    .child-categories {
+      display: flex;
+      position: relative;
+
+      // left: 20rem;
+      background-color: $white;
+      color: $black;
     }
   }
 }

@@ -1,6 +1,6 @@
 import './styles/App.scss';
 
-import CategoryList from './CategoryList';
+import CategoryList from './Categories';
 import TierList from './TierList'
 
 export default function Body(props) {
@@ -10,6 +10,8 @@ export default function Body(props) {
       <CategoryList 
         category={props.category}
         categories={props.categories}
+        childCategories={props.childCategories}
+        childCategory={props.childCategory}
         onChange={props.onChange}
       />
       <TierList

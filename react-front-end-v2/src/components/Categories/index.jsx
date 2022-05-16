@@ -22,6 +22,8 @@ export default function CategoryList(props) {
       <Show
         category={props.category}
         categories={props.categories}
+        childCategories={props.childCategories}
+        childCategory={props.childCategory}
         onChange={props.onChange}
       />
       }
