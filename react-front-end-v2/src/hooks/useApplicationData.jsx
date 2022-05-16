@@ -29,10 +29,8 @@ export default function useApplicationData() {
   const getChildCategories = (category) => {
     axios.get(`/api/categories/${category}`)
       .then((res) => {
-        const childCategories = res;
-        console.log('CHILD CATEGORIES!', childCategories)
-
-        setState(prev => ({...prev, childCategories: childCategories.data}))
+        
+        setState(prev => ({...prev, childCategories: res.data}))
       }).catch(err => console.error(err.message));
   };
 

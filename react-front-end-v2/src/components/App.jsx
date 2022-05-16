@@ -9,11 +9,16 @@ import useApplicationData from '../hooks/useApplicationData';
 export default function App(props) {
 
   const { state , setCategory, getChildCategories } = useApplicationData();
-
+  
   const setMainCategory = (category) => {
+
+    const mainCategory = state.categories.find(parent => parent.id === category);
     setCategory(category);
-    getChildCategories(category);
-  }
+
+    if (mainCategory.has_children) {
+      getChildCategories(category);
+    };
+  };
 
   return (
     <div className="App">
