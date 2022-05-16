@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import '../styles/ChildCategoryListItem.scss';
+import '../../styles/ChildCategoryListItem.scss';
 
 export default function ChildCategoryListItem(props) {
 

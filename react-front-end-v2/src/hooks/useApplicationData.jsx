@@ -18,27 +18,29 @@ export default function useApplicationData() {
   const categoryId = '165797011';
 
   const setCategory = (category) => {
+
     const newState = {
       category: state.category === category ? null : category,
       childCategories: [],
       childCategory: null
     }
     setState(prev => ({...prev, ...newState}));
-  }
 
-  const getChildCategories = (category) => {
-    axios.get(`/api/categories/${category}`)
-      .then((res) => {
-        
-        setState(prev => ({...prev, childCategories: res.data}))
-      }).catch(err => console.error(err.message));
-  };
+    const selectedCategory = state.categories.find(parent => parent.id === category);
+
+    if(selectedCategory.has_children) {
+      axios.get(`/api/categories/${category}`)
+        .then((res) => {
+          setState(prev => ({...prev, childCategories: res.data}));
+        }).catch(err => console.error(err.message));
+    };
+  }
 
   const setProductsBySearch = (searchTerm) => {
     axios.get(`/api/products/${searchTerm}`)
     .then((res) => {
       const products = res.data;
-      setState({... state, products})
+      setState({...state, products})
     })
   }
 
@@ -46,7 +48,7 @@ export default function useApplicationData() {
     axios.get(`/api/products/categories/${category}`)
       .then((res) => {
         const products = res.data;
-        setState({... state, products})
+        setState({...state, products})
       })
   }
 
@@ -62,5 +64,5 @@ export default function useApplicationData() {
     })
   }, [])
 
-  return { state, setCategory, setProductsBySearch, getChildCategories, getProductsByCategory };
+  return { state, setCategory, setProductsBySearch, getProductsByCategory };
 }

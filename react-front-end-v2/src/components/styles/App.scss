@@ -1,5 +1,12 @@
 @import "./partials/Mixins.scss";
 
+@keyframes rotation {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
 .App {
   @include flex-column;
   width: 100%;
@@ -14,7 +21,7 @@
     width: 100%;
 
     .categories {
-      height: 90%;
+      max-height: 91%;
       display: flex;
       position: fixed;
       top: 100px;
@@ -50,10 +57,14 @@
     .child-categories {
       display: flex;
       position: relative;
-
-      // left: 20rem;
       background-color: $white;
       color: $black;
+    }
+
+    .status-loading--image {
+      animation: rotation 2s linear infinite;
+      height: 1rem;
+      padding-left: 0.3rem;
     }
   }
 }
