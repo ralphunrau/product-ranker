@@ -3,17 +3,27 @@ import '../../styles/Nav.scss'
 import User from './User';
 import Guest from './Guest';
 
-import { HIDDEN, LOGIN, REGISTER } from '../helper/modes';
+import { HIDDEN, LOGIN, REGISTER, SHOW } from '../../../helper/modes';
+
+import useVisualMode from '../../../hooks/useVisualMode';
 
 export default function Nav(props) {
 
+  const {mode, transition, back} = useVisualMode(HIDDEN);
+
   const loginForm = () => {
+    back();
     props.toggleForm(props.mode === LOGIN ? HIDDEN : LOGIN);
   };
 
   const registerForm = () => {
+    back();
     props.toggleForm(props.mode === REGISTER ? HIDDEN : REGISTER);
   };
+
+  const clickHandler = () => {
+    mode === HIDDEN ? transition(SHOW) : back();
+  }
 
   return (
     <nav className="navBar">
@@ -22,8 +32,15 @@ export default function Nav(props) {
         <h3>Amazonia</h3>
       </div>
       <div className="nav-right">
-        {props.user && <User />}
-        {!props.user && <Guest onLogin={loginForm} onRegister={registerForm} />}
+        <section className='user-buttons'>
+          <img onClick={clickHandler} src='avatar.png' alt='profile' />
+          {mode === HIDDEN ? <></> : (
+            <>
+              {props.user && <User />}
+              {!props.user && <Guest onLogin={loginForm} onRegister={registerForm} />}
+            </>
+          )}
+        </section>
       </div>
     </nav>
   );

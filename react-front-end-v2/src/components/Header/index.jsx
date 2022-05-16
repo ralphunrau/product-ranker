@@ -6,7 +6,7 @@ import Nav from './Nav';
 import Login from './Login';
 import Register from './Register';
 
-import { HIDDEN, LOGIN, REGISTER } from './helper/modes';
+import { HIDDEN, LOGIN, REGISTER } from '../../helper/modes';
 
 export default function Header(props) {
   const {mode, transition} = useVisualMode(HIDDEN);

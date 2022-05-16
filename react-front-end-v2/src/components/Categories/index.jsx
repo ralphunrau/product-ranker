@@ -5,20 +5,21 @@ import useVisualMode from '../../hooks/useVisualMode';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars  } from '@fortawesome/free-solid-svg-icons';
 
+import {HIDDEN, SHOW} from '../../helper/modes'
 
 
 export default function CategoryList(props) {
 
-  const {mode, transition} = useVisualMode("HIDDEN");
+  const {mode, transition} = useVisualMode(HIDDEN);
 
   const toggleBar = () => {
-    transition(mode === "HIDDEN" ? "SHOW" : "HIDDEN");
+    transition(mode === HIDDEN ? SHOW : HIDDEN);
   };
 
   return (
     <div className='categories'>
-      {mode === "HIDDEN" && <></>}
-      {mode === "SHOW" && 
+      {mode === HIDDEN && <></>}
+      {mode === SHOW && 
       <Show
         category={props.category}
         categories={props.categories}
