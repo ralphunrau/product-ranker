@@ -19,7 +19,9 @@ export default function CategoryListItem(props) {
         key={childCategory.id}
         id={childCategory.id}
         name={childCategory.name}
-        selected={childCategory.id === props.childcategory}
+        selected={childCategory.id === props.childCategory}
+        childCategory={props.childCategory}
+        onChange={props.selectCategory}
       />
     )
   })
@@ -33,7 +35,7 @@ export default function CategoryListItem(props) {
     if (!props.selected) transition(LOADING);
 
     new Promise((res) => {
-      res(props.setCategory(category))
+      res(props.setMainCategory(category))
     })
     .then(() => {
       setTimeout(() => {transition(HIDDEN)}, 500)

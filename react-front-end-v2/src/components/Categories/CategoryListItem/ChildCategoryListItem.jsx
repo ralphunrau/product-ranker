@@ -8,8 +8,12 @@ export default function ChildCategoryListItem(props) {
     'child-list--selected': props.selected
   });
 
+  const clickHandler = () => {
+    props.childCategory === props.id ? props.onChange(null) : props.onChange(props.id);
+  };
+
   return (
-    <li data-testid={'childCategory'} onClick={props.setCategory} className={childCategoryClass}>
+    <li data-testid={'childCategory'} onClick={clickHandler} className={childCategoryClass}>
       <h4 className="text--regular">{props.name}</h4>
     </li>
   );

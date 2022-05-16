@@ -24,7 +24,8 @@ export default function CategoryList(props) {
         categories={props.categories}
         childCategories={props.childCategories}
         childCategory={props.childCategory}
-        onChange={props.onChange}
+        setMainCategory={props.setMainCategory}
+        selectCategory={props.selectCategory}
       />
       }
       <section className="side-bar--button" onClick={toggleBar}>

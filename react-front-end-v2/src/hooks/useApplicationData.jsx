@@ -17,7 +17,7 @@ export default function useApplicationData() {
   const searchTerm = 'hello';
   const categoryId = '165797011';
 
-  const setCategory = (category) => {
+  const setMainCategory = (category) => {
 
     const newState = {
       category: state.category === category ? null : category,
@@ -34,6 +34,10 @@ export default function useApplicationData() {
           setState(prev => ({...prev, childCategories: res.data}));
         }).catch(err => console.error(err.message));
     };
+  };
+
+  const selectCategory = (category) => {
+    setState(prev => ({...prev, childCategory: category}));
   }
 
   const setProductsBySearch = (searchTerm) => {
@@ -64,5 +68,11 @@ export default function useApplicationData() {
     })
   }, [])
 
-  return { state, setCategory, setProductsBySearch, getProductsByCategory };
+  return { 
+    state,
+    setMainCategory,
+    setProductsBySearch,
+    getProductsByCategory,
+    selectCategory
+  };
 }

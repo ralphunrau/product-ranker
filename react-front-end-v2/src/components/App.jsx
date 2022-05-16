@@ -8,7 +8,7 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state , setCategory} = useApplicationData();
+  const { state , setMainCategory, selectCategory } = useApplicationData();
   
   return (
     <div className="App">
@@ -18,7 +18,8 @@ export default function App(props) {
         categories={state.categories}
         childCategories={state.childCategories}
         childCategory={state.childCategory}
-        onChange={setCategory}
+        setMainCategory={setMainCategory}
+        selectCategory={selectCategory}
         products={state.products}
       />
     </div>
