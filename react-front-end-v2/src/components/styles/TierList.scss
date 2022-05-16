@@ -47,6 +47,8 @@
         justify-content: start;
         align-items: center;
         font-size: x-large;
+        overflow: hidden;
+        overflow-x: scroll;
 
         img {
           height: 100px;

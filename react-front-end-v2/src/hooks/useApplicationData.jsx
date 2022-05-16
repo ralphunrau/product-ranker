@@ -35,6 +35,7 @@ export default function useApplicationData() {
 
   const selectCategory = (category) => {
     setState(prev => ({...prev, childCategory: category}));
+    getProductsByCategory(category);
   }
 
   const setSearchTerm = (search) => {
@@ -50,8 +51,6 @@ export default function useApplicationData() {
   }
 
   const getProductsByCategory = (category) => {
-    console.log('category:', category)
-    console.log('childCategory:', state.childCategory)
     if (state.childCategory) {
       axios.get(`/api/products/categories/${state.childCategory}`)
       .then((res) => {
