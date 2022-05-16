@@ -14,13 +14,17 @@ export default function useApplicationData() {
     user: {}
   });
 
+  // function to set parent category
   const setMainCategory = (category) => {
 
+    // create new state for parent and child categories
     const newState = {
       category: state.category === category ? null : category,
       childCategories: [],
       childCategory: null
     }
+    
+    // set new state
     setState(prev => ({...prev, ...newState}));
 
     const selectedCategory = state.categories.find(parent => parent.id === category);
@@ -30,13 +34,29 @@ export default function useApplicationData() {
         .then((res) => {
           setState(prev => ({...prev, childCategories: res.data}));
         }).catch(err => console.error(err.message));
+      return;
     };
+
+    axios.get(`/api/products/categories/${category}`)
+    .then((res) => {
+      const products = res.data;
+      setState(prev => ({...prev, products}))
+    })
+    .catch(err => console.error(err.message));
   };
 
   const selectCategory = (category) => {
-    setState(prev => ({...prev, childCategory: category}));
-    getProductsByCategory(category);
-  }
+    const childCategory = category;
+    setState(prev => ({...prev, childCategory}));
+
+    axios.get(`/api/products/categories/${category}`)
+    .then((res) => {
+      const products = res.data;
+
+      setState(prev => ({...prev, products}));
+    })
+    .catch(err => console.error(err.message));
+  };
 
   const setSearchTerm = (search) => {
     setState(prev => ({...prev, searchTerm: search}));
@@ -50,12 +70,17 @@ export default function useApplicationData() {
     })
   }
 
+
+
+
+
+
   const getProductsByCategory = (category) => {
     if (state.childCategory) {
       axios.get(`/api/products/categories/${state.childCategory}`)
       .then((res) => {
         const products = res.data;
-        setState({...state, products})
+        setState(prev => ({...prev, products, childCategory: category}))
       })
       return;
     }

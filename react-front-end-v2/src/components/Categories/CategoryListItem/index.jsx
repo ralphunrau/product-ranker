@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import '../../styles/categoryListItem.scss';
+import '../../styles/CategoryListItem.scss';
 
 import ChildCategoryListItem from './ChildCategoryListItem';
 import Status from '../../Status';
