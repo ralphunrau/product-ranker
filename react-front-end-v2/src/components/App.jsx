@@ -8,18 +8,8 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state , setCategory, getChildCategories } = useApplicationData();
+  const { state , setCategory} = useApplicationData();
   
-  const setMainCategory = (category) => {
-
-    const mainCategory = state.categories.find(parent => parent.id === category);
-    setCategory(category);
-
-    if (mainCategory.has_children) {
-      getChildCategories(category);
-    };
-  };
-
   return (
     <div className="App">
       <Header mode={state.header}/>
@@ -28,7 +18,7 @@ export default function App(props) {
         categories={state.categories}
         childCategories={state.childCategories}
         childCategory={state.childCategory}
-        onChange={setMainCategory}
+        onChange={setCategory}
         products={state.products}
       />
     </div>

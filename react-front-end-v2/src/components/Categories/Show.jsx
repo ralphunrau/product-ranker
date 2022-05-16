@@ -18,7 +18,7 @@ export default function Show(props) {
       childCategories={props.childCategories}
       childCategory={props.childCategory}
       selected={category.id === props.category}
-      setCategory={(event) => props.onChange(category.id)}
+      setCategory={props.onChange}
     />
     )
   })
