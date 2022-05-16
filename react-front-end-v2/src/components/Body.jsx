@@ -18,8 +18,9 @@ export default function Body(props) {
       <TierList
         currentCategory={props.currentCategory}
         products={props.products}
-        onChange={props.onChange}
+        getProductsByCategory={props.getProductsByCategory}
         category={props.category}
+        childCategory={props.childCategory}
       />
     </main>
   )

@@ -8,7 +8,7 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state , setMainCategory, selectCategory, setSearchTerm } = useApplicationData();
+  const { state , setMainCategory, selectCategory, setSearchTerm, getProductsByCategory } = useApplicationData();
   
   return (
     <div className="App">
@@ -21,6 +21,7 @@ export default function App(props) {
         setMainCategory={setMainCategory}
         selectCategory={selectCategory}
         products={state.products}
+        getProductsByCategory={getProductsByCategory}
       />
     </div>
   );

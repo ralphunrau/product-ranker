@@ -14,10 +14,6 @@ export default function useApplicationData() {
     user: {}
   });
 
-  // these are hard coded values for the search/category queries and will be taken by user input in future
-  // const searchTerm = 'hello';
-  const categoryId = '165797011';
-
   const setMainCategory = (category) => {
 
     const newState = {
@@ -54,11 +50,21 @@ export default function useApplicationData() {
   }
 
   const getProductsByCategory = (category) => {
-    axios.get(`/api/products/categories/${category}`)
+    console.log('category:', category)
+    console.log('childCategory:', state.childCategory)
+    if (state.childCategory) {
+      axios.get(`/api/products/categories/${state.childCategory}`)
       .then((res) => {
         const products = res.data;
         setState({...state, products})
       })
+      return;
+    }
+    axios.get(`/api/products/categories/${category}`)
+    .then((res) => {
+      const products = res.data;
+      setState({...state, products})
+    })
   }
 
   useEffect(() => {
