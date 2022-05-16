@@ -2,9 +2,13 @@ import CategoryListItem from "./CategoryListItem";
 
 export default function Show(props) {
 
-  const categoryListItem = props.categories.map((category) => {
+  props.categories.sort((a, b) => {
+    const aName = a.name.toUpperCase();
+    const bName = b.name.toUpperCase();
+    return (aName < bName) ? -1 : (aName > bName) ? 1 : 0;
+  });
 
-    
+  const categoryListItem = props.categories.map((category) => {  
 
   return (
     <CategoryListItem
