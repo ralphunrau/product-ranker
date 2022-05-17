@@ -15,7 +15,7 @@ export default function SearchBar(props) {
         onChange={event =>  props.setSearch(event.target.value)}
         data-testid="search-term"
       />
-      <FontAwesomeIcon icon={faSearch} className="search-icon" />
+      <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={props.searchProducts}/>
     </div>
   )
 }
