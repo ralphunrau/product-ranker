@@ -10,7 +10,8 @@ export default function TierList(props) {
   const allProductsToComponents = props.products.map((product) => {
     return (
       <Item 
-      image={product.image} 
+      image={product.image}
+      key={product.asin}
       id={product.asin} 
       link={product.link}
       rating={product.rating} 
