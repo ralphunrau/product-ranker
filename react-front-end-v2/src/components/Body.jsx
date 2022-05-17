@@ -21,6 +21,8 @@ export default function Body(props) {
         getProductsByCategory={props.getProductsByCategory}
         category={props.category}
         childCategory={props.childCategory}
+        changeCurrentItem={props.changeCurrentItem}
+        currentItem={props.currentItem}
       />
     </main>
   )

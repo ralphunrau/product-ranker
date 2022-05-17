@@ -59,21 +59,45 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
       }
+
+      .tier-list-item:hover img {
+        transform: translateX(-25%);
+      }
+
       .tier-list-item  {
         border: 2px solid black;
         height: 120px;
         width: 1100px;
         display: flex;
-        justify-content: flex-start;
+        padding: 0 55px;
+        // justify-content: flex-start;
         align-items: center;
-        font-size: x-large;
+        // font-size: x-large;
         overflow: hidden;
         overflow-x: scroll;
+
+        // .item-popup {
+        //   position: absolute;
+        //   height: 400px;
+        //   width: 300px;
+        // }
+
+        img:hover ~ img {
+          transform: translateX(25%);
+        }
+
+        img:hover {
+          transform: scale(1.2) !important;
+        }
 
         img {
           height: 100px;
           width: 100px;
-          margin-left: 5px;
+          background: green;
+          flex: 0 0 100px;
+          text-align: center;
+          margin: 0 2px;
+          transition: transform 300ms ease 100ms;
         }
       }
     }

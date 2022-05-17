@@ -9,8 +9,9 @@ export default function useApplicationData() {
     category: null,
     childCategories: [],
     childCategory: null,
-    currentCategory: [],
     searchTerm: '',
+    // isShown: false,
+    currentItem: null,
     user: {}
   });
 
@@ -70,10 +71,15 @@ export default function useApplicationData() {
     })
   }
 
-
-
-
-
+  const changeCurrentItem = (image) => {
+    if (image == null) {
+      setState({...state, currentItem: null})
+      return;
+    }
+    const currentItem = state.products.find(item => item.image === image);
+    setState({...state, currentItem})
+    console.log(currentItem);
+  }
 
   const getProductsByCategory = (category) => {
     if (state.childCategory) {
@@ -109,6 +115,9 @@ export default function useApplicationData() {
     setProductsBySearch,
     getProductsByCategory,
     selectCategory,
-    setSearchTerm
+    setSearchTerm,
+    // showListItem,
+    // hideListItem,
+    changeCurrentItem
   };
 }

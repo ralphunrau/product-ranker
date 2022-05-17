@@ -1,14 +1,12 @@
 import './styles/App.scss';
-import axios from 'axios';
 import Header from './Header';
 import Body from './Body';
-
 
 import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state , setMainCategory, selectCategory, setSearchTerm, getProductsByCategory } = useApplicationData();
+  const { state , setMainCategory, selectCategory, setSearchTerm, getProductsByCategory, changeCurrentItem } = useApplicationData();
   
   return (
     <div className="App">
@@ -22,6 +20,8 @@ export default function App(props) {
         selectCategory={selectCategory}
         products={state.products}
         getProductsByCategory={getProductsByCategory}
+        changeCurrentItem={changeCurrentItem}
+        currentItem={state.currentItem}
       />
     </div>
   );

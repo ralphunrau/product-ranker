@@ -1,19 +1,21 @@
-import '../styles/TierList.scss'
-import Item from './Item'
+import '../styles/TierList.scss';
+import Item from './Item';
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
 
   const allProductsToComponents = props.products.map((product) => {
     return (
-      <Item 
+      <Item
       image={product.image}
       key={product.asin}
-      id={product.asin} 
+      id={product.asin}
       link={product.link}
-      rating={product.rating} 
-      ratings_total={product.ratings_total} 
-      title={product.title} 
+      rating={product.rating}
+      ratings_total={product.ratings_total}
+      title={product.title}
+      changeCurrentItem={props.changeCurrentItem}
+      currentItem={props.currentItem}
       />
     )
   })
@@ -80,7 +82,6 @@ export default function TierList(props) {
           Compare items on this tier list
         </button>
       </div>
-
     </div>
   )
 }
