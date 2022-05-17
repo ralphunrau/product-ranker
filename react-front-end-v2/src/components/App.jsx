@@ -12,7 +12,17 @@ export default function App(props) {
   
   return (
     <div className="App">
-      <Header mode={state.header} setSearch={setSearchTerm} searchProducts={setProductsBySearch} searchTerm={state.searchTerm}/>
+      <Header
+        setSearch={setSearchTerm}
+        searchProducts={setProductsBySearch}
+        searchTerm={state.searchTerm}
+        category={state.category}
+        categories={state.categories}
+        childCategories={state.childCategories}
+        childCategory={state.childCategory}
+        setMainCategory={setMainCategory}
+        selectCategory={selectCategory}
+      />
       <Body
         category={state.category}
         categories={state.categories}

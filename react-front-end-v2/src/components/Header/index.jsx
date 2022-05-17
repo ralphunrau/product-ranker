@@ -2,11 +2,12 @@ import '../styles/Header.scss'
 
 import useVisualMode from '../../hooks/useVisualMode';
 import Nav from './Nav';
+import CategoryList from './Categories';
 
 import Login from './Login';
 import Register from './Register';
 
-import { HIDDEN, LOGIN, REGISTER } from '../../helper/modes';
+import { HIDDEN, LOGIN, REGISTER, SHOW, LOADING } from '../../helper/modes';
 
 export default function Header(props) {
   const {mode, transition} = useVisualMode(HIDDEN);
@@ -19,6 +20,20 @@ export default function Header(props) {
     mode === form ? onCancel() : transition(form)
   }
 
+  const toggleBar = () => {
+    transition(mode === SHOW ? HIDDEN : SHOW);
+  };
+
+  const onChange = (category) => {
+    transition(LOADING);
+
+    return new Promise((res) => {
+      res(props.selectCategory(category))
+    })
+    .then(transition(SHOW))
+    .catch((error) => console.error(error.message));
+  };
+
   return (
     <header className="header">
       <Nav
@@ -26,8 +41,20 @@ export default function Header(props) {
         onChange={props.setSearch}
         onSearch={props.searchProducts}
         searchTerm={props.searchTerm}
+        toggleBar={toggleBar}
         mode={mode}
       />
+      {mode === SHOW && (
+        <CategoryList 
+          category={props.category}
+          categories={props.categories}
+          childCategories={props.childCategories}
+          childCategory={props.childCategory}
+          setMainCategory={props.setMainCategory}
+          selectCategory={onChange}
+          toggleBar={toggleBar}
+        />
+      )}
       {mode === HIDDEN && <></>}
       {mode === LOGIN && <Login cancel={onCancel}/>}
       {mode === REGISTER && <Register cancel={onCancel}/>}
