@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import '../../styles/CategoryListItem.scss';
+import '../../../styles/CategoryListItem.scss';
 
 import ChildCategoryListItem from './ChildCategoryListItem';
-import Status from '../../Status';
+import Status from '../../../Status';
 
-import useVisualMode from '../../../hooks/useVisualMode';
+import useVisualMode from '../../../../hooks/useVisualMode';
 
-import { HIDDEN, LOADING } from '../../../helper/modes'
+import { HIDDEN, LOADING } from '../../../../helper/modes'
 
 export default function CategoryListItem(props) {
 
