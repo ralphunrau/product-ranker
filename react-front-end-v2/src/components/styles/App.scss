@@ -22,6 +22,7 @@
 
     .categories {
       max-height: 91%;
+      background-color: $white;
       display: flex;
       position: fixed;
       top: 100px;
@@ -29,7 +30,7 @@
 
       .category-lists {
         position: relative;
-        background-color: $third-color;
+        background-color: $form-color;
         position: relative;
         border-right: solid 1px;
         width: auto;
