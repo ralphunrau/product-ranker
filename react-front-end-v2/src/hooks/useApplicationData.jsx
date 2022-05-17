@@ -21,13 +21,12 @@ export default function useApplicationData() {
   useEffect(() => {
     
     Promise.all([
-      axios.get(`/api/categories`)
-    ]).then((res) => {
-      console.log("PROMISE ALL RESPONSE", res);
-      const [categories] = res;
+      axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
+    ]).then((response) => {
+      const [res] = response
       dispatch({
         type: SET_CATEGORIES_DATA,
-        value: {categories: categories.data}
+        value: {categories: res.data.categories}
       });
     });
   }, []);
@@ -46,15 +45,15 @@ export default function useApplicationData() {
     const selectedCategory = state.categories.find(parent => parent.id === category);
 
     if(selectedCategory.has_children && state.category !== category) {
-      axios.get(`/api/categories/${category}`)
-        .then((res) => {
-          // setState(prev => ({...prev, childCategories: res.data}))
-
+      axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.REACT_APP_API_KEY}&parent_id=${category}&domain=amazon.com`)
+      
+        .then((response) => {
+         const res = response.data.categories;
           dispatch({
             type: SET_CATEGORY,
             value: {
               category: category,
-              childCategories: res.data,
+              childCategories: res,
               childCategory: null
             }
           })
@@ -62,20 +61,26 @@ export default function useApplicationData() {
       return;
     };
 
-    axios.get(`/api/products/categories/${category}`)
-    .then((res) => {
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "category",
+      category_id: category,
+      amazon_domain: "amazon.com"
+    }
 
-      // setState(prev => ({...prev, products: res.data}))
+    axios.get('https://api.rainforestapi.com/request', { params })
+    .then((res) => {
+      const response = res.data.category_results;
+
       dispatch({
         type: SET_PRODUCTS,
-        value: { products: res.data }
+        value: { products: response }
       });
     })
     .catch(err => console.error(err.message))
   };
 
   const selectCategory = (category) => {
-    // setState(prev => ({...prev, childCategory}));
 
     dispatch({
       type: SET_CATEGORY,
@@ -86,20 +91,25 @@ export default function useApplicationData() {
       }
     });
 
-    axios.get(`/api/products/categories/${category}`)
-    .then((res) => {
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "category",
+      category_id: category,
+      amazon_domain: "amazon.com"
+    }
 
-      // setState(prev => ({...prev, products}));
+    axios.get('https://api.rainforestapi.com/request', { params })
+    .then((res) => {
+      const response = res.data.category_results
       dispatch({
         type: SET_PRODUCTS,
-        value: { products: res.data }
+        value: { products: response }
       });
     })
     .catch(err => console.error(err.message));
   };
 
   const setSearchTerm = (search) => {
-    // setState(prev => ({...prev, searchTerm: search}));
 
     dispatch({
       type: SET_SEARCH,
@@ -112,21 +122,39 @@ export default function useApplicationData() {
     if (state.childCategory || state.category) {
       const currentCategory = state.childCategories ? state.childCategory : state.category;
 
-      axios.get(`/api/products/${currentCategory}/${term}`)
+      const params = {
+        api_key: process.env.REACT_APP_API_KEY,
+        type: "search",
+        category_id: currentCategory,
+        search_term: term,
+        amazon_domain: "amazon.com"
+      };
+
+
+      axios.get('https://api.rainforestapi.com/request', { params })
       .then((res) => {
+        const response = res.data.search_results;
         dispatch({
           type: SET_PRODUCTS,
-          value: { products: res.data }
+          value: { products: response }
         });
       });
       return;
     };
 
-    axios.get(`/api/products/${term}`)
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "search",
+      search_term: term,
+      amazon_domain: "amazon.com"
+    };
+
+    axios.get('https://api.rainforestapi.com/request', { params })
     .then((res) => {
+      const response = res.data.search_results;
       dispatch({
         type: SET_PRODUCTS,
-        value: { products: res.data }
+        value: { products: response }
       })
     })
   }
