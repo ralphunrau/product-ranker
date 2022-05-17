@@ -3,8 +3,8 @@ import '../styles/TierList.scss'
 export default function Item(props) {
 
   return (
-    <a href={props.link}>
-    <img src={props.image} ></img>
-    </a>
+    <div onClick={props.onSelect} className="product-item">
+    <img src={props.image} alt="product" />
+    </div>
   );
 }

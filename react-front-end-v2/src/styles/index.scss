@@ -9,8 +9,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $brand-color;
+  background-color: $white;
   color: $white;
+  z-index: 0;
+  width: 100%;
 }
 
 code {
@@ -18,14 +20,15 @@ code {
     monospace;
 }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (min-width: 321px) {
   html {
-    font-size: 12px;
+    font-size: 18px;
+    width: 100%;
   }
 }
 
 @media only screen and (max-width: 320px) {
   html {
-    font-size: 10px;
+    font-size: 9px;
   }
 }

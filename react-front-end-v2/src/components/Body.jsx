@@ -38,8 +38,10 @@ export default function Body(props) {
           currentCategory={props.currentCategory}
           products={props.products}
           getProductsByCategory={props.getProductsByCategory}
+          categories={props.categories}
           category={props.category}
           childCategory={props.childCategory}
+          childCategories={props.childCategories}
         />
       )}
     </main>
