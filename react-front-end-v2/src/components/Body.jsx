@@ -18,9 +18,7 @@ export default function Body(props) {
     return new Promise((res) => {
       res(props.selectCategory(category))
     })
-    .then(() => {
-      transition(SHOW);
-    })
+    .then(transition(SHOW))
     .catch((error) => console.error(error.message));
   };
 
