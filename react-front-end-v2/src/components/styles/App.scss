@@ -10,6 +10,9 @@
 .App {
   @include flex-column;
   width: 100%;
+  background-color: $white;
+  color: $brand-color;
+  z-index: 1000;
 
   .category-lists::-webkit-scrollbar {
     display: none;
@@ -22,7 +25,6 @@
 
     .categories {
       max-height: 91%;
-      background-color: $white;
       display: flex;
       position: fixed;
       top: 100px;

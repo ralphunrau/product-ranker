@@ -1,43 +1,47 @@
+@import "../styles/partials/Mixins.scss";
+
 #tier-list {
-  padding: 60px 120px;
+  @include flex-column;
+  width: 100%;
+  padding: 15px;
 
   header {
-    border: 3px solid black;
     font-size: xx-large;
     height: 110px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   #tier-list-body {
-    margin-top: 40px;
-    border: 3px solid black;
-    height: 1000px;
-    display: flex;
+    @include flex-row;
+    justify-content: space-between;
+    width: 100%;
 
     #tier-list-left {
-      padding-left: 60px;
-      display: flex;
-      flex-direction: column;
+      @include flex-column;
+      padding-left: 10px;
       justify-content: space-evenly;
+      width: 90px;
 
-      .tier-list-rank  {
-        border: 2px solid black;
-        height: 120px;
-        width: 120px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      .tier-list-rank {
+        @include align-center;
+        height: 200px;
+        width: 100%;
         font-size: x-large;
+      }
+
+      img {
+        height: 100px;
       }
     }
 
     #tier-list-right {
-      padding-left: 60px;
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
+      width: calc(100% - 140px);
 
       /* width */
       ::-webkit-scrollbar {
@@ -60,51 +64,34 @@
         background: #555;
       }
 
-      .tier-list-item:hover img {
-        transform: translateX(-25%);
-      }
-
-      .tier-list-item  {
-        border: 2px solid black;
-        height: 120px;
-        width: 1100px;
+      .tier-list-item {
         display: flex;
-        padding: 0 55px;
-        // justify-content: flex-start;
+        justify-content: flex-start;
         align-items: center;
-        // font-size: x-large;
-        overflow: hidden;
+        height: 200px;
+        margin-top: 5px;
+        padding: 10px;
         overflow-x: scroll;
 
-        // .item-popup {
-        //   position: absolute;
-        //   height: 400px;
-        //   width: 300px;
-        // }
-
-        img:hover ~ img {
-          transform: translateX(25%);
+        .product-item {
+          display: flex;
+          border: solid 3px $brand-color;
+          padding: 5px;
+          border-radius: 10px;
+          margin: 0 8px 0 8px;
+          &:hover {
+            transform: scale(1.1);
+          }
         }
-
-        img:hover {
-          transform: scale(1.2) !important;
-        }
-
         img {
-          height: 100px;
-          width: 100px;
-          background: green;
-          flex: 0 0 100px;
-          text-align: center;
-          margin: 0 2px;
-          transition: transform 300ms ease 100ms;
+          height: 150px;
+          width: 150px;
         }
       }
     }
   }
 
   #tier-list-footer {
-    border: 2px solid black;
     font-size: large;
     height: 110px;
     display: flex;

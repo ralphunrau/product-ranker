@@ -54,6 +54,8 @@ router.get('/products/:searchTerm', (req, res) => {
     
 })
 
+
+
 // Get category items within a certain category
 router.get('/products/categories/:category', (req, res) => {
 
@@ -109,6 +111,31 @@ router.get('/categories/:categoryId' , (req, res) => {
     console.log(error);
   }); 
 
+})
+
+router.get('/products/:category/:searchTerm', (req, res) => {
+
+  // set up the request parameters
+  const params = {
+    api_key: process.env.API_KEY,
+    type: "search",
+    category_id: req.params.category,
+    amazon_domain: "amazon.com",
+    search_term: req.params.searchTerm
+  }
+  
+  // make the http GET request to Rainforest API
+  axios.get('https://api.rainforestapi.com/request', { params })
+    .then(response => {
+
+      // print the JSON response from Rainforest API
+      res.json(response.data.search_results);
+      
+    }).catch(error => {
+      // catch and print the error
+      console.log(error);
+    })
+    
 })
 
 

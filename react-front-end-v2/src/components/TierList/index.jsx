@@ -1,27 +1,32 @@
-import '../styles/TierList.scss';
-import Item from './Item';
+import '../styles/TierList.scss'
+import Item from './Item'
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
 
   const allProductsToComponents = props.products.map((product) => {
     return (
-      <Item
+      <Item 
       image={product.image}
       key={product.asin}
-      id={product.asin}
+      id={product.asin} 
       link={product.link}
-      rating={product.rating}
-      ratings_total={product.ratings_total}
-      title={product.title}
-      changeCurrentItem={props.changeCurrentItem}
-      currentItem={props.currentItem}
+      rating={product.rating} 
+      ratings_total={product.ratings_total} 
+      title={product.title} 
       />
     )
   })
 
-  const sortItemsIntoTierList = (allProducts) => {
+  const getCategoryName = () => {
+    if (props.category) {
+      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory).name;
+      return props.categories.find(category => category.id === props.category).name;
+    }
+    return 'CATEGORY';
+  }
 
+  const sortItemsIntoTierList = (allProducts) => {
     return (
       <div id="tier-list-right">
         <div className="tier-list-item">
@@ -49,27 +54,27 @@ export default function TierList(props) {
   return (
     <div id="tier-list">
       <header>
-        This is the category of the tier list.
+        {getCategoryName()}
       </header>
       <div id="tier-list-body">
         <div id="tier-list-left">
           <div className="tier-list-rank">
-            S Tier
+            <img src='s-badge.png' alt='s-badge'/>
           </div>
           <div className="tier-list-rank">
-            A Tier
+            <img src='a-badge.png' alt='a-badge'/>
           </div>
           <div className="tier-list-rank">
-            B Tier
+            <img src='b-badge.png' alt='b-badge'/>
           </div>
           <div className="tier-list-rank">
-            C Tier
+            <img src='c-badge.png' alt='c-badge'/>
           </div>
           <div className="tier-list-rank">
-            D Tier
+            <img src='d-badge.png' alt='d-badge'/>
           </div>
           <div className="tier-list-rank">
-            F Tier
+            <img src='f-badge.png' alt='f-badge'/>
           </div>
         </div>
         {sortItemsIntoTierList(allProductsToComponents)}
@@ -82,6 +87,7 @@ export default function TierList(props) {
           Compare items on this tier list
         </button>
       </div>
+
     </div>
   )
 }

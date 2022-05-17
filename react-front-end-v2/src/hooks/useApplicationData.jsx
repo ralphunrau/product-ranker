@@ -1,123 +1,169 @@
-import { useState, useEffect } from "react";
+import { useReducer, useEffect } from "react";
 import axios from "axios";
-// import fetchProductsBySearch from "../helpers/fetchProductsBySearch";
+import reducer, {
+  SET_CATEGORIES_DATA,
+  SET_CATEGORY,
+  SET_PRODUCTS,
+  SET_SEARCH
+} from '../reducers/app';
 
 export default function useApplicationData() {
-  const [state, setState] = useState({
-    products: [],
+
+  const [state, dispatch] = useReducer(reducer, {
+    searchTerm: null,
     categories: [],
     category: null,
     childCategories: [],
     childCategory: null,
-    searchTerm: '',
-    // isShown: false,
-    currentItem: null,
-    user: {}
+    products: [],
   });
+
+  useEffect(() => {
+    
+    Promise.all([
+      axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
+    ]).then((response) => {
+      const [res] = response
+      dispatch({
+        type: SET_CATEGORIES_DATA,
+        value: {categories: res.data.categories}
+      });
+    });
+  }, []);
 
   // function to set parent category
   const setMainCategory = (category) => {
-
-    // create new state for parent and child categories
-    const newState = {
-      category: state.category === category ? null : category,
-      childCategories: [],
-      childCategory: null
-    }
-    
-    // set new state
-    setState(prev => ({...prev, ...newState}));
+    dispatch({
+      type: SET_CATEGORY,
+      value: {
+        category: state.category === category ? null : category,
+        childCategories: [],
+        childCategory: null
+      }
+    });
 
     const selectedCategory = state.categories.find(parent => parent.id === category);
 
-    if(selectedCategory.has_children) {
-      axios.get(`/api/categories/${category}`)
-        .then((res) => {
-          setState(prev => ({...prev, childCategories: res.data}));
-        }).catch(err => console.error(err.message));
+    if(selectedCategory.has_children && state.category !== category) {
+      axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.REACT_APP_API_KEY}&parent_id=${category}&domain=amazon.com`)
+      
+        .then((response) => {
+         const res = response.data.categories;
+          dispatch({
+            type: SET_CATEGORY,
+            value: {
+              category: category,
+              childCategories: res,
+              childCategory: null
+            }
+          })
+        }).catch(err => console.error(err.message))
       return;
     };
 
-    axios.get(`/api/products/categories/${category}`)
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "category",
+      category_id: category,
+      amazon_domain: "amazon.com"
+    }
+
+    axios.get('https://api.rainforestapi.com/request', { params })
     .then((res) => {
-      const products = res.data;
-      setState(prev => ({...prev, products}))
+      const response = res.data.category_results;
+
+      dispatch({
+        type: SET_PRODUCTS,
+        value: { products: response }
+      });
     })
-    .catch(err => console.error(err.message));
+    .catch(err => console.error(err.message))
   };
 
   const selectCategory = (category) => {
-    const childCategory = category;
-    setState(prev => ({...prev, childCategory}));
 
-    axios.get(`/api/products/categories/${category}`)
+    dispatch({
+      type: SET_CATEGORY,
+      value: {
+        category: state.category,
+        childCategories: state.childCategories,
+        childCategory: category
+      }
+    });
+
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "category",
+      category_id: category,
+      amazon_domain: "amazon.com"
+    }
+
+    axios.get('https://api.rainforestapi.com/request', { params })
     .then((res) => {
-      const products = res.data;
-
-      setState(prev => ({...prev, products}));
+      const response = res.data.category_results
+      dispatch({
+        type: SET_PRODUCTS,
+        value: { products: response }
+      });
     })
     .catch(err => console.error(err.message));
   };
 
   const setSearchTerm = (search) => {
-    setState(prev => ({...prev, searchTerm: search}));
+
+    dispatch({
+      type: SET_SEARCH,
+      value: { searchTerm: search }
+    });
   };
 
-  const setProductsBySearch = (searchTerm) => {
-    axios.get(`/api/products/${searchTerm}`)
-    .then((res) => {
-      const products = res.data;
-      setState({...state, products})
-    })
-  }
+  const setProductsBySearch = (term) => {
 
-  const changeCurrentItem = (image) => {
-    if (image == null) {
-      setState({...state, currentItem: null})
-      return;
-    }
-    const currentItem = state.products.find(item => item.image === image);
-    setState({...state, currentItem})
-    console.log(currentItem);
-  }
+    if (state.childCategory || state.category) {
+      const currentCategory = state.childCategories ? state.childCategory : state.category;
 
-  const getProductsByCategory = (category) => {
-    if (state.childCategory) {
-      axios.get(`/api/products/categories/${state.childCategory}`)
+      const params = {
+        api_key: process.env.REACT_APP_API_KEY,
+        type: "search",
+        category_id: currentCategory,
+        search_term: term,
+        amazon_domain: "amazon.com"
+      };
+
+
+      axios.get('https://api.rainforestapi.com/request', { params })
       .then((res) => {
-        const products = res.data;
-        setState(prev => ({...prev, products, childCategory: category}))
-      })
+        const response = res.data.search_results;
+        dispatch({
+          type: SET_PRODUCTS,
+          value: { products: response }
+        });
+      });
       return;
-    }
-    axios.get(`/api/products/categories/${category}`)
+    };
+
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "search",
+      search_term: term,
+      amazon_domain: "amazon.com"
+    };
+
+    axios.get('https://api.rainforestapi.com/request', { params })
     .then((res) => {
-      const products = res.data;
-      setState({...state, products})
+      const response = res.data.search_results;
+      dispatch({
+        type: SET_PRODUCTS,
+        value: { products: response }
+      })
     })
   }
-
-  useEffect(() => {
-    
-    Promise.all([
-      axios.get(`/api/categories`)
-    ]).then((response) => {
-      console.log("PROMISE ALL RESPONSE", response);
-      const [categories] = response;
-
-      setState(prev => ({...prev, categories: categories.data}))
-    })
-  }, [])
 
   return { 
     state,
     setMainCategory,
     setProductsBySearch,
-    getProductsByCategory,
     selectCategory,
     setSearchTerm,
-    // showListItem,
-    // hideListItem,
-    changeCurrentItem
   };
 }

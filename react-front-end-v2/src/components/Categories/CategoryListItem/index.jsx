@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import '../../styles/categoryListItem.scss';
+import '../../styles/CategoryListItem.scss';
 
 import ChildCategoryListItem from './ChildCategoryListItem';
 import Status from '../../Status';
@@ -32,14 +32,12 @@ export default function CategoryListItem(props) {
 
   const clickHandler = (category) => {
     if (!props.selected) transition(LOADING);
-
+    
     new Promise((res) => {
       res(props.setMainCategory(category))
     })
-    .then(() => {
-      setTimeout(() => {transition(HIDDEN)}, 500)
-    })
-    .catch((error) => console.error(error.message));
+    .then(transition(HIDDEN))
+    .catch((err) => console.error(err.message));
   };
 
   return (

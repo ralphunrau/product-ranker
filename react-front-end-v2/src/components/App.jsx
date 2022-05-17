@@ -1,16 +1,18 @@
 import './styles/App.scss';
+import axios from 'axios';
 import Header from './Header';
 import Body from './Body';
+
 
 import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state , setMainCategory, selectCategory, setSearchTerm, getProductsByCategory, changeCurrentItem } = useApplicationData();
+  const { state , setMainCategory, selectCategory, setSearchTerm, getProductsByCategory, setProductsBySearch } = useApplicationData();
   
   return (
     <div className="App">
-      <Header mode={state.header} setSearch={setSearchTerm} />
+      <Header mode={state.header} setSearch={setSearchTerm} searchProducts={setProductsBySearch} searchTerm={state.searchTerm}/>
       <Body
         category={state.category}
         categories={state.categories}
@@ -20,8 +22,6 @@ export default function App(props) {
         selectCategory={selectCategory}
         products={state.products}
         getProductsByCategory={getProductsByCategory}
-        changeCurrentItem={changeCurrentItem}
-        currentItem={state.currentItem}
       />
     </div>
   );
