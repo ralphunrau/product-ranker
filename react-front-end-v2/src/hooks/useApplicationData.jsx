@@ -1,126 +1,140 @@
-import { useState, useEffect } from "react";
+import { useReducer, useEffect } from "react";
 import axios from "axios";
-// import fetchProductsBySearch from "../helpers/fetchProductsBySearch";
+import reducer, {
+  SET_CATEGORIES_DATA,
+  SET_CATEGORY,
+  SET_PRODUCTS,
+  SET_SEARCH
+} from '../reducers/app';
 
 export default function useApplicationData() {
-  const [state, setState] = useState({
-    products: [],
+
+  const [state, dispatch] = useReducer(reducer, {
+    searchTerm: null,
     categories: [],
     category: null,
     childCategories: [],
     childCategory: null,
-    searchTerm: '',
-    user: {}
+    products: [],
   });
-
-  // function to set parent category
-  const setMainCategory = (category) => {
-
-    // create new state for parent and child categories
-    const newState = {
-      category: state.category === category ? null : category,
-      childCategories: [],
-      childCategory: null
-    }
-    
-    // set new state
-    setState(prev => ({...prev, ...newState}));
-
-    const selectedCategory = state.categories.find(parent => parent.id === category);
-
-    if(selectedCategory.has_children) {
-      axios.get(`/api/categories/${category}`)
-        .then((res) => {
-          setState(prev => ({...prev, childCategories: res.data}))
-        }).catch(err => console.error(err.message))
-    };
-
-    axios.get(`/api/products/categories/${category}`)
-    .then((res) => {
-      const products = res.data;
-      setState(prev => ({...prev, products}))
-    })
-    .catch(err => console.error(err.message))
-  };
-
-  const selectCategory = (category) => {
-    const childCategory = category;
-    setState(prev => ({...prev, childCategory}));
-
-    axios.get(`/api/products/categories/${category}`)
-    .then((res) => {
-      const products = res.data;
-
-      setState(prev => ({...prev, products}));
-    })
-    // .catch(err => console.error(err.message));
-  };
-
-  const setSearchTerm = (search) => {
-    setState(prev => ({...prev, searchTerm: search}));
-  };
-
-  const setProductsBySearch = (term) => {
-
-    if (state.childCategory || state.category) {
-      console.log('HELLO! you should not be here!')
-      const currentCategory = state.childCategories ? state.childCategory : state.category;
-
-      axios.get(`/api/products/${currentCategory}/${term}`)
-      .then((res) => {
-        const products = res.data;
-        setState(prev => ({...prev, products}));
-      })
-      return;
-    };
-    console.log('HELLO!')
-    axios.get(`/api/products/${term}`)
-    .then((res) => {
-
-      const products = res.data;
-
-      setState(prev => ({...prev, products}));
-    })
-  }
-
-
-
-
-
-
-  const getProductsByCategory = (category) => {
-    if (state.childCategory) {
-      axios.get(`/api/products/categories/${state.childCategory}`)
-      .then((res) => {
-        const products = res.data;
-        setState(prev => ({...prev, products, childCategory: category}))
-      })
-      return;
-    }
-    axios.get(`/api/products/categories/${category}`)
-    .then((res) => {
-      const products = res.data;
-      setState({...state, products})
-    })
-  }
 
   useEffect(() => {
     
     Promise.all([
       axios.get(`/api/categories`)
-    ]).then((response) => {
-      console.log("PROMISE ALL RESPONSE", response);
-      const [categories] = response;
+    ]).then((res) => {
+      console.log("PROMISE ALL RESPONSE", res);
+      const [categories] = res;
+      dispatch({
+        type: SET_CATEGORIES_DATA,
+        value: {categories: categories.data}
+      });
+    });
+  }, []);
 
-      setState(prev => ({...prev, categories: categories.data}))
+  // function to set parent category
+  const setMainCategory = (category) => {
+    dispatch({
+      type: SET_CATEGORY,
+      value: {
+        category: state.category === category ? null : category,
+        childCategories: [],
+        childCategory: null
+      }
+    });
+
+    const selectedCategory = state.categories.find(parent => parent.id === category);
+
+    if(selectedCategory.has_children && state.category !== category) {
+      axios.get(`/api/categories/${category}`)
+        .then((res) => {
+          // setState(prev => ({...prev, childCategories: res.data}))
+
+          dispatch({
+            type: SET_CATEGORY,
+            value: {
+              category: category,
+              childCategories: res.data,
+              childCategory: null
+            }
+          })
+        }).catch(err => console.error(err.message))
+      return;
+    };
+
+    axios.get(`/api/products/categories/${category}`)
+    .then((res) => {
+
+      // setState(prev => ({...prev, products: res.data}))
+      dispatch({
+        type: SET_PRODUCTS,
+        value: { products: res.data }
+      });
     })
-  }, [])
+    .catch(err => console.error(err.message))
+  };
+
+  const selectCategory = (category) => {
+    // setState(prev => ({...prev, childCategory}));
+
+    dispatch({
+      type: SET_CATEGORY,
+      value: {
+        category: state.category,
+        childCategories: state.childCategories,
+        childCategory: category
+      }
+    });
+
+    axios.get(`/api/products/categories/${category}`)
+    .then((res) => {
+
+      // setState(prev => ({...prev, products}));
+      dispatch({
+        type: SET_PRODUCTS,
+        value: { products: res.data }
+      });
+    })
+    .catch(err => console.error(err.message));
+  };
+
+  const setSearchTerm = (search) => {
+    // setState(prev => ({...prev, searchTerm: search}));
+
+    dispatch({
+      type: SET_SEARCH,
+      value: { searchTerm: search }
+    });
+  };
+
+  const setProductsBySearch = (term) => {
+
+    if (state.childCategory || state.category) {
+      const currentCategory = state.childCategories ? state.childCategory : state.category;
+
+      axios.get(`/api/products/${currentCategory}/${term}`)
+      .then((res) => {
+        dispatch({
+          type: SET_PRODUCTS,
+          value: { products: res.data }
+        });
+      });
+      return;
+    };
+
+    axios.get(`/api/products/${term}`)
+    .then((res) => {
+      dispatch({
+        type: SET_PRODUCTS,
+        value: { products: res.data }
+      })
+    })
+  }
 
   return { 
     state,
     setMainCategory,
     setProductsBySearch,
-    getProductsByCategory,
     selectCategory,
     setSearchTerm,
   };

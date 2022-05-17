@@ -34,8 +34,8 @@ export default function CategoryListItem(props) {
     // if (!props.selected) transition(LOADING);
     
     props.setMainCategory(category)
-      .then(transition(HIDDEN))
-      .catch((err) => console.error(err.message));
+      // .then(transition(HIDDEN))
+      // .catch((err) => console.error(err.message));
   };
 
   return (
