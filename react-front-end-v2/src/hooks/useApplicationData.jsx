@@ -31,9 +31,8 @@ export default function useApplicationData() {
     if(selectedCategory.has_children) {
       axios.get(`/api/categories/${category}`)
         .then((res) => {
-          setState(prev => ({...prev, childCategories: res.data}));
-        }).catch(err => console.error(err.message));
-      return;
+          setState(prev => ({...prev, childCategories: res.data}))
+        }).catch(err => console.error(err.message))
     };
 
     axios.get(`/api/products/categories/${category}`)
@@ -41,7 +40,7 @@ export default function useApplicationData() {
       const products = res.data;
       setState(prev => ({...prev, products}))
     })
-    .catch(err => console.error(err.message));
+    .catch(err => console.error(err.message))
   };
 
   const selectCategory = (category) => {
@@ -54,7 +53,7 @@ export default function useApplicationData() {
 
       setState(prev => ({...prev, products}));
     })
-    .catch(err => console.error(err.message));
+    // .catch(err => console.error(err.message));
   };
 
   const setSearchTerm = (search) => {

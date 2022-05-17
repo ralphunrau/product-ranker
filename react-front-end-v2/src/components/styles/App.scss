@@ -10,6 +10,8 @@
 .App {
   @include flex-column;
   width: 100%;
+  background-color: $white;
+  color: $brand-color;
 
   .category-lists::-webkit-scrollbar {
     display: none;
