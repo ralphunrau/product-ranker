@@ -27,13 +27,17 @@ export default function Nav(props) {
     mode === HIDDEN ? transition(SHOW) : back();
   }
 
+  const searchProducts = () => {
+    props.onSearch(props.searchTerm)
+  }
+
   return (
     <nav className="navBar">
       <div className="nav-left">
         <img src='https://i.imgur.com/BM8SFkP.png' alt='logo'/>
       </div>
       <div className="nav-search">
-        <SearchBar setSearch={props.onChange} />
+        <SearchBar setSearch={props.onChange} searchProducts={searchProducts} searchTerm={props.searchTerm} />
       </div>
       <div className="nav-right">
         <section className='user-buttons'>

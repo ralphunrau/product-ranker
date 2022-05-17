@@ -8,11 +8,11 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App(props) {
 
-  const { state , setMainCategory, selectCategory, setSearchTerm, getProductsByCategory } = useApplicationData();
+  const { state , setMainCategory, selectCategory, setSearchTerm, getProductsByCategory, setProductsBySearch } = useApplicationData();
   
   return (
     <div className="App">
-      <Header mode={state.header} setSearch={setSearchTerm} />
+      <Header mode={state.header} setSearch={setSearchTerm} searchProducts={setProductsBySearch} searchTerm={state.searchTerm}/>
       <Body
         category={state.category}
         categories={state.categories}

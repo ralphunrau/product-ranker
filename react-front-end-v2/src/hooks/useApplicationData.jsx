@@ -9,7 +9,6 @@ export default function useApplicationData() {
     category: null,
     childCategories: [],
     childCategory: null,
-    currentCategory: [],
     searchTerm: '',
     user: {}
   });
@@ -62,11 +61,26 @@ export default function useApplicationData() {
     setState(prev => ({...prev, searchTerm: search}));
   };
 
-  const setProductsBySearch = (searchTerm) => {
-    axios.get(`/api/products/${searchTerm}`)
+  const setProductsBySearch = (term) => {
+
+    if (state.childCategory || state.category) {
+      console.log('HELLO! you should not be here!')
+      const currentCategory = state.childCategories ? state.childCategory : state.category;
+
+      axios.get(`/api/products/${currentCategory}/${term}`)
+      .then((res) => {
+        const products = res.data;
+        setState(prev => ({...prev, products}));
+      })
+      return;
+    };
+    console.log('HELLO!')
+    axios.get(`/api/products/${term}`)
     .then((res) => {
+
       const products = res.data;
-      setState({...state, products})
+
+      setState(prev => ({...prev, products}));
     })
   }
 
@@ -109,6 +123,6 @@ export default function useApplicationData() {
     setProductsBySearch,
     getProductsByCategory,
     selectCategory,
-    setSearchTerm
+    setSearchTerm,
   };
 }
