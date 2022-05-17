@@ -4,7 +4,11 @@ import Item from './Item'
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
 
-  const allProductsToComponents = props.products.map((product) => {
+  const sortProducts = (products) => {
+    return products.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
+  }
+
+  const allProductsToComponents = sortProducts(props.products).map((product) => {
     return (
       <Item 
       image={product.image}
@@ -27,25 +31,28 @@ export default function TierList(props) {
   }
 
   const sortItemsIntoTierList = (allProducts) => {
+
+    const amountOfProducts = allProducts.length;
+
     return (
       <div id="tier-list-right">
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4.8 && product.props.rating <= 5)}
+          {allProducts.slice(0, amountOfProducts / 6)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4.65 && product.props.rating < 4.8)}
+          {allProducts.slice(amountOfProducts / 6 , (amountOfProducts / 6) * 2)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4.3 && product.props.rating < 4.65)}
+          {allProducts.slice((amountOfProducts / 6) * 2 , (amountOfProducts / 6) * 3)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4 && product.props.rating < 4.3)}
+          {allProducts.slice((amountOfProducts / 6) * 3 , (amountOfProducts / 6) * 4)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 2 && product.props.rating < 4)}
+          {allProducts.slice((amountOfProducts / 6) * 4 , (amountOfProducts / 6) * 5)}
         </div>
         <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 0 && product.props.rating < 2)}
+          {allProducts.slice((amountOfProducts / 6) * 5 , -1)}
         </div>
       </div>
     )
