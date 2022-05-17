@@ -1,42 +1,11 @@
 import '../styles/TierList.scss'
 import Item from './Item'
 
-// import hooks
-import useVisualMode from '../../hooks/useVisualMode'
-import useApplicationData from '../../hooks/useApplicationData'
-
-
-// constants for mode
-
+// Import Helper Functions
+const sortItemsIntoTierList = require('./helpers/sortItemsIntoTierList');
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
-
-  const sortItemsIntoTierList = (allProducts) => {
-
-    return (
-      <div id="tier-list-right">
-        <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4.8 && product.props.rating <= 5)}
-        </div>
-        <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4.65 && product.props.rating < 4.8)}
-        </div>
-        <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4.3 && product.props.rating < 4.65)}
-        </div>
-        <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 4 && product.props.rating < 4.3)}
-        </div>
-        <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 2 && product.props.rating < 4)}
-        </div>
-        <div className="tier-list-item">
-          {allProducts.filter(product => product.props.rating >= 0 && product.props.rating < 2)}
-        </div>
-      </div>
-    )
-  }
 
   const allProductsToComponents = props.products.map((product) => {
     return (
@@ -55,9 +24,6 @@ export default function TierList(props) {
     <div id="tier-list">
       <header>
         This is the category of the tier list.
-        <button onClick={() => props.getProductsByCategory(props.category)}>
-          Render Tier List
-        </button>
       </header>
       <div id="tier-list-body">
         <div id="tier-list-left">
