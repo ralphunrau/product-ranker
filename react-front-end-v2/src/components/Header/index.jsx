@@ -25,13 +25,8 @@ export default function Header(props) {
   };
 
   const onChange = (category) => {
-    transition(LOADING);
-
-    return new Promise((res) => {
-      res(props.selectCategory(category))
-    })
-    .then(transition(SHOW))
-    .catch((error) => console.error(error.message));
+    props.selectCategory(category)
+    toggleBar();
   };
 
   return (

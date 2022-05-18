@@ -34,11 +34,12 @@ export default function useApplicationData() {
   // function to set parent category
   const setMainCategory = (category) => {
     dispatch({
-      type: SET_CATEGORY,
+      type: SET_PRODUCTS,
       value: {
         category: state.category === category ? null : category,
         childCategories: [],
-        childCategory: null
+        childCategory: null,
+        products: state.products
       }
     });
 
@@ -50,11 +51,12 @@ export default function useApplicationData() {
         .then((response) => {
          const res = response.data.categories;
           dispatch({
-            type: SET_CATEGORY,
+            type: SET_PRODUCTS,
             value: {
               category: category,
               childCategories: res,
-              childCategory: null
+              childCategory: null,
+              products: state.products
             }
           })
         }).catch(err => console.error(err.message))
@@ -74,7 +76,12 @@ export default function useApplicationData() {
 
       dispatch({
         type: SET_PRODUCTS,
-        value: { products: response }
+        value: { 
+          category: category,
+          childCategories: [],
+          childCategory: null,
+          products: response
+        }
       });
     })
     .catch(err => console.error(err.message))
@@ -83,11 +90,12 @@ export default function useApplicationData() {
   const selectCategory = (category) => {
 
     dispatch({
-      type: SET_CATEGORY,
+      type: SET_PRODUCTS,
       value: {
         category: state.category,
         childCategories: state.childCategories,
-        childCategory: category
+        childCategory: category,
+        products: []
       }
     });
 
@@ -103,7 +111,12 @@ export default function useApplicationData() {
       const response = res.data.category_results
       dispatch({
         type: SET_PRODUCTS,
-        value: { products: response }
+        value: { 
+          category: state.category,
+          childCategories: state.childCategories,
+          childCategory: category,
+          products: response 
+        }
       });
     })
     .catch(err => console.error(err.message));
@@ -118,6 +131,16 @@ export default function useApplicationData() {
   };
 
   const setProductsBySearch = (term) => {
+
+    dispatch({
+      type: SET_PRODUCTS,
+      value: { 
+        category: state.category,
+        childCategories: state.childCategories,
+        childCategory: state.category,
+        products: []
+      }
+    });
 
     if (state.childCategory || state.category) {
       const currentCategory = state.childCategories ? state.childCategory : state.category;
@@ -136,7 +159,12 @@ export default function useApplicationData() {
         const response = res.data.search_results;
         dispatch({
           type: SET_PRODUCTS,
-          value: { products: response }
+          value: { 
+            category: state.category,
+            childCategories: state.childCategories,
+            childCategory: state.childCategory,
+            products: response 
+          }
         });
       });
       return;
@@ -154,7 +182,13 @@ export default function useApplicationData() {
       const response = res.data.search_results;
       dispatch({
         type: SET_PRODUCTS,
-        value: { products: response }
+        value: { 
+          category: state.category,
+            childCategories: state.childCategories,
+            childCategory: state.childCategory,
+            categories: state.categories,
+            products: response 
+        }
       })
     })
   }

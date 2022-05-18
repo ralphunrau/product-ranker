@@ -17,7 +17,8 @@ export default function TierList(props) {
       link={product.link}
       rating={product.rating} 
       ratings_total={product.ratings_total} 
-      title={product.title} 
+      title={product.title}
+      price={product.price?.raw}
       />
     )
   })
