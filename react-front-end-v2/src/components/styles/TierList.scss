@@ -3,7 +3,8 @@
 #tier-list {
   @include flex-column;
   width: 100%;
-  padding: 15px;
+  background-color: $white;
+  margin-top: 100px;
 
   header {
     font-size: xx-large;
@@ -12,6 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 900;
   }
 
   #tier-list-body {
@@ -49,7 +51,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
-      width: calc(100% - 140px);
+      width: calc(100% - 150px);
 
       /* width */
       ::-webkit-scrollbar {
@@ -105,6 +107,5 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: 30px;
   }
 }

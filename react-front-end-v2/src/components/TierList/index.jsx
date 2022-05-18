@@ -19,8 +19,8 @@ export default function TierList(props) {
       key={product.asin}
       id={product.asin}
       link={product.link}
-      rating={product.rating}
-      ratings_total={product.ratings_total}
+      rating={product.rating} 
+      ratings_total={product.ratings_total} 
       title={product.title}
       />
     )
@@ -95,6 +95,7 @@ export default function TierList(props) {
             <VerticalTabs
               id="third-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
+              toggleShow={() => toggleShow("third-rank", "third-tab")}
             />
           </div>
           <div className="tier-list-rank">
@@ -102,6 +103,7 @@ export default function TierList(props) {
             <VerticalTabs
               id="fourth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
+              toggleShow={() => toggleShow("fourth-rank", "fourth-tab")}
             />
           </div>
           <div className="tier-list-rank">
@@ -109,6 +111,7 @@ export default function TierList(props) {
             <VerticalTabs
               id="fifth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
+              toggleShow={() => toggleShow("fifth-rank", "fifth-tab")}
             />
           </div>
           <div className="tier-list-rank">
@@ -116,6 +119,7 @@ export default function TierList(props) {
             <VerticalTabs
               id="sixth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
+              toggleShow={() => toggleShow("sixth-rank", "sixth-tab")}
             />
           </div>
         </div>

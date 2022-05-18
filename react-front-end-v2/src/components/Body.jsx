@@ -1,49 +1,46 @@
 import './styles/App.scss';
 
-import CategoryList from './Categories';
 import TierList from './TierList'
 import Status from './Status';
-
+import Header from './Header';
 import useVisualMode from '../hooks/useVisualMode';
 
-import {LOADING, SHOW } from '../helper/modes';
+import { HIDDEN, RANKER } from '../helper/modes';
 
 export default function Body(props) {
   
-  const {mode, transition} = useVisualMode(SHOW);
+  const {mode, transition} = useVisualMode(HIDDEN);
 
-  const onChange = (category) => {
-    transition(LOADING);
-
-    return new Promise((res) => {
-      res(props.selectCategory(category))
-    })
-    .then(transition(SHOW))
-    .catch((error) => console.error(error.message));
-  };
+  const getProductsByCategory = (category) => {
+    props.selectCategory(category);
+    transition(RANKER);
+  }
 
   return (
     <main className="container">
-      <CategoryList 
+      <Header
+        setSearch={props.setSearch}
+        searchProducts={props.searchProducts}
+        searchTerm={props.searchTerm}
         category={props.category}
         categories={props.categories}
         childCategories={props.childCategories}
         childCategory={props.childCategory}
         setMainCategory={props.setMainCategory}
-        selectCategory={onChange}
+        selectCategory={getProductsByCategory}
       />
-      {mode === LOADING && <Status />}
-      {mode === SHOW && (
-        <TierList
-          currentCategory={props.currentCategory}
-          products={props.products}
-          getProductsByCategory={props.getProductsByCategory}
-          categories={props.categories}
-          category={props.category}
-          childCategory={props.childCategory}
-          childCategories={props.childCategories}
-        />
-      )}
+    {mode === HIDDEN && <></>}
+    {mode === RANKER && (
+      (props.products.length < 1) ? <Status /> : (
+      <TierList
+        currentCategory={props.currentCategory}
+        products={props.products}
+        categories={props.categories}
+        category={props.category}
+        childCategory={props.childCategory}
+        childCategories={props.childCategories}
+      />
+    ))}
     </main>
   )
 }
