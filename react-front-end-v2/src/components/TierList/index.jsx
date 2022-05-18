@@ -1,5 +1,6 @@
-import '../styles/TierList.scss'
-import Item from './Item'
+import '../styles/TierList.scss';
+import Item from './Item';
+import VerticalTabs from './VerticalTabs';
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
@@ -13,11 +14,11 @@ export default function TierList(props) {
       <Item 
       image={product.image}
       key={product.asin}
-      id={product.asin} 
+      id={product.asin}
       link={product.link}
-      rating={product.rating} 
-      ratings_total={product.ratings_total} 
-      title={product.title} 
+      rating={product.rating}
+      ratings_total={product.ratings_total}
+      title={product.title}
       />
     )
   })
@@ -66,22 +67,40 @@ export default function TierList(props) {
       <div id="tier-list-body">
         <div id="tier-list-left">
           <div className="tier-list-rank">
-            <img src='s-badge.png' alt='s-badge'/>
+            {/* <img src='s-badge.png' alt='s-badge'/> */}
+            <VerticalTabs
+              products={sortProducts(props.products.slice(0, (props.products.length) / 6))}
+            />
           </div>
           <div className="tier-list-rank">
-            <img src='a-badge.png' alt='a-badge'/>
+            {/* <img src='a-badge.png' alt='a-badge'/> */}
+            <VerticalTabs
+              products={sortProducts(props.products.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}
+            />
           </div>
           <div className="tier-list-rank">
-            <img src='b-badge.png' alt='b-badge'/>
+            {/* <img src='b-badge.png' alt='b-badge'/> */}
+            <VerticalTabs
+              products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
+            />
           </div>
           <div className="tier-list-rank">
-            <img src='c-badge.png' alt='c-badge'/>
+            {/* <img src='c-badge.png' alt='c-badge'/> */}
+            <VerticalTabs
+              products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
+            />
           </div>
           <div className="tier-list-rank">
-            <img src='d-badge.png' alt='d-badge'/>
+            {/* <img src='d-badge.png' alt='d-badge'/> */}
+            <VerticalTabs
+              products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
+            />
           </div>
           <div className="tier-list-rank">
-            <img src='f-badge.png' alt='f-badge'/>
+            {/* <img src='f-badge.png' alt='f-badge'/> */}
+            <VerticalTabs
+              products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
+            />
           </div>
         </div>
         {sortItemsIntoTierList(allProductsToComponents)}

@@ -30,11 +30,19 @@
         height: 200px;
         width: 100%;
         font-size: x-large;
+
+        // css selector for vertical tab
+        .css-1n3h4wo {
+          width: 200px;
+          position: absolute;
+        }
+
+        img {
+          height: 100px;
+        }
       }
 
-      img {
-        height: 100px;
-      }
+
     }
 
     #tier-list-right {

@@ -15,7 +15,7 @@ export default function useApplicationData() {
     category: null,
     childCategories: [],
     childCategory: null,
-    products: [],
+    products: []
   });
 
   useEffect(() => {
@@ -164,6 +164,6 @@ export default function useApplicationData() {
     setMainCategory,
     setProductsBySearch,
     selectCategory,
-    setSearchTerm,
+    setSearchTerm
   };
 }

@@ -21,7 +21,7 @@ export default function reducer(state, action) {
     
     case SET_PRODUCTS:
       return {...state, products: action.value.products};
-
+      
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
