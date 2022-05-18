@@ -13,6 +13,7 @@ export default function TierList(props) {
   }
 
   const allProductsToComponents = sortProducts(props.products).map((product) => {
+    console.log('PRODUCT', product);
     return (
       <Item 
       image={product.image}

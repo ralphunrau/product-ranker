@@ -51,7 +51,7 @@ export default function Header(props) {
         />
       )}
       {mode === HIDDEN && <></>}
-      {mode === LOGIN && <Login cancel={onCancel}/>}
+      {mode === LOGIN && <Login cancel={onCancel} onLogin={props.setUser}/>}
       {mode === REGISTER && <Register cancel={onCancel}/>}
     </header>
   )
