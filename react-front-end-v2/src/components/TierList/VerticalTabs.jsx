@@ -52,13 +52,15 @@ export default function VerticalTabs(props) {
                 <div className="panel-reviews">
                   <div>
                     <strong>Most Helpful Positive Review:</strong><br/>
-                    {props.currentReviews[0]?.body.slice(0, 250) + '...'}<br/>
+                    {props.currentReviews[0]?.body.slice(0, 250)}
+                    {props.currentReviews[0]?.body.length > 250 && "..."}<br/>
                     Rating: <Rating name="read-only" value={props.currentReviews[0]?.rating} readOnly />
                     <a href={props.currentReviews[0]?.link}>Review Link</a>
                   </div>
                   <div>
                   <strong>Most Helpful Critical Review:</strong><br/>
-                    {props.currentReviews[1]?.body.slice(0, 250) + '...'}<br/>
+                    {props.currentReviews[1]?.body.slice(0, 250)}
+                    {props.currentReviews[1]?.body.length > 250 && "..."}<br/>
                     Rating: <Rating name="read-only" value={props.currentReviews[1]?.rating} readOnly />
                     <a href={props.currentReviews[1]?.link}>Review Link</a>
                   </div>
