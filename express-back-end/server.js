@@ -1,9 +1,14 @@
 require('dotenv').config();
+const PORT = process.env.PORT;
+
 const Express = require('express');
-const App = Express();
+
 const BodyParser = require('body-parser');
 const morgan = require('morgan');
-const PORT = process.env.PORT;
+const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
+
+const App = Express();
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -12,6 +17,13 @@ App.use(Express.static('public'));
 
 // setup morgan middleware
 App.use(morgan('dev'));
+
+// setup cookieSession
+App.use(cookieSession({
+  name: 'session',
+  keys: ['secret', 'notEasy'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hour
+}))
 
 // Routers
 const apiRoutes = require('./routes/apiRoutes');

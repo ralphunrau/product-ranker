@@ -1,16 +1,20 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
- */
+require('dotenv').config({ path: '../../.env' });
+
+const bcrypt = require('bcrypt');
+
+const firstHashPass = bcrypt.hashSync(process.env.FIRST_USER_PASS, 10)
+const secondHashPass = bcrypt.hashSync(process.env.SECOND_USER_PASS, 10)
+const thidHashPass = bcrypt.hashSync(process.env.THIRD_USER_PASS, 10)
+
 exports.seed = async function(knex) {
   // delete existing entries
-  return knex('users').del()
+  return knex('users').truncate()
     .then(() => {
       // insert new seeds
       return knex('users').insert([
-        {id: 1, username: 'Jamesbly', email: 'jbly@email.com', password: 'jikulon'},
-        {id: 2, username: 'SammyHammy', email: 'spark@email.com', password: 'secret'},
-        {id: 3, username: 'Tomtheriddler', email: 'tom@email.com', password: 'easy'}
+        {username: 'Jamesbly', email: 'jbly@email.com', password: firstHashPass},
+        {username: 'SammyHammy', email: 'sam@email.com', password: secondHashPass},
+        {username: 'Tomtheriddler', email: 'tom@dom.com', password: thidHashPass}
       ]);
     });
 };

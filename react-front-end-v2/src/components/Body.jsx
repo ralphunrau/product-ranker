@@ -28,6 +28,8 @@ export default function Body(props) {
         childCategory={props.childCategory}
         setMainCategory={props.setMainCategory}
         selectCategory={getProductsByCategory}
+        setUser={props.setUser}
+
       />
     {mode === HIDDEN && <></>}
     {mode === RANKER && (
