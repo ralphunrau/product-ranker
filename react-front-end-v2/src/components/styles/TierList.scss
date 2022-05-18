@@ -3,7 +3,8 @@
 #tier-list {
   @include flex-column;
   width: 100%;
-  padding: 15px;
+  background-color: $white;
+  margin-top: 100px;
 
   header {
     font-size: xx-large;
@@ -12,6 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 900;
   }
 
   #tier-list-body {
@@ -21,12 +23,14 @@
 
     #tier-list-left {
       @include flex-column;
-      padding-left: 10px;
       justify-content: space-evenly;
-      width: 90px;
+      position: relative;
+      height: 100vh;
+      width: 150px;
 
       .tier-list-rank {
         @include align-center;
+        padding-left: 10px;
         height: 200px;
         width: 100%;
         font-size: x-large;
@@ -41,7 +45,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
-      width: calc(100% - 140px);
+      width: calc(100% - 150px);
 
       /* width */
       ::-webkit-scrollbar {
@@ -97,6 +101,5 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: 30px;
   }
 }

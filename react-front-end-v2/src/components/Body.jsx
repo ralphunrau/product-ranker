@@ -4,16 +4,8 @@ import TierList from './TierList'
 import Status from './Status';
 import Header from './Header';
 
-import useVisualMode from '../hooks/useVisualMode';
-
-import {LOADING, SHOW } from '../helper/modes';
-
 export default function Body(props) {
-  
-  const {mode, transition} = useVisualMode(SHOW);
 
-
-  
   return (
     <main className="container">
       <Header
@@ -27,8 +19,8 @@ export default function Body(props) {
         setMainCategory={props.setMainCategory}
         selectCategory={props.selectCategory}
       />
-    {mode === LOADING && <Status />}
-    {mode === SHOW && (
+    
+    {props.products.length < 1 ? <Status /> : (
       <TierList
         currentCategory={props.currentCategory}
         products={props.products}

@@ -20,7 +20,12 @@ export default function reducer(state, action) {
       return {...state, searchTerm: action.value.searchTerm};
     
     case SET_PRODUCTS:
-      return {...state, products: action.value.products};
+      return {...state,
+        category: action.value.category,
+        childCategories: action.value.childCategories,
+        childCategory: action.value.childCategory,
+        products: action.value.products
+      };
 
     default:
       throw new Error(
