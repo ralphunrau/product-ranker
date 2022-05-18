@@ -38,6 +38,33 @@
           width: 100%;
           position: absolute;
           z-index: 1;
+
+          .css-ahj2mt-MuiTypography-root {
+            height: 200px;
+            overflow-y: hidden;
+
+            button {
+              margin-left: 20px;
+            }
+          }
+
+          // css selector for vertical tab content
+          .css-ahj2mt-MuiTypography-root {
+            display: flex;
+
+            .panel-reviews {
+              display: flex;
+              margin-left: 20px;
+
+              div {
+                width: 450px;
+              }
+
+              a {
+                margin-left: 20px;
+              }
+            }
+          }
         }
 
         img {

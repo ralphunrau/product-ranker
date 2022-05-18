@@ -4,7 +4,8 @@ import reducer, {
   SET_CATEGORIES_DATA,
   SET_PRODUCTS,
   SET_SEARCH,
-  SET_USER
+  SET_USER,
+  SET_REVIEWS
 } from '../reducers/app';
 
 const DB = process.env.REACT_APP_DB_HOST;
@@ -18,7 +19,8 @@ export default function useApplicationData() {
     childCategories: [],
     childCategory: null,
     products: [],
-    user: {}
+    user: {},
+    currentReviews: []
   });
 
   const setUser = (input) => {
@@ -206,12 +208,47 @@ export default function useApplicationData() {
     .catch(error => console.error(error));
   }
 
+  const getReviewsByAsin = (asin) => {
+
+    if (asin === null) {
+      dispatch({
+        type: SET_REVIEWS,
+        value: { 
+          currentReviews: []
+        }
+      })
+      return;
+    }
+
+    // set up the request parameters
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "reviews",
+      amazon_domain: "amazon.com",
+      asin: asin
+    }
+
+    return axios.get('https://api.rainforestapi.com/request', { params })
+    .then((res) => {
+      const fullReviewObject = res.data;
+
+      dispatch({
+        type: SET_REVIEWS,
+        value: { 
+          currentReviews: [fullReviewObject.top_positive, fullReviewObject.top_critical]
+        }
+      })
+    })
+    .catch(error => console.error(error));
+  }
+
   return { 
     state,
     setMainCategory,
     setProductsBySearch,
     selectCategory,
     setSearchTerm,
-    setUser
+    setUser,
+    getReviewsByAsin
   };
 }

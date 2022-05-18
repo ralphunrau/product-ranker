@@ -25,8 +25,7 @@ export default function VerticalTabs(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log('newValue:', newValue);
-    console.log('event:', event);
+    props.getReviewsByAsin(null);
   };
 
   const createTabs = (products) => {
@@ -39,11 +38,32 @@ export default function VerticalTabs(props) {
   const createTabPanels = (products) => {
     return products.map((product, index) => {
       return <TabPanel value={value} index={index}>
-                {product.title}<br/>
-                {product.price?.raw}<br/>
-                {product.rating}<br/>
-                <Rating name="read-only" value={product.rating} precision={0.5} readOnly /><br/>
-                <a href={product.link}>Visit The Amazon product</a>
+                <div>
+                  {product.title.split(',')[0]}<br/>
+                  {product.price?.raw}<br/>
+                  {product.rating}<br/>
+                  <Rating name="read-only" value={product.rating} precision={0.5} readOnly /><br/>
+                  <div>
+                    <a href={product.link}>Visit Product</a>
+                    <button onClick={() => props.getReviewsByAsin(product.asin)}>See Reviews!</button>
+                  </div>
+                </div>
+                {props.currentReviews[1] && 
+                <div className="panel-reviews">
+                  <div>
+                    <strong>Most Helpful Positive Review:</strong><br/>
+                    {props.currentReviews[0]?.body.slice(0, 250) + '...'}<br/>
+                    Rating: <Rating name="read-only" value={props.currentReviews[0]?.rating} readOnly />
+                    <a href={props.currentReviews[0]?.link}>Review Link</a>
+                  </div>
+                  <div>
+                  <strong>Most Helpful Critical Review:</strong><br/>
+                    {props.currentReviews[1]?.body.slice(0, 250) + '...'}<br/>
+                    Rating: <Rating name="read-only" value={props.currentReviews[1]?.rating} readOnly />
+                    <a href={props.currentReviews[1]?.link}>Review Link</a>
+                  </div>
+                </div>
+                }
               </TabPanel>
     })
   }

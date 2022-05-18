@@ -3,9 +3,6 @@ import Item from './Item';
 import VerticalTabs from './VerticalTabs';
 import HorizontalTabs from './HorizontalTabs';
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(HIDDEN);
@@ -15,7 +12,6 @@ export default function TierList(props) {
   }
 
   const allProductsToComponents = sortProducts(props.products).map((product) => {
-    console.log('PRODUCT', product);
     return (
       <Item 
       image={product.image}
@@ -69,6 +65,7 @@ export default function TierList(props) {
   const toggleShow = (id, secondId) => {
     document.getElementById(id).style.display !== "none" ? document.getElementById(id).style.display = "none" : document.getElementById(id).style.display = "block";
     document.getElementById(secondId).style.display !== "none" ? document.getElementById(secondId).style.display = "none" : document.getElementById(secondId).style.display = "block";
+    props.getReviewsByAsin(null);
   }
 
   return (
@@ -81,6 +78,8 @@ export default function TierList(props) {
           <div className="tier-list-rank">
             <img id="first-rank" src='s-badge.png' alt='s-badge' onClick={() => toggleShow("first-rank", "first-tab")}/>
             <VerticalTabs
+              currentReviews={props.currentReviews}
+              getReviewsByAsin={props.getReviewsByAsin}
               id="first-tab"
               products={sortProducts(props.products.slice(0, (props.products.length) / 6))}
               toggleShow={() => toggleShow("first-rank", "first-tab")}
@@ -89,6 +88,8 @@ export default function TierList(props) {
           <div className="tier-list-rank">
             <img id="second-rank" src='a-badge.png' alt='a-badge' onClick={() => toggleShow("second-rank", "second-tab")}/>
               <VerticalTabs
+              currentReviews={props.currentReviews}
+              getReviewsByAsin={props.getReviewsByAsin}
               id="second-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}
               toggleShow={() => toggleShow("second-rank", "second-tab")}
@@ -97,6 +98,8 @@ export default function TierList(props) {
           <div className="tier-list-rank">
             <img id="third-rank" src='b-badge.png' alt='b-badge' onClick={() => toggleShow("third-rank", "third-tab")}/>
             <VerticalTabs
+              currentReviews={props.currentReviews}
+              getReviewsByAsin={props.getReviewsByAsin}
               id="third-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
               toggleShow={() => toggleShow("third-rank", "third-tab")}
@@ -105,6 +108,8 @@ export default function TierList(props) {
           <div className="tier-list-rank">
             <img id="fourth-rank" src='c-badge.png' alt='c-badge' onClick={() => toggleShow("fourth-rank", "fourth-tab")}/>
             <VerticalTabs
+              currentReviews={props.currentReviews}
+              getReviewsByAsin={props.getReviewsByAsin}
               id="fourth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
               toggleShow={() => toggleShow("fourth-rank", "fourth-tab")}
@@ -113,6 +118,8 @@ export default function TierList(props) {
           <div className="tier-list-rank">
             <img id="fifth-rank" src='d-badge.png' alt='d-badge' onClick={() => toggleShow("fifth-rank", "fifth-tab")}/>
             <VerticalTabs
+              currentReviews={props.currentReviews}
+              getReviewsByAsin={props.getReviewsByAsin}
               id="fifth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
               toggleShow={() => toggleShow("fifth-rank", "fifth-tab")}
@@ -121,6 +128,8 @@ export default function TierList(props) {
           <div className="tier-list-rank">
             <img id="sixth-rank" src='f-badge.png' alt='f-badge' onClick={() => toggleShow("sixth-rank", "sixth-tab")}/>
             <VerticalTabs
+              currentReviews={props.currentReviews}
+              getReviewsByAsin={props.getReviewsByAsin}
               id="sixth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
               toggleShow={() => toggleShow("sixth-rank", "sixth-tab")}

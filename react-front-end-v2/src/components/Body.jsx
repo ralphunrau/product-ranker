@@ -41,6 +41,8 @@ export default function Body(props) {
         category={props.category}
         childCategory={props.childCategory}
         childCategories={props.childCategories}
+        getReviewsByAsin={props.getReviewsByAsin}
+        currentReviews={props.currentReviews}
       />
     ))}
     </main>

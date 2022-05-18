@@ -2,6 +2,7 @@ export const SET_CATEGORIES_DATA = 'SET_CATEGORIES_DATA';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const SET_SEARCH = 'SET_SEARCH';
 export const SET_USER = 'SET_USER';
+export const SET_REVIEWS = 'SET_REVIEWS';
 
 export default function reducer(state, action) {
   switch (action.type) {
@@ -24,6 +25,12 @@ export default function reducer(state, action) {
         childCategory: action.value.childCategory,
         products: action.value.products
       };
+
+    case SET_REVIEWS:
+      return {
+        ...state,
+        currentReviews: action.value.currentReviews
+      }
 
     default:
       throw new Error(
