@@ -2,10 +2,12 @@ import { useReducer, useEffect } from "react";
 import axios from "axios";
 import reducer, {
   SET_CATEGORIES_DATA,
-  SET_CATEGORY,
   SET_PRODUCTS,
-  SET_SEARCH
+  SET_SEARCH,
+  SET_USER
 } from '../reducers/app';
+
+const DB = process.env.REACT_APP_DB_HOST;
 
 export default function useApplicationData() {
 
@@ -16,7 +18,16 @@ export default function useApplicationData() {
     childCategories: [],
     childCategory: null,
     products: [],
+    user: {}
   });
+
+  const setUser = (input) => {
+    return axios.post(`${DB}/user/login`, {input})
+      .then((user) => {
+        dispatch({ type: SET_USER, user})
+      })
+      .catch(error => console.error(error));
+  };
 
   useEffect(() => {
     
@@ -28,7 +39,8 @@ export default function useApplicationData() {
         type: SET_CATEGORIES_DATA,
         value: {categories: res.data.categories}
       });
-    });
+    })
+    .catch(error => console.error(error));
   }, []);
 
   // function to set parent category
@@ -46,7 +58,7 @@ export default function useApplicationData() {
     const selectedCategory = state.categories.find(parent => parent.id === category);
 
     if(selectedCategory.has_children && state.category !== category) {
-      axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.REACT_APP_API_KEY}&parent_id=${category}&domain=amazon.com`)
+      return axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.REACT_APP_API_KEY}&parent_id=${category}&domain=amazon.com`)
       
         .then((response) => {
          const res = response.data.categories;
@@ -60,7 +72,6 @@ export default function useApplicationData() {
             }
           })
         }).catch(err => console.error(err.message))
-      return;
     };
 
     const params = {
@@ -70,7 +81,7 @@ export default function useApplicationData() {
       amazon_domain: "amazon.com"
     }
 
-    axios.get('https://api.rainforestapi.com/request', { params })
+    return axios.get('https://api.rainforestapi.com/request', { params })
     .then((res) => {
       const response = res.data.category_results;
 
@@ -87,6 +98,7 @@ export default function useApplicationData() {
     .catch(err => console.error(err.message))
   };
 
+  // function to select child category
   const selectCategory = (category) => {
 
     dispatch({
@@ -106,7 +118,7 @@ export default function useApplicationData() {
       amazon_domain: "amazon.com"
     }
 
-    axios.get('https://api.rainforestapi.com/request', { params })
+    return axios.get('https://api.rainforestapi.com/request', { params })
     .then((res) => {
       const response = res.data.category_results
       dispatch({
@@ -154,7 +166,7 @@ export default function useApplicationData() {
       };
 
 
-      axios.get('https://api.rainforestapi.com/request', { params })
+      return axios.get('https://api.rainforestapi.com/request', { params })
       .then((res) => {
         const response = res.data.search_results;
         dispatch({
@@ -166,8 +178,8 @@ export default function useApplicationData() {
             products: response 
           }
         });
-      });
-      return;
+      })
+      .catch(error => console.error(error));
     };
 
     const params = {
@@ -177,7 +189,7 @@ export default function useApplicationData() {
       amazon_domain: "amazon.com"
     };
 
-    axios.get('https://api.rainforestapi.com/request', { params })
+    return axios.get('https://api.rainforestapi.com/request', { params })
     .then((res) => {
       const response = res.data.search_results;
       dispatch({
@@ -191,6 +203,7 @@ export default function useApplicationData() {
         }
       })
     })
+    .catch(error => console.error(error));
   }
 
   return { 
@@ -199,5 +212,6 @@ export default function useApplicationData() {
     setProductsBySearch,
     selectCategory,
     setSearchTerm,
+    setUser
   };
 }

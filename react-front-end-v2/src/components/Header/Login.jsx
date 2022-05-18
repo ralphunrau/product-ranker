@@ -18,7 +18,12 @@ export default function Login(props) {
     }
 
     setError(null);
-    props.login(email, password)
+    const input = {
+      email: email,
+      password: password
+    };
+
+    props.onLogin(input);
   }
 
   return (
