@@ -1,9 +1,12 @@
 import '../styles/TierList.scss';
 import Item from './Item';
 import VerticalTabs from './VerticalTabs';
+import * as React from 'react';
+import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 
 export default function TierList(props) {
-  // const {mode, transition, back} = useVisualMode(props.user ? USER : GUEST);
+  // const {mode, transition, back} = useVisualMode(HIDDEN);
+  // const [shown, setShown] = React.useState(false);
 
   const sortProducts = (products) => {
     return products.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
@@ -59,6 +62,11 @@ export default function TierList(props) {
     )
   };
 
+  const toggleShow = (id, secondId) => {
+    document.getElementById(id).style.display !== "none" ? document.getElementById(id).style.display = "none" : document.getElementById(id).style.display = "block";
+    document.getElementById(secondId).style.display !== "none" ? document.getElementById(secondId).style.display = "none" : document.getElementById(secondId).style.display = "block";
+  }
+
   return (
     <div id="tier-list">
       <header>
@@ -67,38 +75,46 @@ export default function TierList(props) {
       <div id="tier-list-body">
         <div id="tier-list-left">
           <div className="tier-list-rank">
-            {/* <img src='s-badge.png' alt='s-badge'/> */}
+            <img id="first-rank" src='s-badge.png' alt='s-badge' onClick={() => toggleShow("first-rank", "first-tab")}/>
             <VerticalTabs
+              id="first-tab"
               products={sortProducts(props.products.slice(0, (props.products.length) / 6))}
+              toggleShow={() => toggleShow("first-rank", "first-tab")}
             />
           </div>
           <div className="tier-list-rank">
-            {/* <img src='a-badge.png' alt='a-badge'/> */}
-            <VerticalTabs
+            <img id="second-rank" src='a-badge.png' alt='a-badge' onClick={() => toggleShow("second-rank", "second-tab")}/>
+              <VerticalTabs
+              id="second-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}
+              toggleShow={() => toggleShow("second-rank", "second-tab")}
             />
           </div>
           <div className="tier-list-rank">
-            {/* <img src='b-badge.png' alt='b-badge'/> */}
+            <img id="third-rank" src='b-badge.png' alt='b-badge' onClick={() => toggleShow("third-rank", "third-tab")}/>
             <VerticalTabs
+              id="third-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
             />
           </div>
           <div className="tier-list-rank">
-            {/* <img src='c-badge.png' alt='c-badge'/> */}
+            <img id="fourth-rank" src='c-badge.png' alt='c-badge' onClick={() => toggleShow("fourth-rank", "fourth-tab")}/>
             <VerticalTabs
+              id="fourth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
             />
           </div>
           <div className="tier-list-rank">
-            {/* <img src='d-badge.png' alt='d-badge'/> */}
+            <img id="fifth-rank" src='d-badge.png' alt='d-badge' onClick={() => toggleShow("fifth-rank", "fifth-tab")}/>
             <VerticalTabs
+              id="fifth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
             />
           </div>
           <div className="tier-list-rank">
-            {/* <img src='f-badge.png' alt='f-badge'/> */}
+            <img id="sixth-rank" src='f-badge.png' alt='f-badge' onClick={() => toggleShow("sixth-rank", "sixth-tab")}/>
             <VerticalTabs
+              id="sixth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
             />
           </div>
