@@ -12,8 +12,11 @@ User Stories:
 
 User can see where a product ranks amongst similar products
 User can see related products and see where they tier amongst each other
-User can create subjective tier lists based on products they know
+
 User can compare products and see each products information
+User can create subjective tier lists based on products they know
+
+User can submit a picture and see related products shown in the picture and where they rank amongst each other
 
 Tech Stack:
 
