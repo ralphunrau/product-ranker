@@ -1,12 +1,14 @@
 import '../styles/TierList.scss';
 import Item from './Item';
 import VerticalTabs from './VerticalTabs';
+import HorizontalTabs from './HorizontalTabs';
 import * as React from 'react';
-import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(HIDDEN);
-  // const [shown, setShown] = React.useState(false);
 
   const sortProducts = (products) => {
     return products.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
@@ -41,27 +43,28 @@ export default function TierList(props) {
     return (
       <div id="tier-list-right">
         <div className="tier-list-item">
-          {allProducts.slice(0, amountOfProducts / 6)}
+          <HorizontalTabs products={sortProducts(allProducts.slice(0, (props.products.length) / 6))}/>
         </div>
         <div className="tier-list-item">
-          {allProducts.slice(amountOfProducts / 6 , (amountOfProducts / 6) * 2)}
+          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}/>
         </div>
         <div className="tier-list-item">
-          {allProducts.slice((amountOfProducts / 6) * 2 , (amountOfProducts / 6) * 3)}
+          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}/>
         </div>
         <div className="tier-list-item">
-          {allProducts.slice((amountOfProducts / 6) * 3 , (amountOfProducts / 6) * 4)}
+          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}/> 
         </div>
         <div className="tier-list-item">
-          {allProducts.slice((amountOfProducts / 6) * 4 , (amountOfProducts / 6) * 5)}
+          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}/>
         </div>
         <div className="tier-list-item">
-          {allProducts.slice((amountOfProducts / 6) * 5 , -1)}
+          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 5, -1))}/>
         </div>
       </div>
     )
   };
 
+  // Switches tier list rank display from and to vertical tab
   const toggleShow = (id, secondId) => {
     document.getElementById(id).style.display !== "none" ? document.getElementById(id).style.display = "none" : document.getElementById(id).style.display = "block";
     document.getElementById(secondId).style.display !== "none" ? document.getElementById(secondId).style.display = "none" : document.getElementById(secondId).style.display = "block";

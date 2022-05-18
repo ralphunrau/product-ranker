@@ -37,6 +37,7 @@
         .css-1n3h4wo {
           width: 100%;
           position: absolute;
+          z-index: 1;
         }
 
         img {
@@ -81,7 +82,7 @@
         height: 200px;
         margin-top: 5px;
         padding: 10px;
-        overflow-x: scroll;
+        overflow-x: hidden;
 
         .product-item {
           display: flex;
