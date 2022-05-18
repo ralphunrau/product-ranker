@@ -3,8 +3,18 @@ import './styles/App.scss';
 import TierList from './TierList'
 import Status from './Status';
 import Header from './Header';
+import useVisualMode from '../hooks/useVisualMode';
+
+import { HIDDEN, RANKER } from '../helper/modes';
 
 export default function Body(props) {
+  
+  const {mode, transition} = useVisualMode(HIDDEN);
+
+  const getProductsByCategory = (category) => {
+    props.selectCategory(category);
+    transition(RANKER);
+  }
 
   return (
     <main className="container">
@@ -17,20 +27,20 @@ export default function Body(props) {
         childCategories={props.childCategories}
         childCategory={props.childCategory}
         setMainCategory={props.setMainCategory}
-        selectCategory={props.selectCategory}
+        selectCategory={getProductsByCategory}
       />
-    
-    {props.products.length < 1 ? <Status /> : (
+    {mode === HIDDEN && <></>}
+    {mode === RANKER && (
+      (props.products.length < 1) ? <Status /> : (
       <TierList
         currentCategory={props.currentCategory}
         products={props.products}
-        getProductsByCategory={props.getProductsByCategory}
         categories={props.categories}
         category={props.category}
         childCategory={props.childCategory}
         childCategories={props.childCategories}
       />
-    )}
+    ))}
     </main>
   )
 }
