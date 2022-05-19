@@ -11,9 +11,6 @@ export default function reducer(state, action) {
       return {...state, categories: action.value.categories};
       
     case SET_USER:
-      console.log(action)
-      console.log(action.value)
-      console.log(action.value.user)
       return {...state,
         user: action.value.user
       }

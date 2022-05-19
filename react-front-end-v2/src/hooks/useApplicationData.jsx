@@ -28,12 +28,39 @@ export default function useApplicationData() {
           type: SET_USER,
           value: { user: user.data }
         })
+
+        const storedUser = {...user.data, dateCreated: new Date().getTime()}
+        window.localStorage.setItem('user', JSON.stringify(storedUser));
       })
       .catch(error => console.error(error));
   };
+  
+  const signOut = () => {
+    return axios.post('app/user/logout')
+      .then((user) => {
+        dispatch({
+          type: SET_USER,
+          value: { user: user.data}
+        })
+        localStorage.clear();
+      });
+  };
 
   useEffect(() => {
-    console.log(state)
+
+    const loginUser = JSON.parse(window.localStorage.getItem("user"));
+
+    const currentDate = new Date().getTime();
+
+    if(loginUser && (currentDate - loginUser.dateCreated) < 24 * 60 * 60 * 1000) {
+      dispatch({
+        type: SET_USER,
+        value: { user: loginUser }
+      });
+    } else {
+      localStorage.clear();
+    }
+
     Promise.all([
       axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
     ]).then((response) => {
@@ -49,7 +76,7 @@ export default function useApplicationData() {
   // function to set parent category
   const setMainCategory = (category) => {
 
-    const setCategory = state.category ? null : category;
+    const setCategory = state.category === category ? null : category;
 
     dispatch({
       type: SET_PRODUCTS,
@@ -147,7 +174,6 @@ export default function useApplicationData() {
   };
 
   const setProductsBySearch = (term) => {
-
     dispatch({
       type: SET_PRODUCTS,
       value: { 
@@ -189,13 +215,15 @@ export default function useApplicationData() {
     const params = {
       api_key: process.env.REACT_APP_API_KEY,
       type: "search",
-      search_term: term,
+      search_term: term || '',
       amazon_domain: "amazon.com"
     };
+
 
     return axios.get('api/request', { params })
     .then((res) => {
       const response = res.data.search_results;
+      console.log(response)
       dispatch({
         type: SET_PRODUCTS,
         value: { 
@@ -203,7 +231,7 @@ export default function useApplicationData() {
             childCategories: state.childCategories,
             childCategory: state.childCategory,
             categories: state.categories,
-            products: response 
+            products: response
         }
       })
     })
@@ -251,6 +279,7 @@ export default function useApplicationData() {
     selectCategory,
     setSearchTerm,
     setUser,
+    signOut,
     getReviewsByAsin
   };
 }

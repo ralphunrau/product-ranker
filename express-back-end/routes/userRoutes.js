@@ -10,8 +10,6 @@ router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  console.log('EMAIL', email);
-  console.log('PASS', password);
   getUserByEmail(email)
     .then(user => {
       if(bcrypt.compareSync(password, user.password)) {
@@ -46,5 +44,10 @@ router.post('/register', (req, res) => {
         .catch(error => console.error(error));
     });
 });
+
+router.post('/logout', (req, res) => {
+  req.session = null;
+  res.send({});
+})
 
 module.exports = router;
