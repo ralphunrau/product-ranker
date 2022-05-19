@@ -16,11 +16,16 @@ export default function Body(props) {
     transition(RANKER);
   }
 
+  const setProductsBySearch = (term) => {
+    props.searchProducts(term);
+    transition(RANKER);
+  }
+
   return (
     <main className="container">
       <Header
         setSearch={props.setSearch}
-        searchProducts={props.searchProducts}
+        searchProducts={setProductsBySearch}
         searchTerm={props.searchTerm}
         category={props.category}
         categories={props.categories}
@@ -30,6 +35,7 @@ export default function Body(props) {
         selectCategory={getProductsByCategory}
         user={props.user}
         setUser={props.setUser}
+        signOut={props.signOut}
 
       />
     {mode === HIDDEN && <></>}

@@ -31,6 +31,11 @@ export default function Nav(props) {
     props.onSearch(props.searchTerm)
   }
 
+  const onLogout = () => {
+    back();
+    props.signOut();
+  }
+
   return (
     <nav className="navBar">
       <div className="nav-left">
@@ -41,11 +46,10 @@ export default function Nav(props) {
       </div>
       <div className="nav-right">
         <section className='user-buttons'>
-          {props.user.username && <p className='username'>@{props.user.username}</p>}
           <img onClick={clickHandler} src='avatar.png' alt='profile' />
           {mode === HIDDEN ? <></> : (
             <>
-              {props.user.username && <User />}
+              {props.user.username && <User onLogout={onLogout} user={props.user.username} />}
               {!props.user.username && <Guest onLogin={loginForm} onRegister={registerForm} />}
             </>
           )}

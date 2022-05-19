@@ -34,6 +34,7 @@ export default function Header(props) {
     props.setUser(input);
   }
 
+
   return (
     <header className="header">
       <Nav
@@ -43,6 +44,7 @@ export default function Header(props) {
         searchTerm={props.searchTerm}
         toggleBar={toggleBar}
         user={props.user}
+        signOut={props.signOut}
         mode={mode}
       />
       {mode === SHOW && (
