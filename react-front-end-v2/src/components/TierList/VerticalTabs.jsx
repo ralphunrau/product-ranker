@@ -46,6 +46,7 @@ export default function VerticalTabs(props) {
                   <div>
                     <a href={product.link}>Visit Product</a>
                     <button onClick={() => props.getReviewsByAsin(product.asin)}>See Reviews!</button>
+                    <button onClick={() => props.addToWish(product.asin)}>Add to Wish!</button>
                   </div>
                 </div>
                 {props.currentReviews[1] && 
