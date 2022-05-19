@@ -8,7 +8,7 @@ const thidHashPass = bcrypt.hashSync(process.env.THIRD_USER_PASS, 10)
 
 exports.seed = async function(knex) {
   // delete existing entries
-  return knex('users').truncate()
+  return knex('users').del()
     .then(() => {
       // insert new seeds
       return knex('users').insert([

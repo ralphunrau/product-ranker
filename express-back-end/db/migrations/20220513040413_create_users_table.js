@@ -1,7 +1,4 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
+
 exports.up = function(knex) {
   return knex.schema
   // create new table with following columns
@@ -16,10 +13,6 @@ exports.up = function(knex) {
     })
 };
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
 exports.down = function(knex) {
   // roll-back migration to drop table
   return knex.schema
