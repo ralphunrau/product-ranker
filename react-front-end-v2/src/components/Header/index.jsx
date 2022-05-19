@@ -1,3 +1,5 @@
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+
 import '../styles/Header.scss'
 
 import useVisualMode from '../../hooks/useVisualMode';
@@ -34,33 +36,43 @@ export default function Header(props) {
     props.setUser(input);
   }
 
+  const handleClickAway = () => {
+    transition(HIDDEN);
+  }
+
 
   return (
-    <header className="header">
-      <Nav
-        toggleForm={toggleForm}
-        onChange={props.setSearch}
-        onSearch={props.searchProducts}
-        searchTerm={props.searchTerm}
-        toggleBar={toggleBar}
-        user={props.user}
-        signOut={props.signOut}
-        mode={mode}
-      />
-      {mode === SHOW && (
-        <CategoryList 
-          category={props.category}
-          categories={props.categories}
-          childCategories={props.childCategories}
-          childCategory={props.childCategory}
-          setMainCategory={props.setMainCategory}
-          selectCategory={onChange}
+    <>
+      <ClickAwayListener onClickAway={handleClickAway}>
+        <header className="header">
+        <Nav
+          toggleForm={toggleForm}
+          onChange={props.setSearch}
+          onSearch={props.searchProducts}
+          searchTerm={props.searchTerm}
           toggleBar={toggleBar}
+          user={props.user}
+          signOut={props.signOut}
+          mode={mode}
+          getWishes={props.getWishes}
         />
-      )}
-      {mode === HIDDEN && <></>}
-      {mode === LOGIN && <Login cancel={onCancel} onLogin={onLogin}/>}
-      {mode === REGISTER && <Register cancel={onCancel}/>}
-    </header>
+        {mode === SHOW && (
+          <CategoryList 
+            category={props.category}
+            categories={props.categories}
+            childCategories={props.childCategories}
+            childCategory={props.childCategory}
+            setMainCategory={props.setMainCategory}
+            selectCategory={onChange}
+            toggleBar={toggleBar}
+          />
+        )}
+        {mode === HIDDEN && <></>}
+        {mode === LOGIN && <Login cancel={onCancel} onLogin={onLogin}/>}
+        {mode === REGISTER && <Register cancel={onCancel}/>}
+      </header>
+    </ClickAwayListener>
+    {mode === SHOW && <div className='background-shade' />}
+    </>
   )
 }

@@ -17,7 +17,7 @@ export default function useApplicationData() {
     childCategories: [],
     childCategory: null,
     products: [],
-    user: {},
+    user: null,
     currentReviews: []
   });
 
@@ -37,10 +37,10 @@ export default function useApplicationData() {
   
   const signOut = () => {
     return axios.post('app/user/logout')
-      .then((user) => {
+      .then(() => {
         dispatch({
           type: SET_USER,
-          value: { user: user.data}
+          value: { user: null}
         })
         localStorage.clear();
       });
