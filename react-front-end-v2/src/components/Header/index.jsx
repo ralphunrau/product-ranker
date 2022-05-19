@@ -7,7 +7,7 @@ import CategoryList from './Categories';
 import Login from './Login';
 import Register from './Register';
 
-import { HIDDEN, LOGIN, REGISTER, SHOW, LOADING } from '../../helper/modes';
+import { HIDDEN, LOGIN, REGISTER, SHOW } from '../../helper/modes';
 
 export default function Header(props) {
   const {mode, transition} = useVisualMode(HIDDEN);
@@ -29,6 +29,11 @@ export default function Header(props) {
     toggleBar();
   };
 
+  const onLogin = (input) => {
+    toggleForm(mode);
+    props.setUser(input);
+  }
+
   return (
     <header className="header">
       <Nav
@@ -37,6 +42,7 @@ export default function Header(props) {
         onSearch={props.searchProducts}
         searchTerm={props.searchTerm}
         toggleBar={toggleBar}
+        user={props.user}
         mode={mode}
       />
       {mode === SHOW && (
@@ -51,7 +57,7 @@ export default function Header(props) {
         />
       )}
       {mode === HIDDEN && <></>}
-      {mode === LOGIN && <Login cancel={onCancel} onLogin={props.setUser}/>}
+      {mode === LOGIN && <Login cancel={onCancel} onLogin={onLogin}/>}
       {mode === REGISTER && <Register cancel={onCancel}/>}
     </header>
   )

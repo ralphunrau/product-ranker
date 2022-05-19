@@ -28,6 +28,7 @@ export default function Body(props) {
         childCategory={props.childCategory}
         setMainCategory={props.setMainCategory}
         selectCategory={getProductsByCategory}
+        user={props.user}
         setUser={props.setUser}
 
       />

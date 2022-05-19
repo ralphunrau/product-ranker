@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import '../../../styles/CategoryListItem.scss';
 
 import ChildCategoryListItem from './ChildCategoryListItem';
-import Status from '../../../Status';
+import SidebarStatus from '../../../SidebarStatus';
 
 import useVisualMode from '../../../../hooks/useVisualMode';
 
@@ -19,6 +19,7 @@ export default function CategoryListItem(props) {
         id={childCategory.id}
         name={childCategory.name}
         selected={childCategory.id === props.childCategory}
+        childCategories={props.childCategories}
         childCategory={props.childCategory}
         onChange={props.selectCategory}
       />
@@ -43,7 +44,7 @@ export default function CategoryListItem(props) {
   return (
     <div>
       <li data-testid={'category'} onClick={() => clickHandler(props.id)} className={categoryClass}>
-        <h3 className="text--regular">{props.name} {mode === LOADING && <Status />}{mode === HIDDEN && <></>}</h3> 
+        <h3 className="text--regular">{props.name} {(props.selected && props.childCategories.length < 1) && <SidebarStatus />}</h3> 
       </li>
       {props.selected && <ul>{childCategoryListItem}</ul>}
     </div>

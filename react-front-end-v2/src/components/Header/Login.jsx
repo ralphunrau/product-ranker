@@ -32,7 +32,7 @@ export default function Login(props) {
       <section className="form-input">
         <input
           name="email"
-          type="text"
+          type="email"
           placeholder='Email'
           className="form-input--text"
           onChange={event =>  setEmail(event.target.value)}
@@ -40,7 +40,7 @@ export default function Login(props) {
         />
          <input
           name="password"
-          type="text"
+          type="password"
           placeholder='Password'
           className="form-input--text"
           onChange={event =>  setPassword(event.target.value)}

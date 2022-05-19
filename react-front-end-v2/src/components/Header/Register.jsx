@@ -47,7 +47,7 @@ export default function Register(props) {
         />
         <input
           name="email"
-          type="text"
+          type="email"
           placeholder='Email'
           className="form-input--text"
           onChange={event =>  setEmail(event.target.value)}

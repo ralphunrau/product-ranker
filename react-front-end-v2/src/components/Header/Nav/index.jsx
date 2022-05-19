@@ -41,11 +41,12 @@ export default function Nav(props) {
       </div>
       <div className="nav-right">
         <section className='user-buttons'>
+          {props.user.username && <p className='username'>@{props.user.username}</p>}
           <img onClick={clickHandler} src='avatar.png' alt='profile' />
           {mode === HIDDEN ? <></> : (
             <>
-              {props.user && <User />}
-              {!props.user && <Guest onLogin={loginForm} onRegister={registerForm} />}
+              {props.user.username && <User />}
+              {!props.user.username && <Guest onLogin={loginForm} onRegister={registerForm} />}
             </>
           )}
         </section>
