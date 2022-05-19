@@ -2,10 +2,13 @@ import '../styles/TierList.scss';
 import Item from './Item';
 import VerticalTabs from './VerticalTabs';
 import HorizontalTabs from './HorizontalTabs';
-import * as React from 'react';
+import ImageSubmitForm from './ImageSubmitForm';
+import { useState, React } from 'react';
+import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(HIDDEN);
+  const [ showImageForm, setShowImageForm ] = useState(false);
 
   const sortProducts = (products) => {
     return products.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
@@ -66,6 +69,10 @@ export default function TierList(props) {
     document.getElementById(id).style.display !== "none" ? document.getElementById(id).style.display = "none" : document.getElementById(id).style.display = "block";
     document.getElementById(secondId).style.display !== "none" ? document.getElementById(secondId).style.display = "none" : document.getElementById(secondId).style.display = "block";
     props.getReviewsByAsin(null);
+  }
+
+  const toggleSubmitImageForm = () => {
+    showImageForm ? setShowImageForm(false) : setShowImageForm(true);
   }
 
   return (
@@ -145,6 +152,12 @@ export default function TierList(props) {
         <button>
           Compare items on this tier list
         </button>
+        {showImageForm === false && <BackupRoundedIcon 
+          onClick={() => toggleSubmitImageForm()}
+        />}
+        {showImageForm === true && <ImageSubmitForm
+          onClick={() => toggleSubmitImageForm()}
+        />}
       </div>
 
     </div>

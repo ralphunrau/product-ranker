@@ -133,5 +133,16 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+
+    // css selector for upload image icon and upload image form
+    .css-i4bv87-MuiSvgIcon-root {
+      position: fixed;
+      width: 150px;
+      height: 150px;
+      bottom: 0;
+      right: 0;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
   }
 }

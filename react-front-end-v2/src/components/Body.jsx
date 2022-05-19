@@ -59,6 +59,7 @@ export default function Body(props) {
         childCategories={props.childCategories}
         getReviewsByAsin={props.getReviewsByAsin}
         currentReviews={props.currentReviews}
+        getLabelsByImage={getLabelsByImage}
       />
     ))}
     </main>

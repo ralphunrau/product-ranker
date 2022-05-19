@@ -29,10 +29,12 @@ App.use(cookieSession({
 const apiRoutes = require('./routes/apiRoutes');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
+const visionRoutes = require('./routes/visionRoutes');
 
 App.use('/api', apiRoutes);
 App.use('/products', productRoutes);
 App.use('/user', userRoutes);
+App.use('/vision', visionRoutes);
 
 
 App.listen(PORT, () => {
