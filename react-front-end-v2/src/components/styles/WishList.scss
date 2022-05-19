@@ -1,14 +1,28 @@
 @import "../styles/partials/Mixins.scss";
 
 .wish-list {
-  margin-top: 100px;
+  margin-top: 200px;
   height: 100vh;
 
   .MuiBox-root {
     background-color: white;
+    // height: 500px;
+  }
+
+  .wish-list-box {
+    // margin-top: 200px;
+    // background-color: green;
+    // height: 200px;
+  }
+
+  .wish-list-stack {
+    // background-color: blue;
+    // margin-top: 200px;
+    // height: 300px;
   }
 
   .draggable-item {
     cursor: move;
+    // height: 100px;
   }
 }
