@@ -22,6 +22,7 @@ export default function App(props) {
         setSearch={setSearchTerm}
         searchProducts={setProductsBySearch}
         products={state.products}
+        user={state.user}
         setUser={setUser}
         getReviewsByAsin={getReviewsByAsin}
         currentReviews={state.currentReviews}
