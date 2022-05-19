@@ -18,7 +18,7 @@ router.get('/products', (req, res) => {
   }
   
   // make the http GET request to Rainforest API
-  axios.get('https://api.rainforestapi.com/request', { params })
+  return axios.get('https://api.rainforestapi.com/request', { params })
     .then(response => {
 
       // print the JSON response from Rainforest API
@@ -43,7 +43,7 @@ router.get('/products/:searchTerm', (req, res) => {
   }
   
   // make the http GET request to Rainforest API
-  axios.get('https://api.rainforestapi.com/request', { params })
+  return axios.get('https://api.rainforestapi.com/request', { params })
     .then(response => {
 
       // print the JSON response from Rainforest API
@@ -70,7 +70,7 @@ router.get('/products/categories/:category', (req, res) => {
   }
 
   // make the http GET request to Rainforest API
-  axios.get('https://api.rainforestapi.com/request', { params })
+  return axios.get('https://api.rainforestapi.com/request', { params })
     .then(response => {
 
       // print the JSON response from Rainforest API
@@ -87,7 +87,7 @@ router.get('/products/categories/:category', (req, res) => {
 router.get('/categories', (req, res) => {
 
   // make the http GET request to Rainforest API
-  axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.API_KEY}&domain=amazon.com`)
+  return axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.API_KEY}&domain=amazon.com`)
     .then(response => {
 
       // print the JSON response from Rainforest API
@@ -102,7 +102,7 @@ router.get('/categories', (req, res) => {
 router.get('/categories/:categoryId' , (req, res) => {
 
   // make the http GET request to Rainforest API
-  axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.API_KEY}&parent_id=${req.params.categoryId}&domain=amazon.com`)
+  return axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.API_KEY}&parent_id=${req.params.categoryId}&domain=amazon.com`)
   .then(response => {
 
     // print the JSON response from Rainforest API
@@ -127,7 +127,7 @@ router.get('/products/:category/:searchTerm', (req, res) => {
   }
   
   // make the http GET request to Rainforest API
-  axios.get('https://api.rainforestapi.com/request', { params })
+  return axios.get('https://api.rainforestapi.com/request', { params })
     .then(response => {
 
       // print the JSON response from Rainforest API

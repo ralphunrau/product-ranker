@@ -1,29 +1,45 @@
 @import "./partials/Mixins.scss";
 
 .category-list {
+  @include flex-column;
+  justify-content: center;
   color: $black;
   width: 20rem;
+  max-width: 20rem;
   height: 2rem;
   padding-left: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   font-size: 0.8rem;
 
   &:hover {
     background-color: $brand-color;
     color: $white;
+    transform: scale(1.2);
     cursor: pointer;
+
+    h3 {
+      margin-left: 2rem;
+    }
   }
 
   &--selected {
     background-color: $brand-color;
+    transform: scale(1.2);
     color: $white;
+
+    h3 {
+      margin-left: 2rem;
+    }
 
     &:hover {
       background-color: $brand-color;
     }
+  }
+
+  .status-loading--image {
+    animation: rotation 2s linear infinite;
+    color: white;
+    height: 0.8rem;
   }
 }

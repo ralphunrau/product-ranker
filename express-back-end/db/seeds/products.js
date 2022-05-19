@@ -1,7 +1,7 @@
 
 exports.seed = async function(knex) {
   // delete existing entries
-  return knex('products').truncate()
+  return knex('products').del()
     .then(() => {
       // insert new seeds
       return knex('products').insert([

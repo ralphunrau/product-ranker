@@ -10,13 +10,11 @@ router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  console.log('EMAIL', email);
-  console.log('PASS', password);
   getUserByEmail(email)
     .then(user => {
       if(bcrypt.compareSync(password, user.password)) {
-        req.session.user = user.username;
-        res.send({username: user.username, email: email});
+        req.session.user = user.id;
+        res.send({id: user.id, username: user.username, email: email});
         return;
       }
       res.sendStatus(403);
@@ -42,9 +40,21 @@ router.post('/register', (req, res) => {
       }
 
       registerUser(newUser)
-        .then(() => res.send({username: username, email: email}))
+        .then(() => {
+          getUserByEmail(email)
+          .then((user) => {
+            res.send({id: user.id, username: user.username, email: email});
+            req.session.user = user.id;
+            return;
+          });
+        })
         .catch(error => console.error(error));
-    });
+  });
 });
+
+router.post('/logout', (req, res) => {
+  req.session = null;
+  res.send({});
+})
 
 module.exports = router;

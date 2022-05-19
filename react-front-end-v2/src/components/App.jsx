@@ -3,9 +3,9 @@ import React from 'react';
 import Body from './Body';
 import useApplicationData from '../hooks/useApplicationData';
 
-export default function App(props) {
+export default function App() {
 
-  const { state , setMainCategory, selectCategory, setSearchTerm, setProductsBySearch, setUser, getReviewsByAsin } = useApplicationData();
+  const { state , setMainCategory, selectCategory, setSearchTerm, setProductsBySearch, setUser, signOut, getReviewsByAsin } = useApplicationData();
   
   return (
     <div className="App">
@@ -20,7 +20,9 @@ export default function App(props) {
         setSearch={setSearchTerm}
         searchProducts={setProductsBySearch}
         products={state.products}
+        user={state.user}
         setUser={setUser}
+        signOut={signOut}
         getReviewsByAsin={getReviewsByAsin}
         currentReviews={state.currentReviews}
       />

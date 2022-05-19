@@ -51,7 +51,16 @@
   }
 
   .category-lists::-webkit-scrollbar {
-    display: none;
+    width: 0.3rem;
+  }
+
+  .category-lists::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .category-lists::-webkit-scrollbar-thumb {
+    background: $shade-color;
+    opacity: 0.5;
   }
 
   .categories {
@@ -69,6 +78,7 @@
       border-right: solid 1px;
       width: auto;
       overflow-y: scroll;
+      overflow-x: hidden;
       border-top: solid 1px;
     }
 
