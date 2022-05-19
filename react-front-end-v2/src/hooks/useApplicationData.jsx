@@ -242,6 +242,26 @@ export default function useApplicationData() {
     .catch(error => console.error(error));
   }
 
+  const getLabelsByImage = () => {
+    
+    console.log('hi')
+    axios.get('/api/vision')
+    // .then((res) => {
+    //   const googleVisionData = res.data;
+
+    //   console.log(googleVisionData);
+    //   // dispatch({
+    //   //   type: SET_REVIEWS,
+    //   //   value: { 
+    //   //     currentReviews: [fullReviewObject.top_positive, fullReviewObject.top_critical]
+    //   //   }
+    //   // })
+    // })
+    // .catch(error => console.error(error));
+  }
+
+  getLabelsByImage();
+
   return { 
     state,
     setMainCategory,

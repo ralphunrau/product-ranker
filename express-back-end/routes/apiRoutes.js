@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 const axios = require('axios');
+const vision = require('@google-cloud/vision');
+const credentials = require('../visionAI/googleAPIkey.json');
 
 // Get all products
 router.get('/products', (req, res) => {
@@ -137,6 +139,25 @@ router.get('/products/:category/:searchTerm', (req, res) => {
     })
     
 })
+
+router.get('/vision'), (req, res) => {
+  console.log('im here')
+  // // Initializes authentication
+  // const options = {
+  //   credentials: credentials,
+  //   projectId: 'lighthouse-final'
+  // };
+
+  // // Creates a client
+  // const client = new vision.ImageAnnotatorClient(options);
+
+  // // Performs label detection on the image file
+  // const [result] = client.labelDetection('../visionAI/images/googleVision1.jpg');
+  // const labels = result.labelAnnotations;
+
+  // console.log(labels);
+  // res.send(labels);
+}
 
 
 
