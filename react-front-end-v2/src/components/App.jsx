@@ -5,7 +5,7 @@ import Body from './Body';
 
 import useApplicationData from '../hooks/useApplicationData';
 
-export default function App(props) {
+export default function App() {
 
   const { state , setMainCategory, selectCategory, setSearchTerm, setProductsBySearch, setUser, signOut, getReviewsByAsin } = useApplicationData();
   

@@ -1,0 +1,14 @@
+@import "../styles/partials/Mixins.scss";
+
+.wish-list {
+  margin-top: 100px;
+  height: 100vh;
+
+  .MuiBox-root {
+    background-color: white;
+  }
+
+  .draggable-item {
+    cursor: move;
+  }
+}
