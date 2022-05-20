@@ -47,8 +47,8 @@ export default function Body(props) {
         getWishes={showWishList}
       />
       {mode === HIDDEN && <></>}
-      {/* {mode === WISHES && <WishList />} */}
-      {/* {mode === RANKER && (
+      {mode === WISHES && <WishList />}
+      {mode === RANKER && (
         (props.products.length < 1) ? <Status /> : (
         <TierList
           currentCategory={props.currentCategory}
@@ -59,21 +59,9 @@ export default function Body(props) {
           childCategories={props.childCategories}
           getReviewsByAsin={props.getReviewsByAsin}
           currentReviews={props.currentReviews}
-          getLabelsByImage={props.getLabelsByImage}
+          getProductsByImageLabel={props.getProductsByImageLabel}
         />
-      ))} */}
-      <TierList
-        currentCategory={props.currentCategory}
-        products={props.products}
-        categories={props.categories}
-        category={props.category}
-        childCategory={props.childCategory}
-        childCategories={props.childCategories}
-        getReviewsByAsin={props.getReviewsByAsin}
-        currentReviews={props.currentReviews}
-        getLabelsByImage={props.getLabelsByImage}
-        searchProducts={setProductsBySearch}
-      />
+      ))}
     </main>
   )
 }

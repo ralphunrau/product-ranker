@@ -30,7 +30,7 @@ export default function TierList(props) {
 
   const getCategoryName = () => {
     if (props.category) {
-      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory).name;
+      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory)?.name;
       return props.categories.find(category => category.id === props.category).name;
     }
     return 'CATEGORY';
@@ -157,7 +157,7 @@ export default function TierList(props) {
         />}
         {showImageForm === true && <ImageSubmitForm
           onClick={() => toggleSubmitImageForm()}
-          searchProducts={props.searchProducts}
+          getProductsByImageLabel={props.getProductsByImageLabel}
         />}
       </div>
     </div>

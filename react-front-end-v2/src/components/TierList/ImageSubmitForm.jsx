@@ -3,23 +3,21 @@ import '../styles/TierList.scss';
 import Dropzone from 'react-dropzone';
 import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
-import axios from 'axios';
-import {useState} from 'react';
 
 export default function ImageSubmitForm(props) {
 
   const handleFileChange = async (file) => {
-    let formData = new FormData()
-    formData.append('file', file)
+    let formData = new FormData();
+    formData.append('file', file);
     const response = await fetch('http://localhost:8081/vision/upload', {
       method: 'POST',
       body: formData
     })
     if (response) {
-      const visionAIResponse = await response.json()
-      props.searchProducts(visionAIResponse.label)
+      const visionAIResponse = await response.json();
+      props.getProductsByImageLabel(visionAIResponse.object);
     }
-  }
+  };
 
   return (
     <div className='css-i4bv87-MuiSvgIcon-root' >
@@ -34,8 +32,6 @@ export default function ImageSubmitForm(props) {
         </section>
         )}
       </Dropzone>
-      {/* <input type="file" name="file" onChange={(event) => handleFileChange(event)}/>
-      <button type="button" onClick={(event) => handleSubmit(event)}>Upload</button>  */}
       <DisabledByDefaultIcon onClick={props.onClick}/>
     </div>
   );

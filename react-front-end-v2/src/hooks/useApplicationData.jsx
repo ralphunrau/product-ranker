@@ -273,19 +273,29 @@ export default function useApplicationData() {
     .catch(error => console.error(error));
   }
 
-  const getLabelsByImage = () => {
+  const getProductsByImageLabel = (label) => {
 
-    axios.get('app/vision')
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "search",
+      search_term: label,
+      amazon_domain: "amazon.com"
+    };
+
+
+    return axios.get('api/request', { params })
     .then((res) => {
-      const googleVisionData = res.data;
-
-      console.log(googleVisionData);
-      // dispatch({
-      //   type: SET_REVIEWS,
-      //   value: { 
-      //     currentReviews: [fullReviewObject.top_positive, fullReviewObject.top_critical]
-      //   }
-      // })
+      const response = res.data.search_results;
+      console.log(response)
+      dispatch({
+        type: SET_PRODUCTS,
+        value: {
+          products: response,
+          category: state.category,
+          childCategories: state.childCategories,
+          childCategory: state.childCategory
+        }
+      })
     })
     .catch(error => console.error(error));
   }
@@ -299,6 +309,6 @@ export default function useApplicationData() {
     setUser,
     signOut,
     getReviewsByAsin,
-    getLabelsByImage
+    getProductsByImageLabel
   };
 }

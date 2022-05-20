@@ -5,7 +5,7 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App() {
 
-  const { state , setMainCategory, selectCategory, setSearchTerm, setProductsBySearch, setUser, signOut, getReviewsByAsin, getLabelsByImage } = useApplicationData();
+  const { state , setMainCategory, selectCategory, setSearchTerm, setProductsBySearch, setUser, signOut, getReviewsByAsin, getProductsByImageLabel } = useApplicationData();
   
   return (
     <div className="App">
@@ -25,7 +25,7 @@ export default function App() {
         signOut={signOut}
         getReviewsByAsin={getReviewsByAsin}
         currentReviews={state.currentReviews}
-        getLabelsByImage={getLabelsByImage}
+        getProductsByImageLabel={getProductsByImageLabel}
       />
     </div>
   );

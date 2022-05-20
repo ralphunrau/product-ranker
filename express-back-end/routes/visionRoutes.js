@@ -29,11 +29,11 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
   const client = new vision.ImageAnnotatorClient(options);
 
-  const [result] = await client.labelDetection(`/home/ralphunrau/lighthouse/product-ranker/express-back-end/visionAI/images/${fileName}`);
-  const labels = result.labelAnnotations;
+  const [result] = await client.objectLocalization(`/home/ralphunrau/lighthouse/product-ranker/express-back-end/visionAI/images/${fileName}`);
+  const objects = result.localizedObjectAnnotations;
 
-  console.log(labels)
-  res.send({label: labels[0].description});
+  console.log(objects[0].name)
+  res.send({object: objects[0].name});
 })
 
 
