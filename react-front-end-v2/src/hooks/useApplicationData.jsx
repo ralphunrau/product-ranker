@@ -75,7 +75,8 @@ export default function useApplicationData() {
               type: SET_USER,
               value: {user: loginUser, products: response.data}
             })
-            window.localStorage.setItem('user', JSON.stringify(loginUser));
+            const currentDate = new Date().getTime();
+            window.localStorage.setItem('user', JSON.stringify({...loginUser, dateCreated: currentDate}));
           })     
       })
       .catch(error => console.error(error));
@@ -114,9 +115,18 @@ export default function useApplicationData() {
       items.forEach((item, i) => {
         axios.put(`app/products/wishes/save`, {...item, position: i + 1})
       })
-    ]).then((response) => {
-      console.log('RESPONSE IS', response)
+    ]).then(() => {
+      dispatch({
+        type: SET_PRODUCTS,
+        value: {
+          category: state.category,
+          childCategories: state.childCategories,
+          childCategory: state.childCategory,
+          products: items.map((item, i) => ({...item, position: i + 1}))
+        }
+      });
     })
+    .catch(error => console.error(error));
   }
 
   // function to set parent category
