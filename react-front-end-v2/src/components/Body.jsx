@@ -1,3 +1,5 @@
+import { useState, useEffect, useMemo } from 'react';
+
 import './styles/App.scss';
 
 import TierList from './TierList'
@@ -8,26 +10,29 @@ import WishList from './WishList';
 import useVisualMode from '../hooks/useVisualMode';
 
 import { HIDDEN, RANKER, WISHES } from '../helper/modes';
-import { faBackwardStep } from '@fortawesome/free-solid-svg-icons';
 
 export default function Body(props) {
-  const user = {...props.user}
-
-  const {mode, transition, back} = useVisualMode(user ? WISHES : HIDDEN);
+  const {mode, transition, back} = useVisualMode(props.user ? WISHES : HIDDEN);
 
   const getProductsByCategory = (category) => {
     props.selectCategory(category);
     transition(RANKER);
-  }
+  };
 
   const setProductsBySearch = (term) => {
     props.searchProducts(term);
     transition(RANKER);
-  }
+  };
 
   const showWishList = () => {
+    props.getWishList();
     mode === WISHES ? back() : transition(WISHES);
-  }
+  };
+
+  useEffect(() => {
+    if(props.user && mode === HIDDEN) transition(WISHES);
+    if(!props.user && mode === WISHES) transition(HIDDEN);
+  },[props.user, transition, mode])
 
   return (
     <main className="container">
@@ -45,9 +50,15 @@ export default function Body(props) {
         setUser={props.setUser}
         signOut={props.signOut}
         getWishes={showWishList}
+
       />
     {mode === HIDDEN && <></>}
-    {mode === WISHES && <WishList />}
+    {mode === WISHES && 
+      <WishList
+        products={props.products}
+        onSave={props.updateList}
+      />
+    }
     {mode === RANKER && (
       (props.products.length < 1) ? <Status /> : (
       <TierList

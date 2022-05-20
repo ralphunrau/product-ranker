@@ -7,7 +7,18 @@ import useApplicationData from '../hooks/useApplicationData';
 
 export default function App() {
 
-  const { state , setMainCategory, selectCategory, setSearchTerm, setProductsBySearch, setUser, signOut, getReviewsByAsin } = useApplicationData();
+  const {
+    state,
+    setMainCategory,
+    selectCategory,
+    setSearchTerm,
+    setProductsBySearch,
+    setUser,
+    signOut,
+    getWishList,
+    updateList,
+    getReviewsByAsin
+  } = useApplicationData();
   
   return (
     <div className="App">
@@ -27,6 +38,8 @@ export default function App() {
         signOut={signOut}
         getReviewsByAsin={getReviewsByAsin}
         currentReviews={state.currentReviews}
+        getWishList={getWishList}
+        updateList={updateList}
       />
     </div>
   );
