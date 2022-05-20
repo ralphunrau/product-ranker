@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const vision = require('@google-cloud/vision');
-const credentials = require('../visionAI/googleAPIkey.json');
+const credentials = require('../googleAPIkey.json');
 const fs = require('fs');
 const multer  = require('multer');
 

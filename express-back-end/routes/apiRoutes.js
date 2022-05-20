@@ -3,8 +3,6 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 const axios = require('axios');
-const vision = require('@google-cloud/vision');
-const credentials = require('../visionAI/googleAPIkey.json');
 
 // Get all products
 router.get('/products', (req, res) => {
