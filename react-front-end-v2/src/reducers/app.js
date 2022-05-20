@@ -31,7 +31,7 @@ export default function reducer(state, action) {
         ...state,
         currentReviews: action.value.currentReviews
       }
-
+      
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`

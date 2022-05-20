@@ -72,6 +72,7 @@ export default function Body(props) {
         getReviewsByAsin={props.getReviewsByAsin}
         currentReviews={props.currentReviews}
         getLabelsByImage={props.getLabelsByImage}
+        searchProducts={setProductsBySearch}
       />
     </main>
   )

@@ -7,6 +7,8 @@ const BodyParser = require('body-parser');
 const morgan = require('morgan');
 const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
+const cors = require('cors');
+const multer  = require('multer');
 
 const App = Express();
 
@@ -14,6 +16,7 @@ const App = Express();
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+App.use(cors());
 
 // setup morgan middleware
 App.use(morgan('dev'));

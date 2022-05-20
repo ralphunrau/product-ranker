@@ -157,6 +157,7 @@ export default function TierList(props) {
         />}
         {showImageForm === true && <ImageSubmitForm
           onClick={() => toggleSubmitImageForm()}
+          searchProducts={props.searchProducts}
         />}
       </div>
     </div>

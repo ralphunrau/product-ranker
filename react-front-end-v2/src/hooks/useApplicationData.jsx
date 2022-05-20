@@ -18,7 +18,8 @@ export default function useApplicationData() {
     childCategory: null,
     products: [],
     user: null,
-    currentReviews: []
+    currentReviews: [],
+    image: null
   });
 
   const setUser = (input) => {
