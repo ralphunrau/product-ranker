@@ -42,6 +42,14 @@ const updateProduct = (product) => {
     .catch(e => console.log(e.message));
 };
 
+const updateWish = (product) => {
+  return knex('wishes')
+    .where({ id: product.id })
+    .update({position: product.position})
+    .then(() => product)
+    .catch(e => console.log(e.message));
+};
+
 const addWish = (userId, productId) => {
   const newWish = {
     user_id: userId,
@@ -76,5 +84,6 @@ module.exports = {
   addWish,
   getWish,
   updateProduct,
-  removeWish
+  removeWish,
+  updateWish
 }

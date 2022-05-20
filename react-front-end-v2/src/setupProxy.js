@@ -9,7 +9,7 @@ const proxy = {
 }
 
 const proxy2 = {
-  target: 'https://api.rainforestapi.com',
+  target: 'https://api.rainforestapi.com/',
   changeOrigin: true,
   pathRewrite: {
     '^/api' : '/'

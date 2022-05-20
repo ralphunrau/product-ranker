@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { styled } from '@mui/material/styles';
 
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Draggable from 'react-draggable';
+
+import WishListItem from './WishListItem';
+
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import '../styles/WishList.scss';
-
-const listItems = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5']
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -21,43 +22,89 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export default function WishList(props) {
-  const [positions, setPositions] = useState({});
+  const [list, setList] = useState(props.products);
+  
 
-  const handleStop = (e, data) => {
-    let statePositions = {...positions};
+  const getList = () => {
+    return (
+      (localStorage.getItem("wishList") &&
+        JSON.parse(localStorage.getItem("wishList"))) ||
+        list
+    );
+  };
 
-    const itemId = e.target.id;
-    statePositions[itemId] = {};
-
-    statePositions[itemId]["x"] = data.x;
-    statePositions[itemId]["y"] = data.y;
-    setPositions({...positions, ...statePositions});
-    console.log('Position is', {...positions})
+  const saveList = (newList) => {
+    props.onSave(newList);
+    window.localStorage.setItem('wishList', JSON.stringify(list));
   }
+
+  const onDrop = (source, destination, list) => {
+    const newList = [...list];
+    newList.splice(destination, 0, newList.splice(source,1)[0]);
+    setList(newList);
+  };
+
+  useEffect(() => {
+    setList(props.products)
+  }, [props.products])
 
 
   return (
-    <div className="wish-list">
-      <Box sx={{ width: '100%' }} className="wish-list-box">
-        <Stack spacing={2} className="wish-list-stack">          
-          {listItems.map((listItem) => {
-            return (
-              <Draggable
-                defaultPosition={
-                  positions === null ?
-                  {x: 0, y: 0}
-                  : !positions[listItem[5]]?
-                    {x:0, y:0} :
-                    {x: positions[listItem].x, y: positions[listItem].y}
-                }
-                onStop={handleStop}
+    <DragDropContext 
+          onDragEnd={(param) => {            
+            onDrop(param.source.index, param.destination ? param.destination.index : param.source.index, list)
+          }}
+    >
+      <div className="wish-list">
+      <button onClick={() => saveList(list)} >Save</button>
+        <Box sx={{ width: '100%' }} className="wish-list-box">          
+          <Droppable droppableId='wishlist'>
+            {(provided, snapshot) => (
+              <Stack
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                spacing={1}
+                className="wish-list-stack"
               >
-                <Item id={listItem} className='draggable-item'>{listItem}</ Item>
-              </Draggable>
-            )
-          })}
-        </Stack>
-      </Box>
-    </div>
+              {list.map((product, i) => (                  
+                  <Draggable
+                    key={'draggable-' + product.id}
+                    draggableId={'draggable-' + product.id}
+                    index={i}
+                  >
+                    {(provided, snapshot) => (
+                        <Item
+                          key={'draggable-item' + product.it}
+                          ref={provided.innerRef}                    
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={{
+                            ...provided.draggableProps.style,
+                            boxShadow: snapshot.isDragging
+                              ? "0 0 0.5rem rgb(36, 47, 61)"
+                              : "none"
+                            }}
+                        >
+                          <WishListItem
+                            id={product.id}
+                            image={product.image}
+                            title={product.title}
+                            link={product.link}
+                            price={product.price}
+                            productId={product.product_id}
+                            ratings_total={product.ratings_total}
+                          />                                                 
+                        </ Item>
+                    )} 
+                  </Draggable>
+                ))}
+              {provided.placeholder}
+              </Stack>              
+            )}                                    
+          </Droppable>
+                       
+        </Box>
+      </div>
+  </DragDropContext>      
   )
 }

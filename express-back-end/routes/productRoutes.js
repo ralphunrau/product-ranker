@@ -2,12 +2,29 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 
-const { getProductById, saveProduct, updateProduct, removeWish, addWish, getWish } = require('../db/db');
+const { getProductById, saveProduct, updateProduct, removeWish, addWish, getWish, updateWish } = require('../db/db');
 
 router.get('/wishes/:id', (req, res) => {
   getWish(req.params.id)
     .then(products => res.send(products))
     .catch(error => console.error(error));
+})
+
+router.put('/wishes/save', (req, res) => {
+  const product = {
+    id: req.body.id,
+    image: req.body.image,
+    link: req.body.link,
+    title: req.body.title,
+    price: req.body.price,
+    rating: Number(req.body.rating),
+    ratings_total: Number(req.body.ratings_total),
+    position: req.body.position
+  }
+  updateWish(product)
+    .then((response) => {
+      res.send(response);
+    })
 })
 
 router.post('/wishes/:id', (req, res) => {

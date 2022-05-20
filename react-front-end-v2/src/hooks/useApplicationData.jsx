@@ -5,7 +5,8 @@ import reducer, {
   SET_PRODUCTS,
   SET_SEARCH,
   SET_USER,
-  SET_REVIEWS
+  SET_REVIEWS,
+  SET_APPLICATION_DATA
 } from '../reducers/app';
 
 export default function useApplicationData() {
@@ -21,20 +22,65 @@ export default function useApplicationData() {
     currentReviews: []
   });
 
-  const setUser = (input) => {
-    return axios.post(`app/user/login`, input)
-      .then((user) => {
-        dispatch({
-          type: SET_USER,
-          value: { user: user.data }
-        })
+  useEffect(() => {
+    const loginUser = JSON.parse(window.localStorage.getItem("user"));
+    const currentDate = new Date().getTime();
 
-        const storedUser = {...user.data, dateCreated: new Date().getTime()}
-        window.localStorage.setItem('user', JSON.stringify(storedUser));
+    if (loginUser && (currentDate - loginUser.dateCreated) < 24 * 60 * 60 * 1000) {
+      
+      const userWishes = JSON.parse(window.localStorage.getItem('wishList'));
+
+      if(userWishes) {      
+        axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)  
+          .then((response) => {
+            dispatch({
+              type: SET_APPLICATION_DATA,
+              value: {categories: response.data.categories, products: userWishes, user: loginUser}
+            });
+          })
+          .catch(error => console.error(error))
+      } else {
+        Promise.all([
+          axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`),
+          axios.get(`app/products/wishes/${loginUser.id}`)
+        ]).then((response) => {
+          const [ categories, products ] = response;
+          dispatch({
+            type: SET_APPLICATION_DATA,
+            value: {categories: categories.data.categories, products: products.data, user: loginUser}
+          });
+        })
+        .catch(error => console.error(error))
+      }
+      return;
+    };
+    localStorage.clear();
+
+    axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
+      .then((response) => {
+        dispatch({
+          type: SET_APPLICATION_DATA,
+          value: {categories: response.data.categories, products: state.products, user: state.user}
+        })
+      })
+    }, []);
+  
+  const setUser = (input) => {
+     axios.post(`app/user/login`, input)
+      .then((user) => {
+        const loginUser = {...user.data};        
+        axios.get(`app/products/wishes/${loginUser.id}`)
+          .then((response) => {
+            dispatch({
+              type: SET_USER,
+              value: {user: loginUser, products: response.data}
+            })
+            window.localStorage.setItem('user', JSON.stringify(loginUser));
+          })     
       })
       .catch(error => console.error(error));
   };
-  
+    
   const signOut = () => {
     return axios.post('app/user/logout')
       .then(() => {
@@ -46,32 +92,32 @@ export default function useApplicationData() {
       });
   };
 
-  useEffect(() => {
+  const getWishList = () => {
+    axios.get(`app/products/wishes/${state.user.id}`)
+      .then((response) => {
+        dispatch({
+          type: SET_PRODUCTS,
+          value: {
+            category: state.category,
+            childCategories: state.childCategories,
+            childCategory: state.childCategory,
+            products: response.data
+          }
+        })
+      })
+    .catch(error => console.error(error)); 
+  };
 
-    const loginUser = JSON.parse(window.localStorage.getItem("user"));
-
-    const currentDate = new Date().getTime();
-
-    if(loginUser && (currentDate - loginUser.dateCreated) < 24 * 60 * 60 * 1000) {
-      dispatch({
-        type: SET_USER,
-        value: { user: loginUser }
-      });
-    } else {
-      localStorage.clear();
-    }
-
+  const updateList = (items) => {
+    console.log('UPDATING LIST!......');
     Promise.all([
-      axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
+      items.forEach((item, i) => {
+        axios.put(`app/products/wishes/save`, {...item, position: i + 1})
+      })
     ]).then((response) => {
-      const [res] = response
-      dispatch({
-        type: SET_CATEGORIES_DATA,
-        value: {categories: res.data.categories}
-      });
+      console.log('RESPONSE IS', response)
     })
-    .catch(error => console.error(error));
-  }, []);
+  }
 
   // function to set parent category
   const setMainCategory = (category) => {
@@ -280,6 +326,8 @@ export default function useApplicationData() {
     setSearchTerm,
     setUser,
     signOut,
+    getWishList,
+    updateList,
     getReviewsByAsin
   };
 }
