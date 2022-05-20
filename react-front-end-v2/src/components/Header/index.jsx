@@ -68,7 +68,7 @@ export default function Header(props) {
           />
         )}
         {mode === HIDDEN && <></>}
-        {mode === LOGIN && <Login cancel={onCancel} onLogin={onLogin}/>}
+        {mode === LOGIN && <Login cancel={onCancel} onLogin={onLogin} getWishes={props.getWishes} />}
         {mode === REGISTER && <Register cancel={onCancel}/>}
       </header>
     </ClickAwayListener>

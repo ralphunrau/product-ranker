@@ -3,6 +3,7 @@ export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const SET_SEARCH = 'SET_SEARCH';
 export const SET_USER = 'SET_USER';
 export const SET_REVIEWS = 'SET_REVIEWS';
+export const SET_APPLICATION_DATA = 'SET_APPLICATION_DATA';
 
 export default function reducer(state, action) {
   switch (action.type) {
@@ -12,11 +13,19 @@ export default function reducer(state, action) {
       
     case SET_USER:
       return {...state,
-        user: action.value.user
+        user: action.value.user,
+        products: action.value.products
       }
 
     case SET_SEARCH:
       return {...state, searchTerm: action.value.searchTerm};
+
+    case SET_APPLICATION_DATA:
+      return {...state,
+        categories: action.value.categories,
+        products: action.value.products,
+        user: action.value.user
+      };
     
     case SET_PRODUCTS:
       return {...state,

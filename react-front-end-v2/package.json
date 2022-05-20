@@ -26,6 +26,7 @@
     "react-dom": "^18.1.0",
     "react-draggable": "^4.4.5",
     "react-dropzone": "^14.2.1",
+    "react-beautiful-dnd": "^13.1.0",
     "react-extensions": "^1.0.10",
     "react-scripts": "4.0.0",
     "sass": "^1.51.0",
