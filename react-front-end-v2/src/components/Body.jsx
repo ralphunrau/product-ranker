@@ -46,10 +46,22 @@ export default function Body(props) {
         signOut={props.signOut}
         getWishes={showWishList}
       />
-    {mode === HIDDEN && <></>}
-    {mode === WISHES && <WishList />}
-    {mode === RANKER && (
-      (props.products.length < 1) ? <Status /> : (
+      {mode === HIDDEN && <></>}
+      {/* {mode === WISHES && <WishList />} */}
+      {/* {mode === RANKER && (
+        (props.products.length < 1) ? <Status /> : (
+        <TierList
+          currentCategory={props.currentCategory}
+          products={props.products}
+          categories={props.categories}
+          category={props.category}
+          childCategory={props.childCategory}
+          childCategories={props.childCategories}
+          getReviewsByAsin={props.getReviewsByAsin}
+          currentReviews={props.currentReviews}
+          getLabelsByImage={props.getLabelsByImage}
+        />
+      ))} */}
       <TierList
         currentCategory={props.currentCategory}
         products={props.products}
@@ -59,9 +71,8 @@ export default function Body(props) {
         childCategories={props.childCategories}
         getReviewsByAsin={props.getReviewsByAsin}
         currentReviews={props.currentReviews}
-        getLabelsByImage={getLabelsByImage}
+        getLabelsByImage={props.getLabelsByImage}
       />
-    ))}
     </main>
   )
 }

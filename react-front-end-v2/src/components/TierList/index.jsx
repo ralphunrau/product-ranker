@@ -159,7 +159,6 @@ export default function TierList(props) {
           onClick={() => toggleSubmitImageForm()}
         />}
       </div>
-
     </div>
   )
 }

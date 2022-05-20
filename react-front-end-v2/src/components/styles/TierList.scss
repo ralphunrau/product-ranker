@@ -143,6 +143,30 @@
       right: 0;
       margin-right: 10px;
       margin-bottom: 10px;
+      display: flex;
+
+      section {
+        border: 1px solid rgb(36, 47, 61);
+
+        p {
+          margin: 2px;
+          font-size: large;
+          text-align: center;
+        }
+        
+        .css-i4bv87-MuiSvgIcon-root {
+          height: 70px;
+          width: 70px;
+          margin-right: 50px;
+        }
+      }
+
+      // css selector for upload image form exit button
+      .css-i4bv87-MuiSvgIcon-root {
+        height: 20px;
+        width: 20px;
+        
+      }
     }
   }
 }
