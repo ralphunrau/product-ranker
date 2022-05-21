@@ -138,6 +138,4 @@ router.get('/products/:category/:searchTerm', (req, res) => {
     
 })
 
-
-
 module.exports = router;

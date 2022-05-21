@@ -67,6 +67,7 @@ const getWish = (user) =>  {
     .leftJoin('wishes', { 'products.id': 'wishes.product_id' })
     .select().table('products')
     .where({ 'wishes.user_id':  user })
+    .orderBy('position', 'asc')
     .then((res) => res)
 };
 

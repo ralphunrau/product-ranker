@@ -57,4 +57,11 @@ router.post('/logout', (req, res) => {
   res.send({});
 })
 
+router.get('/:id', (req, res) => {
+  const templateVars = {
+    name: 'USER'
+  }
+  res.render()
+})
+
 module.exports = router;

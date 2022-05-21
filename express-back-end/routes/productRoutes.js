@@ -30,11 +30,11 @@ router.put('/wishes/save', (req, res) => {
 router.post('/wishes/:id', (req, res) => {
 
   const product = {
-    id: req.body.id,
+    id: req.body.asin,
     image: req.body.image,
     link: req.body.link,
     title: req.body.title,
-    price: req.body.price,
+    price: req.body.price.raw,
     rating: Number(req.body.rating),
     ratings_total: Number(req.body.ratings_total)
   }
@@ -54,13 +54,12 @@ router.post('/wishes/:id', (req, res) => {
         .then((wishes) => {
           if(!wishes.find((wish) => wish.product_id === product.id)) {
             addWish(req.params.id, product.id)
-              .then((response) =>  {
+              .then(() =>  {
                 console.log(`User ${req.params.id} wishes for product ${product.id}`)
-                res.send(response);
+                res.sendStatus(200);
                 return;
               })
           }
-          res.sendStatus(403);
         })
       })
       .catch(error => console.error(error));

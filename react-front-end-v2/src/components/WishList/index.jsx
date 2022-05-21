@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export default function WishList(props) {
-  const [list, setList] = useState(props.products);
+  const [list, setList] = useState(props.wishes);
   
 
   const getList = () => {
@@ -45,8 +45,8 @@ export default function WishList(props) {
   };
 
   useEffect(() => {
-    setList(props.products)
-  }, [props.products])
+    setList(props.wishes)
+  }, [props.wishes])
 
 
   return (
@@ -92,7 +92,9 @@ export default function WishList(props) {
                             link={product.link}
                             price={product.price}
                             productId={product.product_id}
+                            rating={product.rating}
                             ratings_total={product.ratings_total}
+                            removeWish={() => props.removeWish(product.product_id)}
                           />                                                 
                         </ Item>
                     )} 
