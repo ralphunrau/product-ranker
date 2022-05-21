@@ -21,7 +21,8 @@ export default function useApplicationData() {
     products: [],
     wishes: [],
     user: null,
-    currentReviews: []
+    currentReviews: [],
+    image: null
   });
 
   useEffect(() => {
@@ -319,6 +320,33 @@ export default function useApplicationData() {
     .catch(error => console.error(error));
   }
 
+  const getProductsByImageLabel = (label) => {
+
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "search",
+      search_term: label,
+      amazon_domain: "amazon.com"
+    };
+
+
+    return axios.get('api/request', { params })
+    .then((res) => {
+      const response = res.data.search_results;
+      console.log(response)
+      dispatch({
+        type: SET_PRODUCTS,
+        value: {
+          products: response,
+          category: state.category,
+          childCategories: state.childCategories,
+          childCategory: state.childCategory
+        }
+      })
+    })
+    .catch(error => console.error(error));
+  }
+
   return { 
     state,
     setMainCategory,
@@ -331,6 +359,7 @@ export default function useApplicationData() {
     removeWish,
     getWishList,
     updateList,
-    getReviewsByAsin
+    getReviewsByAsin,
+    getProductsByImageLabel
   };
 }

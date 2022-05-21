@@ -1,8 +1,6 @@
 import './styles/App.scss';
-
+import React from 'react';
 import Body from './Body';
-
-
 import useApplicationData from '../hooks/useApplicationData';
 
 export default function App() {
@@ -19,7 +17,8 @@ export default function App() {
     removeWish,
     getWishList,
     updateList,
-    getReviewsByAsin
+    getReviewsByAsin,
+    getProductsByImageLabel
   } = useApplicationData();
   
   return (
@@ -45,6 +44,7 @@ export default function App() {
         getWishList={getWishList}
         updateList={updateList}
         wishes={state.wishes}
+        getProductsByImageLabel={getProductsByImageLabel}
       />
     </div>
   );
