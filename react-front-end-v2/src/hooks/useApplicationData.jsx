@@ -1,13 +1,12 @@
 import { useReducer, useEffect } from "react";
 import axios from "axios";
 import reducer, {
+  SET_CATEGORIES_DATA,
   SET_PRODUCTS,
   SET_SEARCH,
   SET_USER,
   SET_REVIEWS,
-  SET_APPLICATION_DATA,
-  SET_CATEGORIES,
-  SET_WISHES
+  SET_APPLICATION_DATA
 } from '../reducers/app';
 
 export default function useApplicationData() {
@@ -19,9 +18,9 @@ export default function useApplicationData() {
     childCategories: [],
     childCategory: null,
     products: [],
-    wishes: [],
     user: null,
-    currentReviews: []
+    currentReviews: [],
+    image: null
   });
 
   useEffect(() => {
@@ -37,22 +36,22 @@ export default function useApplicationData() {
           .then((response) => {
             dispatch({
               type: SET_APPLICATION_DATA,
-              value: {categories: response.data.categories, wishes: userWishes, user: loginUser}
+              value: {categories: response.data.categories, products: userWishes, user: loginUser}
             });
           })
-          .catch(error => console.error(error));
+          .catch(error => console.error(error))
       } else {
         Promise.all([
           axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`),
           axios.get(`app/products/wishes/${loginUser.id}`)
         ]).then((response) => {
-          const [ categories, wishes ] = response;
+          const [ categories, products ] = response;
           dispatch({
             type: SET_APPLICATION_DATA,
-            value: {categories: categories.data.categories, wishes: wishes.data, user: loginUser}
+            value: {categories: categories.data.categories, products: products.data, user: loginUser}
           });
         })
-        .catch(error => console.error(error));
+        .catch(error => console.error(error))
       }
       return;
     };
@@ -61,25 +60,25 @@ export default function useApplicationData() {
     axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
       .then((response) => {
         dispatch({
-          type: SET_CATEGORIES,
-          value: {categories: response.data.categories, childCategories: [], childCategory: null}
-        });
-      });
+          type: SET_APPLICATION_DATA,
+          value: {categories: response.data.categories, products: state.products, user: state.user}
+        })
+      })
     }, []);
   
   const setUser = (input) => {
-    return axios.post(`app/user/login`, input)
+     axios.post(`app/user/login`, input)
       .then((user) => {
         const loginUser = {...user.data};        
-        return axios.get(`app/products/wishes/${loginUser.id}`)
+        axios.get(`app/products/wishes/${loginUser.id}`)
           .then((response) => {
             dispatch({
               type: SET_USER,
               value: {user: loginUser, products: response.data}
-            });
+            })
             const currentDate = new Date().getTime();
             window.localStorage.setItem('user', JSON.stringify({...loginUser, dateCreated: currentDate}));
-          });     
+          })     
       })
       .catch(error => console.error(error));
   };
@@ -90,69 +89,46 @@ export default function useApplicationData() {
         dispatch({
           type: SET_USER,
           value: { user: null}
-        });
+        })
         localStorage.clear();
       });
   };
 
   const getWishList = () => {
-    return axios.get(`app/products/wishes/${state.user.id}`)
+    axios.get(`app/products/wishes/${state.user.id}`)
       .then((response) => {
-        console.log('RESPOI2',response)
         dispatch({
-          type: SET_WISHES,
-          value: { wishes: response.data }
-        });
+          type: SET_PRODUCTS,
+          value: {
+            category: state.category,
+            childCategories: state.childCategories,
+            childCategory: state.childCategory,
+            products: response.data
+          }
+        })
       })
     .catch(error => console.error(error)); 
   };
 
   const updateList = (items) => {
+    console.log('UPDATING LIST!......');
     Promise.all([
       items.forEach((item, i) => {
-        return axios.put(`app/products/wishes/save`, {...item, position: i + 1})
+        axios.put(`app/products/wishes/save`, {...item, position: i + 1})
       })
     ]).then(() => {
       dispatch({
-        type: SET_WISHES,
-        value: { wishes: items.map((item, i) => ({...item, position: i + 1})) }
+        type: SET_PRODUCTS,
+        value: {
+          category: state.category,
+          childCategories: state.childCategories,
+          childCategory: state.childCategory,
+          products: items.map((item, i) => ({...item, position: i + 1}))
+        }
       });
     })
     .catch(error => console.error(error));
-  };
-
-  const addWish = (item) => {
-    return axios.post(`app/products/wishes/${state.user.id}`, item)
-      .then(() => {
-        console.log('Added wish!');
-        return axios.get(`app/products/wishes/${state.user.id}`)
-          .then((response) => {
-            console.log('RESPOI',response)
-            dispatch({
-              type: SET_WISHES,
-              value: { wishes: response.data }
-            })
-            window.localStorage.setItem('wishList', JSON.stringify(response.data))
-        });
-      })
-      .catch(error => console.error(error));
-  };
-
-  const removeWish = (id) => {
-    return axios.post(`app/products/remove/${state.user.id}/${id}`)
-      .then(() => {
-        console.log('Removed wish!');
-        return axios.get(`app/products/wishes/${state.user.id}`)
-          .then((response) => {
-            dispatch({
-              type: SET_WISHES,
-              value: { wishes: response.data }
-            });
-            window.localStorage.setItem('wishList', JSON.stringify(response.data));
-          });
-      })
-      .catch(error => console.error(error));
-  };
+  }
 
   // function to set parent category
   const setMainCategory = (category) => {
@@ -160,51 +136,67 @@ export default function useApplicationData() {
     const setCategory = state.category === category ? null : category;
 
     dispatch({
-      type: SET_CATEGORIES,
-      value: { category: setCategory, childCategories: [], childCategory: null }
+      type: SET_PRODUCTS,
+      value: {
+        category: setCategory,
+        childCategories: [],
+        childCategory: null,
+        products: state.products
+      }
     })
 
-    if(setCategory && state.categories.find(parent => parent.id === setCategory).has_children) {
-      return axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&parent_id=${category}&domain=amazon.com`)      
-        .then((response) => {
-          dispatch({
-            type: SET_CATEGORIES,
-            value: { category: category, childCategories: response.data.categories, childCategory: null }
-          })
-          console.log('STATE IS', state)
-        }).catch(err => console.error(err.message))
-
-    } else {
+    if(state.categories.find(parent => parent.id === setCategory).has_children) {
+      return axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&parent_id=${category}&domain=amazon.com`)
       
-      const params = {
-        api_key: process.env.REACT_APP_API_KEY,
-        type: "category",
-        category_id: category,
-        amazon_domain: "amazon.com"
-      };
-
-      return axios.get('api/request', { params })
-        .then((res) => {
+        .then((response) => {
+         const res = response.data.categories;
           dispatch({
             type: SET_PRODUCTS,
-            value: { products: res.data.category_results }
-          });
-        })
-        .catch(err => console.error(err.message))
+            value: {
+              category: category,
+              childCategories: res,
+              childCategory: null,
+              products: state.products
+            }
+          })
+        }).catch(err => console.error(err.message))
     };
+
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "category",
+      category_id: category,
+      amazon_domain: "amazon.com"
+    }
+
+    return axios.get('api/request', { params })
+    .then((res) => {
+      const response = res.data.category_results;
+
+      dispatch({
+        type: SET_PRODUCTS,
+        value: { 
+          category: state.category === null ? null : category,
+          childCategories: [],
+          childCategory: null,
+          products: response
+        }
+      });
+    })
+    .catch(err => console.error(err.message))
   };
 
   // function to select child category
   const selectCategory = (category) => {
 
     dispatch({
-      type: SET_CATEGORIES,
-      value: {category: state.category, childCategories: state.childCategories, childCategory: category}
-    });
-
-    dispatch({
       type: SET_PRODUCTS,
-      value: { products: [] }
+      value: {
+        category: state.category,
+        childCategories: state.childCategories,
+        childCategory: category,
+        products: []
+      }
     });
 
     const params = {
@@ -219,7 +211,12 @@ export default function useApplicationData() {
       const response = res.data.category_results
       dispatch({
         type: SET_PRODUCTS,
-        value: { products: response }
+        value: { 
+          category: state.category,
+          childCategories: state.childCategories,
+          childCategory: category,
+          products: response 
+        }
       });
     })
     .catch(err => console.error(err.message));
@@ -234,10 +231,14 @@ export default function useApplicationData() {
   };
 
   const setProductsBySearch = (term) => {
-
     dispatch({
       type: SET_PRODUCTS,
-      value: { products: [] }
+      value: { 
+        category: state.category,
+        childCategories: state.childCategories,
+        childCategory: state.category,
+        products: []
+      }
     });
 
     if (state.childCategory || state.category) {
@@ -257,9 +258,13 @@ export default function useApplicationData() {
         const response = res.data.search_results;
         dispatch({
           type: SET_PRODUCTS,
-          value: { products: response }
+          value: { 
+            category: state.category,
+            childCategories: state.childCategories,
+            childCategory: state.childCategory,
+            products: response 
+          }
         });
-        return;
       })
       .catch(error => console.error(error));
     };
@@ -271,16 +276,21 @@ export default function useApplicationData() {
       amazon_domain: "amazon.com"
     };
 
+
     return axios.get('api/request', { params })
     .then((res) => {
       const response = res.data.search_results;
+      console.log(response)
       dispatch({
         type: SET_PRODUCTS,
-        value: {         
-          products: response
+        value: { 
+          category: state.category,
+            childCategories: state.childCategories,
+            childCategory: state.childCategory,
+            categories: state.categories,
+            products: response
         }
-      });
-      return;
+      })
     })
     .catch(error => console.error(error));
   }
@@ -319,6 +329,33 @@ export default function useApplicationData() {
     .catch(error => console.error(error));
   }
 
+  const getProductsByImageLabel = (label) => {
+
+    const params = {
+      api_key: process.env.REACT_APP_API_KEY,
+      type: "search",
+      search_term: label,
+      amazon_domain: "amazon.com"
+    };
+
+
+    return axios.get('api/request', { params })
+    .then((res) => {
+      const response = res.data.search_results;
+      console.log(response)
+      dispatch({
+        type: SET_PRODUCTS,
+        value: {
+          products: response,
+          category: state.category,
+          childCategories: state.childCategories,
+          childCategory: state.childCategory
+        }
+      })
+    })
+    .catch(error => console.error(error));
+  }
+
   return { 
     state,
     setMainCategory,
@@ -327,10 +364,9 @@ export default function useApplicationData() {
     setSearchTerm,
     setUser,
     signOut,
-    addWish,
-    removeWish,
     getWishList,
     updateList,
-    getReviewsByAsin
+    getReviewsByAsin,
+    getProductsByImageLabel
   };
 }

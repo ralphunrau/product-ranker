@@ -10,10 +10,8 @@ import WishList from './WishList';
 import useVisualMode from '../hooks/useVisualMode';
 
 import { HIDDEN, RANKER, WISHES } from '../helper/modes';
-import { State } from '0g';
 
 export default function Body(props) {
-
   const {mode, transition, back} = useVisualMode(props.user ? WISHES : HIDDEN);
 
   const getProductsByCategory = (category) => {
@@ -27,10 +25,8 @@ export default function Body(props) {
   };
 
   const showWishList = () => {
-    props.getWishList()
-      .then(() => {
-        mode === WISHES ? back() : transition(WISHES);
-      })
+    props.getWishList();
+    mode === WISHES ? back() : transition(WISHES);
   };
 
   useEffect(() => {
@@ -54,35 +50,28 @@ export default function Body(props) {
         setUser={props.setUser}
         signOut={props.signOut}
         getWishes={showWishList}
-        wishes={props.wishes}
+
       />
     {mode === HIDDEN && <></>}
-    {mode === WISHES && (
-      (props.wishes.length < 1) ? <Status /> : (
+    {mode === WISHES && 
       <WishList
         products={props.products}
-        onRemove={props.removeWish}
         onSave={props.updateList}
-        user={props.user}
-        wishes={props.wishes}
-        removeWish={props.removeWish}
       />
-    ))}
+    }
     {mode === RANKER && (
       (props.products.length < 1) ? <Status /> : (
-      <TierList
-      currentCategory={props.currentCategory}
-      products={props.products}
-      categories={props.categories}
-      category={props.category}
-      childCategory={props.childCategory}
-      childCategories={props.childCategories}
-      getReviewsByAsin={props.getReviewsByAsin}
-      currentReviews={props.currentReviews}
-      addWish={props.addWish}
-      user={props.user}
-      wishes={props.wishes}
-      />
+        <TierList
+          currentCategory={props.currentCategory}
+          products={props.products}
+          categories={props.categories}
+          category={props.category}
+          childCategory={props.childCategory}
+          childCategories={props.childCategories}
+          getReviewsByAsin={props.getReviewsByAsin}
+          currentReviews={props.currentReviews}
+          getProductsByImageLabel={props.getProductsByImageLabel}
+        />
     ))}
     </main>
   )

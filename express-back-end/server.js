@@ -7,6 +7,8 @@ const BodyParser = require('body-parser');
 const morgan = require('morgan');
 const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
+const cors = require('cors');
+const multer  = require('multer');
 
 const App = Express();
 
@@ -14,6 +16,7 @@ const App = Express();
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+App.use(cors());
 
 // setup morgan middleware
 App.use(morgan('dev'));
@@ -29,10 +32,12 @@ App.use(cookieSession({
 const apiRoutes = require('./routes/apiRoutes');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
+const visionRoutes = require('./routes/visionRoutes');
 
 App.use('/api', apiRoutes);
 App.use('/products', productRoutes);
 App.use('/user', userRoutes);
+App.use('/vision', visionRoutes);
 
 
 App.listen(PORT, () => {
