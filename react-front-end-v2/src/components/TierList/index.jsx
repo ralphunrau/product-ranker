@@ -87,10 +87,7 @@ export default function TierList(props) {
           />
         </div>
       </section>
-      <footer>
-        <button>
-          Compare items on this tier list
-        </button>
+      <footer className="tier-list-footer">
         {mode === HIDDEN && <BackupRoundedIcon 
           onClick={() => toggleImageForm()}
         />}

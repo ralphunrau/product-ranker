@@ -30,7 +30,7 @@ export default function HorizontalTabs(props) {
       {mode === HORIZONTAL && (
         <>
           <div className="tier-list-left">
-            <img src='a-badge'alt='rank-badge' onClick={() => toggleShow()} />
+            <img src='https://i.imgur.com/VwN4P8K.png' alt='rank-badge' onClick={() => toggleShow()} />
           </div>
           <div className="tier-list-right">
             <Box sx={{ maxWidth: { xs: 320, sm: 1500 }, bgcolor: 'background.paper' }}>
