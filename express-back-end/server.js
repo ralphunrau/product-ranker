@@ -8,7 +8,6 @@ const morgan = require('morgan');
 const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
-const multer  = require('multer');
 
 const App = Express();
 

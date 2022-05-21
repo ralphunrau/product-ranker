@@ -29,10 +29,9 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
   const client = new vision.ImageAnnotatorClient(options);
 
-  const [result] = await client.objectLocalization(`/home/ralphunrau/lighthouse/product-ranker/express-back-end/visionAI/images/${fileName}`);
+  const [result] = await client.objectLocalization(`${process.env.FILE_PATH}${fileName}`);
   const objects = result.localizedObjectAnnotations;
 
-  console.log(objects[0].name)
   res.send({object: objects[0].name});
 })
 

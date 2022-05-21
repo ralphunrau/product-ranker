@@ -1,4 +1,3 @@
-import { SET_PRODUCTS } from "../../reducers/app";
 import Button from "../Button";
 
 export default function WishListItem(props) {

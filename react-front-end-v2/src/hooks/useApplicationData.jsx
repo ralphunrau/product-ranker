@@ -60,10 +60,10 @@ export default function useApplicationData() {
     localStorage.clear();
 
     axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
-      .then((response) => {
+    .then((response) => {
         dispatch({
-          type: SET_CATEGORIES,
-          value: {categories: response.data.categories, childCategories: [], childCategory: null}
+          type: SET_APPLICATION_DATA,
+          value: {categories: response.data.categories, wishes: [], user: null}
         });
       });
     }, []);
