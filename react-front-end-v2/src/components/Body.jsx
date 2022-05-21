@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import './styles/App.scss';
 
@@ -10,11 +10,10 @@ import WishList from './WishList';
 import useVisualMode from '../hooks/useVisualMode';
 
 import { HIDDEN, RANKER, WISHES } from '../helper/modes';
-import { State } from '0g';
 
 export default function Body(props) {
 
-  const {mode, transition, back} = useVisualMode(props.user ? WISHES : HIDDEN);
+  const {mode, transition, back} = useVisualMode(props.user ? WISHES : RANKER);
 
   const getProductsByCategory = (category) => {
     props.selectCategory(category);
@@ -32,11 +31,6 @@ export default function Body(props) {
         mode === WISHES ? back() : transition(WISHES);
       })
   };
-
-  useEffect(() => {
-    if(props.user && mode === HIDDEN) transition(WISHES);
-    if(!props.user && mode === WISHES) transition(HIDDEN);
-  },[props.user, transition, mode])
 
   return (
     <main className="container">
