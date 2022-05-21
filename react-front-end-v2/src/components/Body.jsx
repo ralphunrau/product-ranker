@@ -84,6 +84,7 @@ export default function Body(props) {
       wishes={props.wishes}
       getProductsByImageLabel={props.getProductsByImageLabel}
       />
+
     ))}
     </main>
   )

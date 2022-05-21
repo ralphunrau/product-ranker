@@ -8,7 +8,6 @@ import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(HIDDEN);
-
   const [ showImageForm, setShowImageForm ] = useState(false);
 
   const sortProducts = (products) => {
@@ -31,7 +30,7 @@ export default function TierList(props) {
 
   const getCategoryName = () => {
     if (props.category) {
-      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory).name;
+      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory)?.name;
       return props.categories.find(category => category.id === props.category).name;
     }
     return 'CATEGORY';
