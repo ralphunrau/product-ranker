@@ -13,7 +13,7 @@ import { HIDDEN, RANKER, WISHES } from '../helper/modes';
 
 export default function Body(props) {
 
-  const {mode, transition, back} = useVisualMode(props.user ? WISHES : RANKER);
+  const {mode, transition, back} = useVisualMode(props.user ? WISHES : HIDDEN);
 
   const getProductsByCategory = (category) => {
     props.selectCategory(category);

@@ -6,5 +6,22 @@ const SHOW = 'SHOW'
 const LOADING = 'LOADING';
 const RANKER = 'RANKER';
 const WISHES = 'WISHES';
+const DETAILS = 'DETAILS';
+const REVIEWS = 'REVIEWS';
+const HORIZONTAL = 'HORIZONTAL';
+const VERTICAL = 'VERTICAL';
 
-module.exports = {HIDDEN, LOGIN, REGISTER, SHOW, LOADING, RANKER, WISHES};
+
+module.exports = {
+  HIDDEN,
+  LOGIN,
+  REGISTER,
+  SHOW,
+  LOADING,
+  RANKER,
+  WISHES,
+  DETAILS,
+  REVIEWS,
+  HORIZONTAL,
+  VERTICAL
+};
