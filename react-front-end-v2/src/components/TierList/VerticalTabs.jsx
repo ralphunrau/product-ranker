@@ -30,7 +30,7 @@ export default function VerticalTabs(props) {
 
   const createTabs = (products) => {
     return products.map((product, index) => {
-      let image = <img src={product.image}></img>
+      let image = <img src={product.image} alt="product" ></img>
       return <Tab label={image} {...a11yProps(index)} />
     })
   }
@@ -46,7 +46,7 @@ export default function VerticalTabs(props) {
                   <div>
                     <a href={product.link}>Visit Product</a>
                     <button onClick={() => props.getReviewsByAsin(product.asin)}>See Reviews!</button>
-                    <button onClick={() => props.addToWish(product.asin)}>Add to Wish!</button>
+                    {(props.user.id) && <button onClick={() => props.addWish(product)}>Add to Wish!</button>}
                   </div>
                 </div>
                 {props.currentReviews[1] && 

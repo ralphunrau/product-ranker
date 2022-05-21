@@ -8,6 +8,7 @@ import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 
 export default function TierList(props) {
   // const {mode, transition, back} = useVisualMode(HIDDEN);
+
   const [ showImageForm, setShowImageForm ] = useState(false);
 
   const sortProducts = (products) => {
@@ -30,7 +31,7 @@ export default function TierList(props) {
 
   const getCategoryName = () => {
     if (props.category) {
-      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory)?.name;
+      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory).name;
       return props.categories.find(category => category.id === props.category).name;
     }
     return 'CATEGORY';
@@ -52,7 +53,7 @@ export default function TierList(props) {
           <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}/>
         </div>
         <div className="tier-list-item">
-          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}/> 
+          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}/>
         </div>
         <div className="tier-list-item">
           <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}/>
@@ -90,6 +91,9 @@ export default function TierList(props) {
               id="first-tab"
               products={sortProducts(props.products.slice(0, (props.products.length) / 6))}
               toggleShow={() => toggleShow("first-rank", "first-tab")}
+              addWish={props.addWish}
+              user={props.user}
+              wishes={props.wishes}
             />
           </div>
           <div className="tier-list-rank">
@@ -100,6 +104,9 @@ export default function TierList(props) {
               id="second-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}
               toggleShow={() => toggleShow("second-rank", "second-tab")}
+              addWish={props.addWish}
+              user={props.user}
+              wishes={props.wishes}
             />
           </div>
           <div className="tier-list-rank">
@@ -110,6 +117,9 @@ export default function TierList(props) {
               id="third-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
               toggleShow={() => toggleShow("third-rank", "third-tab")}
+              addWish={props.addWish}
+              user={props.user}
+              wishes={props.wishes}
             />
           </div>
           <div className="tier-list-rank">
@@ -120,6 +130,9 @@ export default function TierList(props) {
               id="fourth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
               toggleShow={() => toggleShow("fourth-rank", "fourth-tab")}
+              addWish={props.addWish}
+              user={props.user}
+              wishes={props.wishes}
             />
           </div>
           <div className="tier-list-rank">
@@ -130,6 +143,8 @@ export default function TierList(props) {
               id="fifth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
               toggleShow={() => toggleShow("fifth-rank", "fifth-tab")}
+              addWish={props.addWish}
+              user={props.user}
             />
           </div>
           <div className="tier-list-rank">
@@ -140,6 +155,9 @@ export default function TierList(props) {
               id="sixth-tab"
               products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
               toggleShow={() => toggleShow("sixth-rank", "sixth-tab")}
+              addWish={props.addWish}
+              user={props.user}
+              wishes={props.wishes}
             />
           </div>
         </div>

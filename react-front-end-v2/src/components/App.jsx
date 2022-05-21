@@ -1,6 +1,8 @@
 import './styles/App.scss';
-import React from 'react';
+
 import Body from './Body';
+
+
 import useApplicationData from '../hooks/useApplicationData';
 
 export default function App() {
@@ -13,6 +15,8 @@ export default function App() {
     setProductsBySearch,
     setUser,
     signOut,
+    addWish,
+    removeWish,
     getWishList,
     updateList,
     getReviewsByAsin,
@@ -22,6 +26,9 @@ export default function App() {
   return (
     <div className="App">
       <Body
+        user={state.user}
+        setUser={setUser}
+        signOut={signOut}
         categories={state.categories}
         category={state.category}
         setMainCategory={setMainCategory}
@@ -32,13 +39,13 @@ export default function App() {
         setSearch={setSearchTerm}
         searchProducts={setProductsBySearch}
         products={state.products}
-        user={state.user}
-        setUser={setUser}
-        signOut={signOut}
         getReviewsByAsin={getReviewsByAsin}
         currentReviews={state.currentReviews}
+        addWish={addWish}
+        removeWish={removeWish}
         getWishList={getWishList}
         updateList={updateList}
+        wishes={state.wishes}
         getProductsByImageLabel={getProductsByImageLabel}
       />
     </div>
