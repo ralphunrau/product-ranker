@@ -26,8 +26,7 @@ export default function ImageSubmitForm(props) {
         <section>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
-            <p>Drag 'n' drop some files here, or click to select files</p>
-            <BackupRoundedIcon />
+            <p>Drop or click to submit image</p>
           </div>
         </section>
         )}
