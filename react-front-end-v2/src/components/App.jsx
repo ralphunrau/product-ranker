@@ -1,8 +1,6 @@
 import './styles/App.scss';
-
+import React from 'react';
 import Body from './Body';
-
-
 import useApplicationData from '../hooks/useApplicationData';
 
 export default function App() {

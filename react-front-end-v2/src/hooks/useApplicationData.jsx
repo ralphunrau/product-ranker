@@ -21,7 +21,8 @@ export default function useApplicationData() {
     products: [],
     wishes: [],
     user: null,
-    currentReviews: []
+    currentReviews: [],
+    image: null
   });
 
   useEffect(() => {
