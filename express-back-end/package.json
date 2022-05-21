@@ -11,17 +11,14 @@
     "seed": "knex seed:run --knexfile db/knexfile.js"
   },
   "dependencies": {
-    "@google-cloud/vision": "^2.4.2",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.18.3",
     "cookie-session": "^2.0.0",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.16.4",
     "knex": "^2.0.0",
     "morgan": "^1.10.0",
-    "multer": "^1.4.4",
     "nodemon": "^1.18.7",
     "pg": "^8.7.3"
   }
