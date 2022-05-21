@@ -1,32 +1,22 @@
-import '../styles/TierList.scss';
-import Item from './Item';
-import VerticalTabs from './VerticalTabs';
-import HorizontalTabs from './HorizontalTabs';
+import HorizontalTabs from "./HorizontalTabs";
 import ImageSubmitForm from './ImageSubmitForm';
-import { useState, React } from 'react';
 import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 
+import useVisualMode from "../../hooks/useVisualMode";
+
+import {HIDDEN, SHOW} from '../../helper/modes';
+
 export default function TierList(props) {
-  // const {mode, transition, back} = useVisualMode(HIDDEN);
-  const [ showImageForm, setShowImageForm ] = useState(false);
+
+  const {mode, transition, back} = useVisualMode(HIDDEN);
 
   const sortProducts = (products) => {
-    return products.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
-  }
+    return products.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+  };
 
-  const allProductsToComponents = sortProducts(props.products).map((product) => {
-    return (
-      <Item 
-      image={product.image}
-      key={product.asin}
-      id={product.asin}
-      link={product.link}
-      rating={product.rating} 
-      ratings_total={product.ratings_total} 
-      title={product.title}
-      />
-    )
-  })
+  const toggleImageForm = () => {
+    mode === HIDDEN ? transition(SHOW) : back();
+  };
 
   const getCategoryName = () => {
     if (props.category) {
@@ -34,149 +24,81 @@ export default function TierList(props) {
       return props.categories.find(category => category.id === props.category).name;
     }
     return 'CATEGORY';
-  }
-
-  const sortItemsIntoTierList = (allProducts) => {
-
-    const amountOfProducts = allProducts.length;
-
-    return (
-      <div id="tier-list-right">
-        <div className="tier-list-item">
-          <HorizontalTabs products={sortProducts(allProducts.slice(0, (props.products.length) / 6))}/>
-        </div>
-        <div className="tier-list-item">
-          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}/>
-        </div>
-        <div className="tier-list-item">
-          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}/>
-        </div>
-        <div className="tier-list-item">
-          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}/>
-        </div>
-        <div className="tier-list-item">
-          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}/>
-        </div>
-        <div className="tier-list-item">
-          <HorizontalTabs products={sortProducts(allProducts.slice((props.products.length) / 6 * 5, -1))}/>
-        </div>
-      </div>
-    )
   };
 
-  // Switches tier list rank display from and to vertical tab
-  const toggleShow = (id, secondId) => {
-    document.getElementById(id).style.display !== "none" ? document.getElementById(id).style.display = "none" : document.getElementById(id).style.display = "block";
-    document.getElementById(secondId).style.display !== "none" ? document.getElementById(secondId).style.display = "none" : document.getElementById(secondId).style.display = "block";
-    props.getReviewsByAsin(null);
-  }
-
-  const toggleSubmitImageForm = () => {
-    showImageForm ? setShowImageForm(false) : setShowImageForm(true);
-  }
-
   return (
-    <div id="tier-list">
+    <div className="tier-list">
       <header>
         {getCategoryName()}
       </header>
-      <div id="tier-list-body">
-        <div id="tier-list-left">
-          <div className="tier-list-rank">
-            <img id="first-rank" src='s-badge.png' alt='s-badge' onClick={() => toggleShow("first-rank", "first-tab")}/>
-            <VerticalTabs
-              currentReviews={props.currentReviews}
-              getReviewsByAsin={props.getReviewsByAsin}
-              id="first-tab"
-              products={sortProducts(props.products.slice(0, (props.products.length) / 6))}
-              toggleShow={() => toggleShow("first-rank", "first-tab")}
-              addWish={props.addWish}
-              user={props.user}
-              wishes={props.wishes}
-            />
-          </div>
-          <div className="tier-list-rank">
-            <img id="second-rank" src='a-badge.png' alt='a-badge' onClick={() => toggleShow("second-rank", "second-tab")}/>
-              <VerticalTabs
-              currentReviews={props.currentReviews}
-              getReviewsByAsin={props.getReviewsByAsin}
-              id="second-tab"
-              products={sortProducts(props.products.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}
-              toggleShow={() => toggleShow("second-rank", "second-tab")}
-              addWish={props.addWish}
-              user={props.user}
-              wishes={props.wishes}
-            />
-          </div>
-          <div className="tier-list-rank">
-            <img id="third-rank" src='b-badge.png' alt='b-badge' onClick={() => toggleShow("third-rank", "third-tab")}/>
-            <VerticalTabs
-              currentReviews={props.currentReviews}
-              getReviewsByAsin={props.getReviewsByAsin}
-              id="third-tab"
-              products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
-              toggleShow={() => toggleShow("third-rank", "third-tab")}
-              addWish={props.addWish}
-              user={props.user}
-              wishes={props.wishes}
-            />
-          </div>
-          <div className="tier-list-rank">
-            <img id="fourth-rank" src='c-badge.png' alt='c-badge' onClick={() => toggleShow("fourth-rank", "fourth-tab")}/>
-            <VerticalTabs
-              currentReviews={props.currentReviews}
-              getReviewsByAsin={props.getReviewsByAsin}
-              id="fourth-tab"
-              products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
-              toggleShow={() => toggleShow("fourth-rank", "fourth-tab")}
-              addWish={props.addWish}
-              user={props.user}
-              wishes={props.wishes}
-            />
-          </div>
-          <div className="tier-list-rank">
-            <img id="fifth-rank" src='d-badge.png' alt='d-badge' onClick={() => toggleShow("fifth-rank", "fifth-tab")}/>
-            <VerticalTabs
-              currentReviews={props.currentReviews}
-              getReviewsByAsin={props.getReviewsByAsin}
-              id="fifth-tab"
-              products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
-              toggleShow={() => toggleShow("fifth-rank", "fifth-tab")}
-              addWish={props.addWish}
-              user={props.user}
-            />
-          </div>
-          <div className="tier-list-rank">
-            <img id="sixth-rank" src='f-badge.png' alt='f-badge' onClick={() => toggleShow("sixth-rank", "sixth-tab")}/>
-            <VerticalTabs
-              currentReviews={props.currentReviews}
-              getReviewsByAsin={props.getReviewsByAsin}
-              id="sixth-tab"
-              products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
-              toggleShow={() => toggleShow("sixth-rank", "sixth-tab")}
-              addWish={props.addWish}
-              user={props.user}
-              wishes={props.wishes}
-            />
-          </div>
+      <section className="tier-list-body">
+        <div className="tier-list-item">
+          <HorizontalTabs
+            products={sortProducts(props.products.slice(0, (props.products.length) / 6))}
+            user={props.user}
+            addWish={props.addWish}
+            wishes={props.wishes}
+            getReviewByAsin={props.getReviewByAsin}            
+          />
         </div>
-        {sortItemsIntoTierList(allProductsToComponents)}
-      </div>
-      <div id="tier-list-footer">
-        <button>
-          Add item to favorites
-        </button>
+        <div className="tier-list-item">
+          <HorizontalTabs
+            products={sortProducts(props.products.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}
+            user={props.user}
+            addWish={props.addWish}
+            wishes={props.wishes}
+            getReviewByAsin={props.getReviewByAsin}            
+          />      
+        </div>
+        <div className="tier-list-item">
+          <HorizontalTabs
+            products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
+            user={props.user}
+            addWish={props.addWish}
+            wishes={props.wishes}
+            getReviewByAsin={props.getReviewByAsin}            
+          />
+        </div>
+        <div className="tier-list-item">
+          <HorizontalTabs
+            products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
+            user={props.user}
+            addWish={props.addWish}
+            wishes={props.wishes}
+            getReviewByAsin={props.getReviewByAsin}            
+          />
+        </div>
+        <div className="tier-list-item">
+          <HorizontalTabs
+            products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
+            user={props.user}
+            addWish={props.addWish}
+            wishes={props.wishes}
+            getReviewByAsin={props.getReviewByAsin}            
+          />
+        </div>
+        <div className="tier-list-item">
+          <HorizontalTabs
+            products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
+            user={props.user}
+            addWish={props.addWish}
+            wishes={props.wishes}
+            getReviewByAsin={props.getReviewByAsin}            
+          />
+        </div>
+      </section>
+      <footer>
         <button>
           Compare items on this tier list
         </button>
-        {showImageForm === false && <BackupRoundedIcon 
-          onClick={() => toggleSubmitImageForm()}
+        {mode === HIDDEN && <BackupRoundedIcon 
+          onClick={() => toggleImageForm()}
         />}
-        {showImageForm === true && <ImageSubmitForm
-          onClick={() => toggleSubmitImageForm()}
+        {mode === SHOW && <ImageSubmitForm
+          onClick={() => toggleImageForm()}
           getProductsByImageLabel={props.getProductsByImageLabel}
         />}
-      </div>
+      </footer>
     </div>
-  )
-}
+  );
+};
