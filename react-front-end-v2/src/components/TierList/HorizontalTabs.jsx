@@ -43,6 +43,7 @@ export default function HorizontalTabs(props) {
 
 
   const itemsPanels = props.products.map((product, index) => {
+    const productItem = {...product, title: (product.title.split(',')[0]).split(' ').slice(0, 10).join(' ').split('-')[0]};
     return (      
       <ProductPanel
         id={`panel-${index}`}
@@ -50,8 +51,9 @@ export default function HorizontalTabs(props) {
         index={index}
         value={value}
         reviews={props.reviews}
-        product={product}
+        product={productItem}
         addWish={props.addWish}
+        removeWish={props.removeWish}
         wishes={props.wishes}
         getReviewByAsin={props.getReviewByAsin}
         user={props.user}

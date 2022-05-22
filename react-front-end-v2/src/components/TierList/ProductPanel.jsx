@@ -36,7 +36,7 @@ export default function ProductPanel(props) {
           </div>
           {props.product.price?.raw}
           <div className='product-details-section'>
-            {(props.user?.id && !inWishList) && <button onClick={() => props.addWish(props.product)}>Add to Wish!</button>}
+            {(props.user?.id && !inWishList) ? <button onClick={() => props.addWish(props.product)}>Add to Wish</button> : <button onClick={() => props.removeWish(props.product.asin)}>Remove Wish</button>}
             <a href={props.product.link} target="_blank" rel="noreferrer"><button>Visit Product</button></a>
           </div>
         </div>
