@@ -52,6 +52,7 @@ export default function HorizontalTabs(props) {
         reviews={props.reviews}
         product={product}
         addWish={props.addWish}
+        wishes={props.wishes}
         getReviewByAsin={props.getReviewByAsin}
         user={props.user}
         toggleShow={toggleShow}
