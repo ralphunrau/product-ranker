@@ -45,7 +45,7 @@ export default function reducer(state, action) {
     case SET_REVIEWS:
       return {
         ...state,
-        currentReviews: action.value.currentReviews
+        reviews: action.value.reviews
       }
       
     default:

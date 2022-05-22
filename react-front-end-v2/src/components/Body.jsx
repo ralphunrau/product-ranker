@@ -72,7 +72,7 @@ export default function Body(props) {
       childCategory={props.childCategory}
       childCategories={props.childCategories}
       getReviewsByAsin={props.getReviewsByAsin}
-      currentReviews={props.currentReviews}
+      reviews={props.reviews}
       addWish={props.addWish}
       user={props.user}
       wishes={props.wishes}

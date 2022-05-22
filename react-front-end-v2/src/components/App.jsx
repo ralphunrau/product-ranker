@@ -38,7 +38,7 @@ export default function App() {
         searchProducts={setProductsBySearch}
         products={state.products}
         getReviewsByAsin={getReviewsByAsin}
-        currentReviews={state.currentReviews}
+        reviews={state.reviews}
         addWish={addWish}
         removeWish={removeWish}
         getWishList={getWishList}
