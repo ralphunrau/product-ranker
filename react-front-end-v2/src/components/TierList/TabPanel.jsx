@@ -1,5 +1,5 @@
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import '../styles/ProductPanel.scss';
 
 export default function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -8,13 +8,14 @@ export default function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
+      id={`horizontal-tabpanel-${index}`}
+      aria-labelledby={`horizontal-tab-${index}`}
       {...other}
+      className='tab-panel'
     >
       {value === index && (
-        <Box sx={{ p: 2 }}>
-          <Typography>{children}</Typography>
+        <Box sx={{ p: 3 }}>
+          {children}
         </Box>
       )}
     </div>
