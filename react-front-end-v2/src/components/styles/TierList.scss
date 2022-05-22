@@ -25,6 +25,7 @@
 
     .tier-list-item {
       @include flex-row;
+      align-items: center;
       width: 100%;
 
       .tier-list-row {
