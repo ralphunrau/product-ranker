@@ -9,6 +9,7 @@ import reducer, {
   SET_CATEGORIES,
   SET_WISHES
 } from '../reducers/app';
+import { State } from "0g";
 
 export default function useApplicationData() {
 
@@ -22,7 +23,8 @@ export default function useApplicationData() {
     wishes: [],
     user: null,
     currentReviews: [],
-    image: null
+    image: null,
+    reviews: {0: [], 1: [], 2: [], 3: [], 4: [], 5: []}
   });
 
   useEffect(() => {
@@ -172,7 +174,6 @@ export default function useApplicationData() {
             type: SET_CATEGORIES,
             value: { category: category, childCategories: response.data.categories, childCategory: null }
           })
-          console.log('STATE IS', state)
         }).catch(err => console.error(err.message))
 
     } else {
@@ -286,17 +287,17 @@ export default function useApplicationData() {
     .catch(error => console.error(error));
   }
 
-  const getReviewsByAsin = (asin) => {
+  const getReviewsByAsin = (asin, index) => {
+    const newReviews = {...state.reviews};
+    newReviews[index] = [];
 
-    if (asin === null) {
-      dispatch({
-        type: SET_REVIEWS,
-        value: { 
-          currentReviews: []
-        }
-      })
-      return;
-    }
+
+    dispatch({
+      type: SET_REVIEWS,
+      value: { 
+        reviews: {...newReviews}
+      }
+    });
 
     // set up the request parameters
     const params = {
@@ -306,14 +307,14 @@ export default function useApplicationData() {
       asin: asin
     }
 
-    return axios.get('https://api.rainforestapi.com/request', { params })
-    .then((res) => {
-      const fullReviewObject = res.data;
-
-      dispatch({
-        type: SET_REVIEWS,
-        value: { 
-          currentReviews: [fullReviewObject.top_positive, fullReviewObject.top_critical]
+    return axios.get('api/request', { params })
+      .then((res) => {
+        const fullReviewObject = res.data;
+        newReviews[index] = [fullReviewObject.top_positive, fullReviewObject.top_critical]
+        dispatch({
+          type: SET_REVIEWS,
+          value: { 
+            reviews: {...newReviews}
         }
       })
     })

@@ -25,6 +25,8 @@ function a11yProps(index) {
 
 export default function HorizontalTabs(props) {
 
+  console.log(props.reviews)
+
   const [value, setValue] = useState(false);
 
   const {mode, transition, back} = useVisualMode(HORIZONTAL);
@@ -35,10 +37,10 @@ export default function HorizontalTabs(props) {
   };
 
   const toggleShow = () => {
-      mode === HORIZONTAL ? transition(VERTICAL) : back();
+    mode === HORIZONTAL ? transition(VERTICAL) : back();
   };
 
-  const items = props.products.map((item, index) => <Tab id={`horizontal-tab-${index}`} key={`horizontal-tab-${index}`} label={<img src={item.image} alt="product"></img>} {...a11yProps(index)} />);
+
 
   const itemsPanels = props.products.map((product, index) => {
     return (      
@@ -47,6 +49,7 @@ export default function HorizontalTabs(props) {
         key={`panel-${index}`}
         index={index}
         value={value}
+        reviews={props.reviews}
         product={product}
         addWish={props.addWish}
         getReviewByAsin={props.getReviewByAsin}
@@ -56,24 +59,34 @@ export default function HorizontalTabs(props) {
     ) 
   });
 
+  const items = props.products.map((item, index) => (
+    <Tab 
+      id={`horizontal-tab-${index}`} 
+      key={`horizontal-tab-${index}`} 
+      label={<img src={item.image} alt="product"></img>}
+      {...a11yProps(index)}
+      onClick={toggleShow}
+      onChange={() => props.getReviewByAsin(item.asin, props.row)}
+    />
+  ));
+
   return (
     <section className='tier-list-row'>
         <div className='horizontal-tab'>          
           <div className="horizontal-tab-top">
-            <Box sx={{ maxWidth: { xs: 320, sm: 1500 }, bgcolor: 'background.paper' }}>
+            <Box sx={{ maxWidth: { xs: 320, sm: 1500 }, bgcolor: 'background.paper' }}>              
               <Tabs
                 id={`horizontal-${value}`}
                 key={`horizontal-${value}`}
                 value={value}
                 onChange={handleChange}
-                onClick={toggleShow}
                 variant="scrollable"
                 scrollButtons
                 allowScrollButtonsMobile
                 aria-label="scrollable force tabs example"
-              >
+              >              
               {items}
-              </Tabs>              
+              </Tabs>
             </Box>
           </div>
           {mode === HORIZONTAL && <></>}

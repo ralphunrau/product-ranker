@@ -8,6 +8,25 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductPanel(props) {
 
+  console.log(props.reviews)
+
+  const currentReviews = props.reviews.map((review) => {
+    console.log('PROPS IS', props);
+    console.log('REVIEW IS', review);
+    return (
+      <article>
+        <header className="review-title">
+          <b>{review.title}</b>
+          <Rating name='read-only' value={review.rating} precision={0.5} readOnly />
+          {review.date.raw}
+        </header>
+        <section className="review-body">
+          {review.body}
+        </section>
+      </article>
+    )
+  })
+
   return (
     <TabPanel value={props.value} index={props.index}>
       <div className="product-info">
@@ -24,9 +43,8 @@ export default function ProductPanel(props) {
           </div>
         </div>
         <div className='product-reviews'>
-          <div className='reviews-header'>
-            <b>Reviews</b>
-            <FontAwesomeIcon icon={faClose} onClick={props.toggleShow} />
+          <div className='reviews'>
+            {currentReviews}
           </div>
         </div>
       </div>      
