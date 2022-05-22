@@ -30,36 +30,6 @@
       .tier-list-row {
         @include flex-row;
         width: 100%;
-
-        .tier-list-left {
-          @include flex-column;
-          @include align-center;
-          width: 12rem;
-
-          img {
-            width: 12rem;
-            height: 15rem;
-          }
-        }
-
-        .tier-list-right {
-          @include flex-row;
-          align-items: center;
-          width: calc(100% - 12rem);
-
-          img {
-            height: 7rem;
-            width: 7rem;
-          }
-
-          .MuiBox-root {
-            width: 100%;
-
-            .MuiTabs-root {
-              width: 100%;
-            }
-          }
-        }
       }
     }
   }
@@ -67,6 +37,7 @@
   .tier-list-footer {
     font-size: large;
     height: 5.5rem;
+    background-color: purple;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

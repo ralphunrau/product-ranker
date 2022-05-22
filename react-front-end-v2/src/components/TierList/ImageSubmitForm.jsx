@@ -1,7 +1,6 @@
 import * as React from 'react';
 import '../styles/TierList.scss';
 import Dropzone from 'react-dropzone';
-import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
 export default function ImageSubmitForm(props) {

@@ -2,66 +2,87 @@ import { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
 
-import VerticalTabs from './VerticalTabs';
+import TabPanel from './TabPanel';
+import ProductPanel from './ProductPanel';
+
+import '../styles/HorizontalTabs.scss';
 
 import useVisualMode from '../../hooks/useVisualMode';
 
 import {HORIZONTAL, VERTICAL} from '../../helper/modes';
 
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired
+};
+
+function a11yProps(index) {
+  return {id: `horizontal-tab-${index}`, 'aria-controls': `horizontal-tabpanel-${index}`};
+}
+
 export default function HorizontalTabs(props) {
 
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(false);
 
   const {mode, transition, back} = useVisualMode(HORIZONTAL);
 
-  const items = props.products.map((item) => <Tab key={item.asin} label={<img src={item.image} alt="product"></img>} />);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    transition(HORIZONTAL);
   };
 
   const toggleShow = () => {
-    mode === HORIZONTAL ? transition(VERTICAL) : back();
+      mode === HORIZONTAL ? transition(VERTICAL) : back();
   };
+
+  const items = props.products.map((item, index) => <Tab id={`horizontal-tab-${index}`} key={`horizontal-tab-${index}`} label={<img src={item.image} alt="product"></img>} {...a11yProps(index)} />);
+
+  const itemsPanels = props.products.map((product, index) => {
+    return (      
+      <ProductPanel
+        id={`panel-${index}`}
+        key={`panel-${index}`}
+        index={index}
+        value={value}
+        product={product}
+        addWish={props.addWish}
+        getReviewByAsin={props.getReviewByAsin}
+        user={props.user}
+        toggleShow={toggleShow}
+      />
+    ) 
+  });
 
   return (
     <section className='tier-list-row'>
-      {mode === HORIZONTAL && (
-        <>
-          <div className="tier-list-left">
-            <img src='https://i.imgur.com/VwN4P8K.png' alt='rank-badge' onClick={() => toggleShow()} />
-          </div>
-          <div className="tier-list-right">
+        <div className='horizontal-tab'>          
+          <div className="horizontal-tab-top">
             <Box sx={{ maxWidth: { xs: 320, sm: 1500 }, bgcolor: 'background.paper' }}>
               <Tabs
+                id={`horizontal-${value}`}
                 key={`horizontal-${value}`}
                 value={value}
                 onChange={handleChange}
+                onClick={toggleShow}
                 variant="scrollable"
                 scrollButtons
                 allowScrollButtonsMobile
                 aria-label="scrollable force tabs example"
               >
               {items}
-              </Tabs>
+              </Tabs>              
             </Box>
           </div>
-        </>
-      )}
-      {mode === VERTICAL && (
-        <VerticalTabs
-          key={`vertical-${value}`}
-          value={value}
-          addWish={props.addWish}
-          products={props.products}
-          user={props.user}
-          getReviewByAsin={props.getReviewByAsin}
-          toggleShow={toggleShow}
-          handleChange={handleChange}
-        />
-      )}
-      
+          {mode === HORIZONTAL && <></>}
+          {mode === VERTICAL && (
+            <div className="horizontal-tab-bottom">
+              {itemsPanels}
+            </div>
+            )}
+        </div>
     </ section>
   )
 }
