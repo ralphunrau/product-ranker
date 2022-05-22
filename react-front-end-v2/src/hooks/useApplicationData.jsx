@@ -9,7 +9,6 @@ import reducer, {
   SET_CATEGORIES,
   SET_WISHES
 } from '../reducers/app';
-import { State } from "0g";
 
 export default function useApplicationData() {
 
@@ -322,6 +321,11 @@ export default function useApplicationData() {
   }
 
   const getProductsByImageLabel = (label) => {
+
+    dispatch({
+      type: SET_PRODUCTS,
+      value: { products: [] }
+    });
 
     const params = {
       api_key: process.env.REACT_APP_API_KEY,
