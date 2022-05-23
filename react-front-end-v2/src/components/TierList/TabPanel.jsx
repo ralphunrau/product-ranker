@@ -13,11 +13,7 @@ export default function TabPanel(props) {
       {...other}
       className='tab-panel'
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && (<>{children}</>)}
     </div>
   );
 }

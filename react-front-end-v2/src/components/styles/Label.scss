@@ -1,0 +1,11 @@
+@import "../styles/partials/Mixins.scss";
+
+.item-label {
+  @include flex-column;
+  @include align-center;
+
+  .product-details-section {
+    @include flex-column;
+    @include align-center;
+  }
+}

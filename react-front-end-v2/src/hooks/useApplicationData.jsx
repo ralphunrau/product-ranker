@@ -23,8 +23,10 @@ export default function useApplicationData() {
     user: null,
     currentReviews: [],
     image: null,
-    reviews: {0: [], 1: [], 2: [], 3: [], 4: [], 5: []}
+    reviews: []
   });
+
+  console.log(state.products);
 
   useEffect(() => {
     const loginUser = JSON.parse(window.localStorage.getItem("user"));
@@ -286,15 +288,12 @@ export default function useApplicationData() {
     .catch(error => console.error(error));
   }
 
-  const getReviewsByAsin = (asin, index) => {
-    const newReviews = {...state.reviews};
-    newReviews[index] = [];
-
+  const getReviewsByAsin = (asin) => {
 
     dispatch({
       type: SET_REVIEWS,
       value: { 
-        reviews: {...newReviews}
+        reviews: []
       }
     });
 
@@ -308,12 +307,12 @@ export default function useApplicationData() {
 
     return axios.get('api/request', { params })
       .then((res) => {
-        const fullReviewObject = res.data;
-        newReviews[index] = [fullReviewObject.top_positive, fullReviewObject.top_critical]
+
+        console.log('RES IS', res)
         dispatch({
           type: SET_REVIEWS,
           value: { 
-            reviews: {...newReviews}
+            reviews: res.data.reviews
         }
       })
     })
