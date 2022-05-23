@@ -23,4 +23,4 @@ Shoppers can decide on which product to buy when unsure if the product is the be
 
 - Front-End: React, HTML, SCSS, MUI, Axios,
 - Back-End: Node, Express, PostgreSQL, Knex Js
-  Testing: Cypress
+- Testing: Cypress

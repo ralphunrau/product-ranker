@@ -41,8 +41,8 @@ export default function TierList(props) {
       <section className="tier-list-body">
         <div className="tier-list-item">
           <HorizontalTabs
-            row={0}            
-            products={sortProducts(props.products.slice(0, (props.products.length) / 6))}
+            row={0}
+            products={sortProducts(props.products).slice(0, (props.products.length) / 6)}
             user={props.user}
             addWish={props.addWish}
             wishes={props.wishes}
@@ -53,7 +53,7 @@ export default function TierList(props) {
         <div className="tier-list-item">
           <HorizontalTabs
             row={1}    
-            products={sortProducts(props.products.slice((props.products.length) / 6, (props.products.length) / 6 * 2))}
+            products={sortProducts(props.products).slice((props.products.length) / 6, (props.products.length) / 6 * 2)}
             user={props.user}
             addWish={props.addWish}
             wishes={props.wishes}
@@ -64,7 +64,7 @@ export default function TierList(props) {
         <div className="tier-list-item">
           <HorizontalTabs
             row={2}
-            products={sortProducts(props.products.slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3))}
+            products={sortProducts(props.products).slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3)}
             user={props.user}
             addWish={props.addWish}
             wishes={props.wishes}
@@ -75,7 +75,7 @@ export default function TierList(props) {
         <div className="tier-list-item">
           <HorizontalTabs
             row={3}    
-            products={sortProducts(props.products.slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4))}
+            products={sortProducts(props.products).slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4)}
             user={props.user}
             addWish={props.addWish}
             wishes={props.wishes}
@@ -86,7 +86,7 @@ export default function TierList(props) {
         <div className="tier-list-item">
           <HorizontalTabs
             row={4}    
-            products={sortProducts(props.products.slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5))}
+            products={sortProducts(props.products).slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5)}
             user={props.user}
             addWish={props.addWish}
             wishes={props.wishes}
@@ -97,7 +97,7 @@ export default function TierList(props) {
         <div className="tier-list-item">
           <HorizontalTabs
             row={5}    
-            products={sortProducts(props.products.slice((props.products.length) / 6 * 5, -1))}
+            products={sortProducts(props.products).slice((props.products.length) / 6 * 5, -1)}
             user={props.user}
             addWish={props.addWish}
             wishes={props.wishes}
