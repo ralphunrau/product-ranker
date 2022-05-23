@@ -7,7 +7,7 @@ import Modal from '@mui/material/Modal';
 
 
 import TabPanel from './TabPanel';
-import ProductPanel from './ProductPanel';
+import ReviewsPanel from './ReviewsPanel';
 import Label from './Label';
 import Status from '../Status';
 
@@ -49,7 +49,7 @@ export default function HorizontalTabs(props) {
 
   const [value, setValue] = useState(false);
 
-  const {mode, transition, back} = useVisualMode(HIDDEN);
+  const {mode, transition} = useVisualMode(HIDDEN);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,7 +57,6 @@ export default function HorizontalTabs(props) {
 
   const toggleShow = (asin) => {
     mode === SHOW ? transition(HIDDEN) : transition(SHOW);
-    // transition(SHOW)
     props.getReviewsByAsin(asin);
   };
 
@@ -66,7 +65,7 @@ export default function HorizontalTabs(props) {
   const itemsPanels = props.products.map((product, index) => {
     const productItem = {...product, title: (product.title.split(',')[0]).split(' ').slice(0, 10).join(' ').split('-')[0]};
     return (      
-      <ProductPanel
+      <ReviewsPanel
         id={`panel-${index}`}
         key={`panel-${index}`}
         index={index}

@@ -2,7 +2,7 @@ import TabPanel from './TabPanel';
 import Rating from '@mui/material/Rating';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function ProductPanel(props) {
+export default function ReviewsPanel(props) {
 
   console.log('REVIEWS ARE', props.reviews);
 

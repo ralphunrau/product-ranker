@@ -3,7 +3,7 @@
 .tier-list {
   @include flex-column;
   padding: 2rem;
-  width: 80%;
+  width: 90%;
   background-color: $white;
   margin-top: 5rem;
 
@@ -40,6 +40,8 @@
         @include flex-row;
         align-items: center;
         width: 85%;
+        margin-bottom: 1rem;
+        border-bottom: solid 1px $black;
       }
     }
   }
