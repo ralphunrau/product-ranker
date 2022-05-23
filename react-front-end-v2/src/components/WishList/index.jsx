@@ -15,7 +15,7 @@ import '../styles/WishList.scss';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(3),
+  padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
@@ -23,15 +23,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function WishList(props) {
   const [list, setList] = useState(props.wishes);
-  
-
-  const getList = () => {
-    return (
-      (localStorage.getItem("wishList") &&
-        JSON.parse(localStorage.getItem("wishList"))) ||
-        list
-    );
-  };
 
   const saveList = (newList) => {
     props.onSave(newList);

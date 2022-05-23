@@ -2,11 +2,13 @@
 
 .wish-list {
   margin-top: 200px;
+  width: 100%;
   height: 100vh;
 
   .MuiBox-root {
     background-color: white;
-    // height: 500px;
+    width: 100%;
+    height: 15rem;
   }
 
   .wish-list-box {
@@ -16,13 +18,5 @@
   }
 
   .wish-list-stack {
-    // background-color: blue;
-    // margin-top: 200px;
-    // height: 300px;
-  }
-
-  .draggable-item {
-    cursor: move;
-    // height: 100px;
   }
 }

@@ -12,8 +12,9 @@ import useVisualMode from '../hooks/useVisualMode';
 import { HIDDEN, RANKER, WISHES } from '../helper/modes';
 
 export default function Body(props) {
+  console.log('USER', props.user?.id);
 
-  const {mode, transition, back} = useVisualMode(props.user ? WISHES : RANKER);
+  const {mode, transition, back} = useVisualMode(props.user?.id ? WISHES : HIDDEN);
 
   const getProductsByCategory = (category) => {
     props.selectCategory(category);
@@ -31,6 +32,11 @@ export default function Body(props) {
         mode === WISHES ? back() : transition(WISHES);
       })
   };
+
+  useEffect(() => {
+    if(props.user?.id && mode === HIDDEN) transition(WISHES);
+    if(!props.user?.id && mode === WISHES) transition(HIDDEN);
+  }, [mode, transition, props.user?.id])
 
   return (
     <main className="container">
