@@ -2,6 +2,7 @@ import * as React from 'react';
 import '../styles/TierList.scss';
 import Dropzone from 'react-dropzone';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 export default function ImageSubmitForm(props) {
 
@@ -20,6 +21,7 @@ export default function ImageSubmitForm(props) {
   };
 
   return (
+  <ClickAwayListener onClickAway={props.handleClickAway}>
     <div className='css-i4bv87-MuiSvgIcon-root' >
       <Dropzone onDrop={acceptedFiles => handleFileChange(acceptedFiles[0])}>
         {({getRootProps, getInputProps}) => (
@@ -33,5 +35,6 @@ export default function ImageSubmitForm(props) {
       </Dropzone>
       <DisabledByDefaultIcon onClick={props.onClick}/>
     </div>
+  </ClickAwayListener>
   );
 }

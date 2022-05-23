@@ -3,6 +3,7 @@ import HorizontalTabs from "./HorizontalTabs";
 import ImageSubmitForm from './ImageSubmitForm';
 import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 
+
 import useVisualMode from "../../hooks/useVisualMode";
 
 import {HIDDEN, SHOW} from '../../helper/modes';
@@ -17,6 +18,10 @@ export default function TierList(props) {
 
   const toggleImageForm = () => {
     mode === HIDDEN ? transition(SHOW) : back();
+  };
+
+  const handleClickAway = () => {
+    transition(HIDDEN);
   };
 
   const getCategoryName = () => {
@@ -123,11 +128,14 @@ export default function TierList(props) {
         {mode === HIDDEN && <BackupRoundedIcon 
           onClick={() => toggleImageForm()}
         />}
-        {mode === SHOW && <ImageSubmitForm
-          onClick={() => toggleImageForm()}
-          getProductsByImageLabel={props.getProductsByImageLabel}
-          setSearch={props.setSearch}
-        />}
+        {mode === SHOW && (       
+          <ImageSubmitForm
+            onClick={() => toggleImageForm()}
+            getProductsByImageLabel={props.getProductsByImageLabel}
+            setSearch={props.setSearch}
+            handleClickAway={handleClickAway}
+          />
+        )}       
       </footer>
     </div>
   );
