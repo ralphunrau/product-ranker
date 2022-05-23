@@ -40,8 +40,8 @@ export default function Body(props) {
   }
   
   useEffect(() => {
-    if(!props.user?.id && mode === WISHES) transition(HOME);
-  }, [mode, transition, props.user?.id])
+    if(!props.user?.id) transition(HOME);
+  }, [props.user?.id])
 
   return (
     <main className="container">
@@ -67,8 +67,7 @@ export default function Body(props) {
         getProductsByImageLabel={setProductsAndModeByImage}
       />}
     {mode === HIDDEN && <></>}
-    {mode === WISHES && (
-      (props.wishes.length < 1) ? transition(HOME) : (
+    {mode === WISHES && 
       <WishList
         products={props.products}
         onRemove={props.removeWish}
@@ -77,7 +76,7 @@ export default function Body(props) {
         wishes={props.wishes}
         removeWish={props.removeWish}
       />
-    ))}
+    }
     {mode === RANKER && (
       (props.products.length < 1) ? <Status /> : (
       <TierList
