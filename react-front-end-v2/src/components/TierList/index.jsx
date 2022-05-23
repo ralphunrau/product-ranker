@@ -41,7 +41,7 @@ export default function TierList(props) {
       <section className="tier-list-body">
         <div className="tier-list-item">
           <div className="tier-list-rank">
-            <h1>S</h1>
+            <img src='s.png' alt='s-rank'/>
           </div>
           <HorizontalTabs
             products={sortProducts(props.products).slice(0, (props.products.length) / 6)}
@@ -55,7 +55,7 @@ export default function TierList(props) {
         </div>
         <div className="tier-list-item">
           <div className="tier-list-rank">
-            <h1>A</h1>
+          <img src='a.png' alt='a-rank'/>
           </div>
           <HorizontalTabs  
             products={sortProducts(props.products).slice((props.products.length) / 6, (props.products.length) / 6 * 2)}
@@ -69,7 +69,7 @@ export default function TierList(props) {
         </div>
         <div className="tier-list-item">
           <div className="tier-list-rank">
-            <h1>B</h1>
+            <img src='b.png' alt='b-rank'/>
           </div>
           <HorizontalTabs
             products={sortProducts(props.products).slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3)}
@@ -83,7 +83,7 @@ export default function TierList(props) {
         </div>
         <div className="tier-list-item">
           <div className="tier-list-rank">
-            <h1>C</h1>
+            <img src='c.png' alt='c-rank'/>
           </div>
           <HorizontalTabs    
             products={sortProducts(props.products).slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4)}
@@ -97,7 +97,7 @@ export default function TierList(props) {
         </div>
         <div className="tier-list-item">
           <div className="tier-list-rank">
-            <h1>D</h1>
+            <img src='d.png' alt='d-rank'/>
           </div>
           <HorizontalTabs    
             products={sortProducts(props.products).slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5)}
@@ -111,7 +111,7 @@ export default function TierList(props) {
         </div>
         <div className="tier-list-item">
           <div className="tier-list-rank">
-            <h1>F</h1>
+            <img src='f.png' alt='f-rank'/>
           </div>
           <HorizontalTabs    
             products={sortProducts(props.products).slice((props.products.length) / 6 * 5, -1)}

@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 import WishListItem from './WishListItem';
+import Button from '../Button';
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -47,8 +48,7 @@ export default function WishList(props) {
           }}
     >
       <div className="wish-list">
-      <button onClick={() => saveList(list)} >Save</button>
-        <Box sx={{ width: '100%' }} className="wish-list-box">          
+        <Box sx={{ width: '80%' }} className="wish-list-box">          
           <Droppable droppableId='wishlist'>
             {(provided, snapshot) => (
               <Stack
@@ -73,10 +73,17 @@ export default function WishList(props) {
                             ...provided.draggableProps.style,
                             boxShadow: snapshot.isDragging
                               ? "0 0 0.5rem rgb(36, 47, 61)"
-                              : "none"
+                              : "none",
+                            border: snapshot.isDragging
+                              ? "solid"
+                              : "none",
+                            borderBottom: snapshot.isDragging
+                              ? "none"
+                              : "solid",
                             }}
                         >
                           <WishListItem
+                            position={i + 1}
                             id={product.id}
                             image={product.image}
                             title={product.title}
@@ -97,6 +104,10 @@ export default function WishList(props) {
           </Droppable>
                        
         </Box>
+        <div className='save-button'>
+          <Button onClick={() => saveList(list)} >Save</Button>
+          <Button onClick={() => props.onCancel} >Cancel</Button>
+        </div>
       </div>
   </DragDropContext>      
   )

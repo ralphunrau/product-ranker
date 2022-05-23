@@ -13,7 +13,7 @@
 .button--danger {
   color: $white;
   border-color: $alternate-color;
-  background-color: $black;
+  background-color: $danger-color;
   border: none;
   border-top: 1px solid;
   border-bottom: 1px solid;
@@ -26,7 +26,7 @@
 
 .button--confirm {
   color: $white;
-  background-color: $alternate-color;
+  background-color: $third-color;
   border-radius: 1px;
   border: none;
   border-bottom: 1px solid $black;
