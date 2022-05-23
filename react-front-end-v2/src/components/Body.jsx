@@ -6,10 +6,11 @@ import TierList from './TierList'
 import Status from './Status';
 import Header from './Header';
 import WishList from './WishList';
+import HomePage from './HomePage';
 
 import useVisualMode from '../hooks/useVisualMode';
 
-import { HIDDEN, RANKER, WISHES } from '../helper/modes';
+import { HIDDEN, RANKER, WISHES, HOME } from '../helper/modes';
 
 export default function Body(props) {
 
