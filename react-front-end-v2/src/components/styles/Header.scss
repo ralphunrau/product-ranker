@@ -16,6 +16,8 @@
     margin-top: 150px;
     margin-bottom: -100px;
     font-size: 1.3rem;
+    z-index: 1;
+    position: absolute;
 
     .form-input {
       @include flex-column;

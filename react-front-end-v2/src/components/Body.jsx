@@ -13,8 +13,9 @@ import useVisualMode from '../hooks/useVisualMode';
 import { HIDDEN, RANKER, WISHES, HOME } from '../helper/modes';
 
 export default function Body(props) {
+  console.log('USER', props.user?.id);
 
-  const {mode, transition, back} = useVisualMode(props.user ? WISHES : HOME);
+  const {mode, transition, back} = useVisualMode(props.user?.id ? WISHES : HOME);
 
   const getProductsByCategory = (category) => {
     props.selectCategory(category);
@@ -37,6 +38,10 @@ export default function Body(props) {
     props.getProductsByImageLabel(label);
     transition(RANKER);
   }
+  
+  useEffect(() => {
+    if(!props.user?.id && mode === WISHES) transition(HOME);
+  }, [mode, transition, props.user?.id])
 
   return (
     <main className="container">
@@ -63,7 +68,7 @@ export default function Body(props) {
       />}
     {mode === HIDDEN && <></>}
     {mode === WISHES && (
-      (props.wishes.length < 1) ? <Status /> : (
+      (props.wishes.length < 1) ? transition(HOME) : (
       <WishList
         products={props.products}
         onRemove={props.removeWish}

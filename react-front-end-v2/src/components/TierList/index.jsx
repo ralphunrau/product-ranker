@@ -3,6 +3,7 @@ import HorizontalTabs from "./HorizontalTabs";
 import ImageSubmitForm from './ImageSubmitForm';
 import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
 
+
 import useVisualMode from "../../hooks/useVisualMode";
 
 import {HIDDEN, SHOW} from '../../helper/modes';
@@ -15,14 +16,12 @@ export default function TierList(props) {
 
   const {mode, transition, back} = useVisualMode(HIDDEN);
 
-  const clickHandler = () => {
-
-  }
-
- 
-
   const toggleImageForm = () => {
     mode === HIDDEN ? transition(SHOW) : back();
+  };
+
+  const handleClickAway = () => {
+    transition(HIDDEN);
   };
 
   const getCategoryName = () => {
@@ -39,80 +38,89 @@ export default function TierList(props) {
 
   return (
     <div className="tier-list">
-      <header>
-        {getCategoryName()}
-      </header>
       <section className="tier-list-body">
         <div className="tier-list-item">
+          <div className="tier-list-rank">
+            <h1>S</h1>
+          </div>
           <HorizontalTabs
-            row={0}
             products={sortProducts(props.products).slice(0, (props.products.length) / 6)}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
-            reviews={props.reviews['0']}
+            reviews={props.reviews}
           />
         </div>
         <div className="tier-list-item">
-          <HorizontalTabs
-            row={1}    
+          <div className="tier-list-rank">
+            <h1>A</h1>
+          </div>
+          <HorizontalTabs  
             products={sortProducts(props.products).slice((props.products.length) / 6, (props.products.length) / 6 * 2)}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
-            reviews={props.reviews['1']}
+            reviews={props.reviews}
           />      
         </div>
         <div className="tier-list-item">
+          <div className="tier-list-rank">
+            <h1>B</h1>
+          </div>
           <HorizontalTabs
-            row={2}
             products={sortProducts(props.products).slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3)}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
-            reviews={props.reviews['2']}           
+            reviews={props.reviews}    
           />
         </div>
         <div className="tier-list-item">
-          <HorizontalTabs
-            row={3}    
+          <div className="tier-list-rank">
+            <h1>C</h1>
+          </div>
+          <HorizontalTabs    
             products={sortProducts(props.products).slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4)}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
-            reviews={props.reviews['3']}            
+            reviews={props.reviews}            
           />
         </div>
         <div className="tier-list-item">
-          <HorizontalTabs
-            row={4}    
+          <div className="tier-list-rank">
+            <h1>D</h1>
+          </div>
+          <HorizontalTabs    
             products={sortProducts(props.products).slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5)}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
-            reviews={props.reviews['4']}            
+            reviews={props.reviews}            
           />
         </div>
         <div className="tier-list-item">
-          <HorizontalTabs
-            row={5}    
+          <div className="tier-list-rank">
+            <h1>F</h1>
+          </div>
+          <HorizontalTabs    
             products={sortProducts(props.products).slice((props.products.length) / 6 * 5, -1)}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
-            reviews={props.reviews['5']}           
+            reviews={props.reviews}           
           />
         </div>
       </section>
@@ -120,11 +128,14 @@ export default function TierList(props) {
         {mode === HIDDEN && <BackupRoundedIcon 
           onClick={() => toggleImageForm()}
         />}
-        {mode === SHOW && <ImageSubmitForm
-          onClick={() => toggleImageForm()}
-          getProductsByImageLabel={props.getProductsByImageLabel}
-          setSearch={props.setSearch}
-        />}
+        {mode === SHOW && (       
+          <ImageSubmitForm
+            onClick={() => toggleImageForm()}
+            getProductsByImageLabel={props.getProductsByImageLabel}
+            setSearch={props.setSearch}
+            handleClickAway={handleClickAway}
+          />
+        )}       
       </footer>
     </div>
   );

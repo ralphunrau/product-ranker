@@ -2,15 +2,15 @@
 
 .horizontal-tab {
   @include flex-column;
-  @include align-center;
+  align-items: center;
   width: 100%;
 
   .horizontal-tab-top {
     width: 100%;
 
     img {
-      height: 7rem;
-      width: 7rem;
+      height: 5rem;
+      width: 5rem;
     }
 
     .MuiBox-root {
@@ -19,35 +19,35 @@
       .MuiTabs-root {
         width: 100%;
 
-        .products-card {
-          @include flex-column;
+        .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root {
+          background-color: transparent;
+        }
+
+        .css-ptiqhd-MuiSvgIcon-root {
+          font-size: 3rem;
+        }
+
+        .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root {
+          background-color: transparent;
         }
 
         .MuiTabs-scroller {
           @include flex-row;
-          width: 90%;
-          height: 12rem;
+          width: 100%;
+          height: 15rem;
           justify-content: flex-start;
           align-items: center;
         }
       }
 
       .MuiTab-root {
-        height: 10rem;
+        height: 15rem;
         width: 10rem;
-        border: solid 1px;
-        border-radius: 0.25rem;
-        margin: 0 0.25rem 0 0.25rem;
+        font-size: 0.7rem;
         &:hover {
-          margin: 0 1rem 0 1rem;
           transform: scale(1.1);
         }
       }
     }
-  }
-
-  .horizontal-tab-bottom {
-    display: flex;
-    width: 90%;
   }
 }

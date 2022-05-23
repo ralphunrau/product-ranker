@@ -1,0 +1,81 @@
+@import "../styles/partials/Mixins.scss";
+.tab-panel {
+  @include flex-column;
+  @include align-center;
+  width: 100%;
+  color: black;
+
+  .product-info {
+    @include flex-column;
+    width: 100%;
+
+    .product-details {
+      @include flex-row;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      .product-details-section {
+        @include flex-row;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 0.25rem;
+        margin-top: 0.25rem;
+      }
+
+      button {
+        margin-right: 0.25rem;
+        margin-top: 0.25rem;
+        background-color: $third-color;
+        color: $white;
+      }
+    }
+
+    .product-reviews {
+      font-size: 0.8rem;
+      width: 100%;
+
+      article {
+        @include flex-column;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+
+      .review-title {
+        @include flex-column;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+.product-modal {
+  .MuiBox-root {
+    overflow-y: scroll;
+    .modal-status {
+      display: flex;
+      align-items: center;
+      height: 15vh;
+
+      .MuiCircularProgress-svg {
+        display: flex;
+        justify-self: center;
+        align-self: center;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $shade-color;
+    opacity: 0.5;
+  }
+}
