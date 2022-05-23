@@ -11,16 +11,19 @@ router.get('/wishes/:id', (req, res) => {
 })
 
 router.put('/wishes/save', (req, res) => {
+  console.log('PRODUCT IS', product)
+
   const product = {
     id: req.body.id,
     image: req.body.image,
-    link: req.body.link,
+    link: req.body.link.split('&')[0],
     title: req.body.title,
     price: req.body.price,
     rating: Number(req.body.rating),
     ratings_total: Number(req.body.ratings_total),
     position: req.body.position
   }
+
   updateWish(product)
     .then((response) => {
       res.send(response);
@@ -32,9 +35,9 @@ router.post('/wishes/:id', (req, res) => {
   const product = {
     id: req.body.asin,
     image: req.body.image,
-    link: req.body.link,
+    link: req.body.link.split('&')[0],
     title: req.body.title,
-    price: req.body.price.raw,
+    price: req.body.price?.raw,
     rating: Number(req.body.rating),
     ratings_total: Number(req.body.ratings_total)
   }

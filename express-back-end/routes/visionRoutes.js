@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
 
 router.post('/upload', upload.single('file'), async (req, res) => {
 
@@ -31,9 +31,8 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
   const [result] = await client.objectLocalization(`${process.env.FILE_PATH}${fileName}`);
   const objects = result.localizedObjectAnnotations;
-
   res.send({object: objects[0].name});
-})
+});
 
 
 module.exports = router;
