@@ -19,6 +19,18 @@
       .MuiTabs-root {
         width: 100%;
 
+        .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root {
+          background-color: transparent;
+        }
+
+        .css-ptiqhd-MuiSvgIcon-root {
+          font-size: 3rem;
+        }
+
+        .css-145v6pe-MuiButtonBase-root-MuiTabScrollButton-root {
+          background-color: transparent;
+        }
+
         .MuiTabs-scroller {
           @include flex-row;
           width: 100%;

@@ -33,9 +33,6 @@ export default function TierList(props) {
 
   return (
     <div className="tier-list">
-      <header>
-        {getCategoryName()}
-      </header>
       <section className="tier-list-body">
         <div className="tier-list-item">
           <div className="tier-list-rank">
