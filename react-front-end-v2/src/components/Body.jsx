@@ -50,6 +50,11 @@ export default function Body(props) {
         getWishes={showWishList}
         wishes={props.wishes}
       />
+    {mode === HOME && 
+      <HomePage
+        setSearch={props.setSearch}
+        getProductsByImageLabel={props.getProductsByImageLabel}
+      />}
     {mode === HIDDEN && <></>}
     {mode === WISHES && (
       (props.wishes.length < 1) ? <Status /> : (
