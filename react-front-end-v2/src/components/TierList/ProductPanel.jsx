@@ -1,25 +1,24 @@
-import PropTypes from 'prop-types';
 import TabPanel from './TabPanel';
 import Rating from '@mui/material/Rating';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ProductPanel(props) {
 
+  console.log('REVIEWS ARE', props.reviews);
+
+
   const inWishList = props.wishes.find((wish) => wish.product_id === props.product.asin);
 
-  const currentReviews = props.reviews.map((review) => {
+  const currentReviews = props.reviews?.map((review) => {
     return (
       <article>
         <header className="review-title">
-          <b>{review.title}</b>
-          <Rating name='read-only' value={review.rating} precision={0.5} readOnly />
-          {review.date.raw}
+          <Rating name='read-only' value={review.rating} precision={0.5} readOnly size='small'/>
+          <b>{review?.title}</b>
+          {review?.date.raw}
         </header>
         <section className="review-body">
-          {review.body}
+          {review?.body}
         </section>
       </article>
     )
@@ -27,25 +26,24 @@ export default function ProductPanel(props) {
 
   return (
     <TabPanel value={props.value} index={props.index}>
-      <div className="product-info">
-        <div className='product-details'>
-          <b>{props.product.title.split(',')[0]}</b><br/>
-          <div className='product-details-section' >
-            <Rating name='read-only' value={props.product.rating} precision={0.5} readOnly />
-            ({props.product.ratings_total})<br/>
+      {(props.reviews?.length < 1) ? <div className='modal-status'><CircularProgress /></div>: (
+        <div className="product-info">
+          <div className='product-details'>
+            <div className='product-details-section' >
+              <b>{props.product.title.split(',')[0]}</b><br/>
+            </div>
+            <div className='product-details-section'>
+              {(props.user?.id && !inWishList) ? <button onClick={() => props.addWish(props.product)}>Add to Wish</button> : <button onClick={() => props.removeWish(props.product.asin)}>Remove Wish</button>}
+              <a href={props.product.link} target="_blank" rel="noreferrer"><button>Visit Product</button></a>
+            </div>
           </div>
-          {props.product.price?.raw}
-          <div className='product-details-section'>
-            {(props.user?.id && !inWishList) ? <button onClick={() => props.addWish(props.product)}>Add to Wish</button> : <button onClick={() => props.removeWish(props.product.asin)}>Remove Wish</button>}
-            <a href={props.product.link} target="_blank" rel="noreferrer"><button>Visit Product</button></a>
+          <div className='product-reviews'>
+            <div className='reviews'>
+              {currentReviews}
+            </div>
           </div>
-        </div>
-        <div className='product-reviews'>
-          <div className='reviews'>
-            {currentReviews}
-          </div>
-        </div>
-      </div>      
+        </div>      
+      )}
     </TabPanel>
   )
 }

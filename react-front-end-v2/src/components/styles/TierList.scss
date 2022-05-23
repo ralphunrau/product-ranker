@@ -2,8 +2,8 @@
 
 .tier-list {
   @include flex-column;
-  @include align-center;
-  width: 100%;
+  padding: 2rem;
+  width: 80%;
   background-color: $white;
   margin-top: 5rem;
 
@@ -25,12 +25,21 @@
 
     .tier-list-item {
       @include flex-row;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
 
+      .tier-list-rank {
+        @include flex-row;
+        @include align-center;
+        width: 15%;
+        height: 15rem;
+      }
+
       .tier-list-row {
         @include flex-row;
-        width: 100%;
+        align-items: center;
+        width: 85%;
       }
     }
   }
@@ -38,7 +47,6 @@
   .tier-list-footer {
     font-size: large;
     height: 5.5rem;
-    background-color: purple;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
