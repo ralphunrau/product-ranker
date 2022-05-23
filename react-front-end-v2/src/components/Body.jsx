@@ -33,6 +33,11 @@ export default function Body(props) {
       })
   };
 
+  const setProductsAndModeByImage = (label) => {
+    props.getProductsByImageLabel(label);
+    transition(RANKER);
+  }
+
   return (
     <main className="container">
       <Header
@@ -54,7 +59,7 @@ export default function Body(props) {
     {mode === HOME && 
       <HomePage
         setSearch={props.setSearch}
-        getProductsByImageLabel={props.getProductsByImageLabel}
+        getProductsByImageLabel={setProductsAndModeByImage}
       />}
     {mode === HIDDEN && <></>}
     {mode === WISHES && (
