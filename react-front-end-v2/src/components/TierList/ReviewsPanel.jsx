@@ -9,9 +9,9 @@ export default function ReviewsPanel(props) {
 
   const inWishList = props.wishes.find((wish) => wish.product_id === props.product.asin);
 
-  const currentReviews = props.reviews?.map((review) => {
+  const currentReviews = props.reviews?.map((review, index) => {
     return (
-      <article>
+      <article key={`review-${index}`} id={`review-${index}`}>
         <header className="review-title">
           <Rating name='read-only' value={review.rating} precision={0.5} readOnly size='small'/>
           <b>{review?.title}</b>
