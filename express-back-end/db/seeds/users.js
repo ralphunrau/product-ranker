@@ -2,9 +2,9 @@ require('dotenv').config({ path: '../../.env' });
 
 const bcrypt = require('bcrypt');
 
-const firstHashPass = bcrypt.hashSync(process.env.FIRST_USER_PASS, 10)
-const secondHashPass = bcrypt.hashSync(process.env.SECOND_USER_PASS, 10)
-const thidHashPass = bcrypt.hashSync(process.env.THIRD_USER_PASS, 10)
+const firstHashPass = bcrypt.hashSync(process.env.FIRST_USER_PASS, 10);
+const secondHashPass = bcrypt.hashSync(process.env.SECOND_USER_PASS, 10);
+const thidHashPass = bcrypt.hashSync(process.env.THIRD_USER_PASS, 10);
 
 exports.seed = async function(knex) {
   // delete existing entries
