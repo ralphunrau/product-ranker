@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import '../styles/ProductPanel.scss';
+import '../styles/ReviewsPanel.scss';
 
 export default function TabPanel(props) {
   const { children, value, index, ...other } = props;

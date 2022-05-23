@@ -10,7 +10,7 @@
 .App {
   @include flex-column;
   @include align-center;
-  width: 100vw;
+  width: 100%;
   color: $brand-color;
 
   .container {

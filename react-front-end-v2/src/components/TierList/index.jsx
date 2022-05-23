@@ -15,12 +15,6 @@ export default function TierList(props) {
 
   const {mode, transition, back} = useVisualMode(HIDDEN);
 
-  const clickHandler = () => {
-
-  }
-
- 
-
   const toggleImageForm = () => {
     mode === HIDDEN ? transition(SHOW) : back();
   };

@@ -9,8 +9,8 @@
     width: 100%;
 
     img {
-      height: 7rem;
-      width: 7rem;
+      height: 5rem;
+      width: 5rem;
     }
 
     .MuiBox-root {
@@ -30,9 +30,8 @@
 
       .MuiTab-root {
         height: 15rem;
-        width: 15rem;
+        width: 10rem;
         font-size: 0.7rem;
-        margin: 0 0.25rem 0 0.25rem;
         &:hover {
           transform: scale(1.1);
         }
