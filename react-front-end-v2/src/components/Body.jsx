@@ -74,6 +74,7 @@ export default function Body(props) {
       getReviewsByAsin={props.getReviewsByAsin}
       reviews={props.reviews}
       addWish={props.addWish}
+      removeWish={props.removeWish}
       user={props.user}
       wishes={props.wishes}
       getProductsByImageLabel={props.getProductsByImageLabel}

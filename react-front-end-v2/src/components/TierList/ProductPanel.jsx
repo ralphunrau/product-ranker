@@ -8,11 +8,9 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductPanel(props) {
 
-  console.log(props.reviews)
+  const inWishList = props.wishes.find((wish) => wish.product_id === props.product.asin);
 
   const currentReviews = props.reviews.map((review) => {
-    console.log('PROPS IS', props);
-    console.log('REVIEW IS', review);
     return (
       <article>
         <header className="review-title">
@@ -38,7 +36,7 @@ export default function ProductPanel(props) {
           </div>
           {props.product.price?.raw}
           <div className='product-details-section'>
-            {(props.user?.id) && <button onClick={() => props.addWish(props.product)}>Add to Wish!</button>}
+            {(props.user?.id && !inWishList) ? <button onClick={() => props.addWish(props.product)}>Add to Wish</button> : <button onClick={() => props.removeWish(props.product.asin)}>Remove Wish</button>}
             <a href={props.product.link} target="_blank" rel="noreferrer"><button>Visit Product</button></a>
           </div>
         </div>

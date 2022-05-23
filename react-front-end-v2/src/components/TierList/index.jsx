@@ -45,6 +45,7 @@ export default function TierList(props) {
             products={sortProducts(props.products).slice(0, (props.products.length) / 6)}
             user={props.user}
             addWish={props.addWish}
+            removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
             reviews={props.reviews['0']}
@@ -56,6 +57,7 @@ export default function TierList(props) {
             products={sortProducts(props.products).slice((props.products.length) / 6, (props.products.length) / 6 * 2)}
             user={props.user}
             addWish={props.addWish}
+            removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
             reviews={props.reviews['1']}
@@ -67,6 +69,7 @@ export default function TierList(props) {
             products={sortProducts(props.products).slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3)}
             user={props.user}
             addWish={props.addWish}
+            removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
             reviews={props.reviews['2']}           
@@ -78,6 +81,7 @@ export default function TierList(props) {
             products={sortProducts(props.products).slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4)}
             user={props.user}
             addWish={props.addWish}
+            removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
             reviews={props.reviews['3']}            
@@ -89,6 +93,7 @@ export default function TierList(props) {
             products={sortProducts(props.products).slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5)}
             user={props.user}
             addWish={props.addWish}
+            removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
             reviews={props.reviews['4']}            
@@ -100,6 +105,7 @@ export default function TierList(props) {
             products={sortProducts(props.products).slice((props.products.length) / 6 * 5, -1)}
             user={props.user}
             addWish={props.addWish}
+            removeWish={props.removeWish}
             wishes={props.wishes}
             getReviewsByAsin={props.getReviewsByAsin}
             reviews={props.reviews['5']}           
