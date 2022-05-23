@@ -8,11 +8,17 @@ export default function HomePage(props) {
 
   return (
     <div className="home-page">
-      <h1>
-        Welcome to Amazonia!
-      </h1>
+      <div className="home-page-text">
+        <h1>
+          Welcome to Amazonia!
+        </h1>
+        <p>
+          Submit an image in the dropbox below to explore similar products
+        </p>
+      </div>
       <ImageSubmitForm 
-        
+        getProductsByImageLabel={props.getProductsByImageLabel}
+        setSearch={props.setSearch}
       />
     </div>
   );

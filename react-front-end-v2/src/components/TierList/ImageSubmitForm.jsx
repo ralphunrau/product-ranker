@@ -20,7 +20,7 @@ export default function ImageSubmitForm(props) {
   };
 
   return (
-    <div className='image-submission' >
+    <div className='css-i4bv87-MuiSvgIcon-root' >
       <Dropzone onDrop={acceptedFiles => handleFileChange(acceptedFiles[0])}>
         {({getRootProps, getInputProps}) => (
         <section>
