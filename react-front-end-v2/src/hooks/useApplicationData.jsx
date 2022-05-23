@@ -163,7 +163,7 @@ export default function useApplicationData() {
 
     dispatch({
       type: SET_CATEGORIES,
-      value: { category: setCategory, childCategories: [], childCategory: null }
+      value: { category: setCategory, childCategories: [], childCategory: null, searchTerm: null }
     })
 
     if(setCategory && state.categories.find(parent => parent.id === setCategory).has_children) {
@@ -171,7 +171,7 @@ export default function useApplicationData() {
         .then((response) => {
           dispatch({
             type: SET_CATEGORIES,
-            value: { category: category, childCategories: response.data.categories, childCategory: null }
+            value: { category: category, childCategories: response.data.categories, childCategory: null, searchTerm: null }
           })
         }).catch(err => console.error(err.message))
 
@@ -200,7 +200,7 @@ export default function useApplicationData() {
 
     dispatch({
       type: SET_CATEGORIES,
-      value: {category: state.category, childCategories: state.childCategories, childCategory: category}
+      value: {category: state.category, childCategories: state.childCategories, childCategory: category, searchTerm: null}
     });
 
     dispatch({

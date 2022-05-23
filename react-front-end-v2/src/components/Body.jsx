@@ -78,6 +78,8 @@ export default function Body(props) {
       user={props.user}
       wishes={props.wishes}
       getProductsByImageLabel={props.getProductsByImageLabel}
+      searchTerm={props.searchTerm}
+      setSearch={props.setSearch}
       />
 
     ))}

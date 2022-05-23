@@ -29,7 +29,8 @@ export default function reducer(state, action) {
       return {...state,
         category: action.value.category,
         childCategories: action.value.childCategories,
-        childCategory: action.value.childCategory
+        childCategory: action.value.childCategory,
+        searchTerm: action.value.searchTerm
       };
     
     case SET_PRODUCTS:

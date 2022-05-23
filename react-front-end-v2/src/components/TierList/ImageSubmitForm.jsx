@@ -15,6 +15,7 @@ export default function ImageSubmitForm(props) {
     if (response) {
       const visionAIResponse = await response.json();
       props.getProductsByImageLabel(visionAIResponse.object);
+      props.setSearch(visionAIResponse.object);
     }
   };
 
