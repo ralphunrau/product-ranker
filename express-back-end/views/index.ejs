@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Wish Basket</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Imported Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/wishList.css" type="text/css" />
+
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <img src="https://i.imgur.com/dL5bHVu.png" alt="logo" />
+        <h1><%= user %>'s Wish Basket</h1>
+      </header>
+      <% if(products.length > 0) { %>
+        <% products.forEach((product) => { %>
+        <div class="card">
+          <div class="position">
+            <b><%= product.position %></b>
+          </div>
+          <img alt="product" src=<%= product.image %> />
+          <div>
+            <h5 class="card-title"><%= product.title %></h5>
+            <div class="product-rating">
+              <% for(let i = 0; i < Math.floor(product.rating); i++) { %>
+                <span class="fa fa-star checked"></span>
+              <% } %>
+              <% for(let i = 0; i < 5 - Math.floor(product.rating); i++) { %>
+                <span class="fa fa-star"></span>
+              <% } %>
+            </div>        
+            <%= product.price %>
+            <div>
+              <a target="_blank" href=<%= product.link %> class="btn btn-primary">See in Amazon</a>
+            </div>
+          </div>       
+        </div>        
+        <% }) %>
+      <% } else { %>
+        <div class="card">
+          <div class="card-empty">
+            <div class="empty-title">
+              <h5 class="card-title"><%= user %>'s Basket is Empty!</h5>
+            </div>
+            <div class="empty-text">
+              <p class="card-text"><%= user %> is not wishing for anything right now....</p>
+            </div>       
+          </div>
+        </div>        
+      <% } %>
+    </main>
+    
+  </body>
+</html>

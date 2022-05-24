@@ -1,5 +1,12 @@
 const knex = require('./knex');
 
+const getUserById = (id) => {
+  return knex('users')
+    .where({ id: id })
+    .then((res) => res[0])
+    .catch(e => console.log(e.message));
+}
+
 const getUserByEmail = (emailinput) => {
   return knex('users')
     .where({ email: emailinput })
@@ -86,5 +93,6 @@ module.exports = {
   getWish,
   updateProduct,
   removeWish,
-  updateWish
+  updateWish,
+  getUserById
 };

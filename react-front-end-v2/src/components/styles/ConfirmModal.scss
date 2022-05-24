@@ -1,0 +1,60 @@
+@import "./partials/Mixins.scss";
+
+.tab-panel {
+  .delete-confirm {
+    @include flex-column;
+    @include align-center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .delete-buttons {
+    @include flex-row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 3rem;
+    width: 80%;
+    button {
+      background-color: white;
+      color: $danger-color;
+      border: solid 1px;
+      border-color: $danger-color;
+      border-radius: 0.25rem;
+      width: 45%;
+      &:hover {
+        background-color: $danger-color;
+        color: white;
+        border-color: white;
+      }
+    }
+  }
+
+  .share-panel {
+    @include flex-column;
+    @include align-center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .sharable-link {
+    @include flex-row;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    margin-top: 3rem;
+
+    button {
+      background-color: white;
+      color: $third-color;
+      border-color: $third-color;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      width: 100%;
+      &:hover {
+        background-color: $third-color;
+        color: white;
+        border-color: white;
+      }
+    }
+  }
+}

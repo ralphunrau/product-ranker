@@ -12,6 +12,7 @@ import WishListItem from './WishListItem';
 import Button from '../Button';
 import TabPanel from '../TierList/TabPanel';
 import Confirm from './Confirm';
+import Share from './Share';
 
 import useVisualMode from '../../hooks/useVisualMode';
 import { HIDDEN, CONFIRM } from '../../helper/modes';
@@ -51,9 +52,20 @@ export default function Show(props) {
   const [value, setValue] = useState(null);
   const {mode, transition, back} = useVisualMode(HIDDEN);
 
+  const onCopy = () => {
+    const userId = props.user.id;
+    navigator.clipboard.writeText(`http://localhost:8081/basket/${userId}`);
+    transition(HIDDEN);
+  }
+
   const onRemove = (index) => {
     setValue(index);
     transition(CONFIRM);
+  };
+
+  const onShare = () => {
+    setValue(5000);
+    transition(CONFIRM)
   };
 
   const onConfirm = (id) => {
@@ -114,7 +126,8 @@ export default function Show(props) {
         {props.wishes.length > 0 ? (
           <>
             <div className="edit-button">
-              {props.wishes.length > 0 && <Button confirm onClick={props.onEdit} className="edit-button">Edit</Button>}
+              <Button confirm onClick={onShare} className="edit-button">Share</Button>
+              {props.wishes.length > 1 && <Button confirm onClick={props.onEdit} className="edit-button">Edit</Button>}
             </div>
             <Box sx={{ width: '80%' }} className="wish-list-box">          
               <Stack spacing={1} className="wish-list-stack">
@@ -138,6 +151,13 @@ export default function Show(props) {
         >  
           <Box sx={style} className="confirm-panel" >
             {confirmPanel}
+            <Share 
+              key={`share-panel`}
+              onCancel={onClose}
+              value={value}
+              index={5000}
+              onCopy={onCopy}
+            />
           </Box>  
         </Modal>
       </div>
