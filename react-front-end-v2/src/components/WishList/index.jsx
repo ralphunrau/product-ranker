@@ -5,10 +5,6 @@ import Show from './Show';
 
 import useVisualMode from '../../hooks/useVisualMode';
 import { EDIT, SHOW } from '../../helper/modes';
-import { backdropClasses } from '@mui/material';
-
-
-
 
 export default function WishList(props) {  
   const {mode, transition, back} = useVisualMode(SHOW);

@@ -19,7 +19,7 @@ export default function WishListItem(props) {
       </div>
       <div className="item-buttons">        
         {props.edit === false && <a href={props.link} target="_blank" rel="noreferrer"> <Button confirm>Visit Product</Button></a>}
-        {props.edit === true && <Button danger onClick={props.removeWish} >Remove</Button>}
+        <Button danger onClick={props.removeWish} >Remove</Button>
       </div>
     </article>
   )

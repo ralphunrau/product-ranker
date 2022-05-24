@@ -93,11 +93,10 @@ export default function HorizontalTabs(props) {
           id={`item-${index}`}
           product={item}
           value={value}
+          wishes={props.wishes}
         />
-      )}      
-    >
-      
-    </Tab>
+      )}
+    />
   ));
 
   return (

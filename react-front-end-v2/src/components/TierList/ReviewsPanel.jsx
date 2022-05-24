@@ -4,8 +4,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ReviewsPanel(props) {
 
-  console.log('REVIEWS ARE', props.reviews);
-
 
   const inWishList = props.wishes.find((wish) => wish.product_id === props.product.asin);
 
