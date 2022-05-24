@@ -26,8 +26,6 @@ export default function useApplicationData() {
     reviews: []
   });
 
-  console.log(state.products);
-
   useEffect(() => {
     const loginUser = JSON.parse(window.localStorage.getItem("user"));
     const currentDate = new Date().getTime();
