@@ -10,7 +10,6 @@ import {HIDDEN, SHOW} from '../../helper/modes';
 
 const sortProducts = (products) => {
   const filteredProducts = products.filter((product) => {
-    console.log(product.rating)
     return product.rating != null;
   })
   return filteredProducts.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));

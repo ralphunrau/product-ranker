@@ -45,8 +45,6 @@ function a11yProps(index) {
 
 export default function HorizontalTabs(props) {
 
-  console.log(props.reviews)
-
   const [value, setValue] = useState(false);
 
   const {mode, transition} = useVisualMode(HIDDEN);

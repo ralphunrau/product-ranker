@@ -126,7 +126,7 @@ export default function Show(props) {
           <Stack sx={{ width: '100%' }} spacing={2}>
           <Alert severity="info">
             <AlertTitle><strong>Your Wish Basket is empty!</strong></AlertTitle>
-              Pick a category or search for a product to add to your list.
+              Pick a category or search for a product to add to your basket.
             </Alert>
           </Stack>
         )}
