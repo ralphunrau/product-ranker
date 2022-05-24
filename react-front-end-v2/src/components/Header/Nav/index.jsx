@@ -1,7 +1,7 @@
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
+import { faBasketShopping } from '@fortawesome/free-solid-svg-icons';
 
 import '../../styles/Nav.scss'
 
@@ -56,7 +56,7 @@ export default function Nav(props) {
         </div>
         <div className="nav-right">
           <section className='user-buttons'>
-            {props.user && <div onClick={props.getWishes}><FontAwesomeIcon icon={faList} className="wish-list-button" /></div>}
+            {props.user && <div onClick={props.getWishes}><FontAwesomeIcon icon={ faBasketShopping } className="wish-list-button" /></div>}
             <img onClick={clickHandler} src='avatar.png' alt='profile' />
             {mode === HIDDEN ? <></> : (
               <>

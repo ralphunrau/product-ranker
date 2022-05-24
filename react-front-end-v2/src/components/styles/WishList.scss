@@ -38,11 +38,11 @@
     border-top: solid;
 
     .MuiPaper-root {
+      border-bottom: solid;
       width: 100%;
       @include flex-row;
       @include align-center;
       padding: 0.5rem;
-      border-bottom: solid;
 
       .wish-list-item {
         @include flex-row;
@@ -87,6 +87,11 @@
         }
       }
     }
+
+    .edit-paper {
+      animation: shake 0.5s;
+      animation-iteration-count: infinite;
+    }
   }
 
   .save-button {
@@ -105,8 +110,5 @@
         background-color: $confirm-color;
       }
     }
-  }
-
-  .confirm-panel {
   }
 }

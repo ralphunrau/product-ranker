@@ -1,10 +1,15 @@
 import Rating from '@mui/material/Rating';
 import Button from "../Button";
+import classNames from 'classnames';
 
 export default function WishListItem(props) {
 
+  const wishListItemClassName = classNames('wish-list-item', {
+    'wish-list--edit': props.edit
+  });
+
   return (
-    <article className="wish-list-item">
+    <article className={wishListItemClassName}>
       <div className="product-info">
           <h4><b>{props.position}</b></h4>
           <img src={props.image} alt="product-item" />
@@ -18,8 +23,12 @@ export default function WishListItem(props) {
         </div>
       </div>
       <div className="item-buttons">        
-        {props.edit === false && <a href={props.link} target="_blank" rel="noreferrer"> <Button confirm>Visit Product</Button></a>}
-        <Button danger onClick={props.removeWish} >Remove</Button>
+        {props.edit === false && (
+          <>
+            <a href={props.link} target="_blank" rel="noreferrer"> <Button confirm>Visit Product</Button></a>
+            <Button danger onClick={props.removeWish} >Remove</Button>
+          </>
+        )}
       </div>
     </article>
   )
