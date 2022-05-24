@@ -11,6 +11,8 @@ const REVIEWS = 'REVIEWS';
 const HORIZONTAL = 'HORIZONTAL';
 const VERTICAL = 'VERTICAL';
 const EDIT = 'EDIT';
+const HOME = 'HOME';
+
 
 
 module.exports = {
@@ -25,5 +27,6 @@ module.exports = {
   REVIEWS,
   HORIZONTAL,
   VERTICAL,
-  EDIT
+  EDIT,
+  HOME
 };

@@ -1,0 +1,41 @@
+.home-page {
+  background-color: black;
+  background-image: url('../../backgroundImages/AmazonWarehouse2.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 100%;
+
+  .home-page-text {
+    padding-top: 400px;
+    padding-left: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding-right: 300px;
+    color: white;
+  }
+
+  // css selector for image submission
+  .css-i4bv87-MuiSvgIcon-root {
+    width: 90%;
+    height: 500px;
+
+    section {
+      height: 400px;
+      background-color: whitesmoke;
+      border-radius: 20px;
+      border: 1px;
+      border-style: dashed;
+      margin-left: 600px;
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    // css selector for the mui icon
+    .css-i4bv87-MuiSvgIcon-root {
+      display: none;
+    }
+  }
+}

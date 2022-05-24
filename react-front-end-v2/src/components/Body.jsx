@@ -6,13 +6,14 @@ import TierList from './TierList'
 import Status from './Status';
 import Header from './Header';
 import WishList from './WishList';
+import HomePage from './HomePage';
 
 import useVisualMode from '../hooks/useVisualMode';
 
-import { HIDDEN, RANKER, WISHES } from '../helper/modes';
+import { HIDDEN, RANKER, WISHES, HOME } from '../helper/modes';
 
 export default function Body(props) {
-  const {mode, transition, back} = useVisualMode(props.user?.id ? WISHES : HIDDEN);
+  const {mode, transition, back} = useVisualMode(props.user?.id ? WISHES : HOME);
 
   const getProductsByCategory = (category) => {
     props.selectCategory(category);
@@ -31,10 +32,14 @@ export default function Body(props) {
       })
   };
 
+  const setProductsAndModeByImage = (label) => {
+    props.getProductsByImageLabel(label);
+    transition(RANKER);
+  }
+  
   useEffect(() => {
-    if(props.user?.id && mode === HIDDEN) transition(WISHES);
-    if(!props.user?.id && mode === WISHES) transition(HIDDEN);
-  }, [mode, transition, props.user?.id])
+    if(!props.user?.id) transition(HOME);
+  }, [props.user?.id])
 
   return (
     <main className="container">
@@ -54,9 +59,13 @@ export default function Body(props) {
         getWishes={showWishList}
         wishes={props.wishes}
       />
+    {mode === HOME && 
+      <HomePage
+        setSearch={props.setSearch}
+        getProductsByImageLabel={setProductsAndModeByImage}
+      />}
     {mode === HIDDEN && <></>}
-    {mode === WISHES && (
-      (props.wishes.length < 1) ? <Status /> : (
+    {mode === WISHES && 
       <WishList
         products={props.products}
         onRemove={props.removeWish}
@@ -65,7 +74,7 @@ export default function Body(props) {
         wishes={props.wishes}
         removeWish={props.removeWish}
       />
-    ))}
+    }
     {mode === RANKER && (
       (props.products.length < 1) ? <Status /> : (
       <TierList
