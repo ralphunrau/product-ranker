@@ -2,10 +2,17 @@
 
 .wish-list {
   @include flex-column;
-  @include align-center;
+  align-items: center;
+  justify-content: center;
   margin-top: 10rem;
   margin-bottom: 5rem;
   width: 70%;
+  min-height: calc(100vh - 5rem);
+  color: black;
+
+  header {
+    margin-bottom: 2rem;
+  }
 
   .edit-button {
     display: flex;
@@ -25,10 +32,13 @@
   }
 
   .wish-list-stack {
+    @include flex-column;
+    @include align-center;
     width: 100%;
     border-top: solid;
 
     .MuiPaper-root {
+      width: 100%;
       @include flex-row;
       @include align-center;
       padding: 0.5rem;
@@ -87,12 +97,11 @@
     button {
       width: 100%;
       height: 2rem;
-      background-color: $black;
       color: $white;
-      border-radius: 0.25rem;
+      border-radius: 0.5rem;
       margin-bottom: 0.25rem;
       &:hover {
-        background-color: $alternate-color;
+        background-color: $confirm-color;
       }
     }
   }

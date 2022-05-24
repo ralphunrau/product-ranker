@@ -5,12 +5,13 @@ import Show from './Show';
 
 import useVisualMode from '../../hooks/useVisualMode';
 import { EDIT, SHOW } from '../../helper/modes';
+import { backdropClasses } from '@mui/material';
 
 
 
 
 export default function WishList(props) {  
-  const {mode, transition} = useVisualMode(SHOW);
+  const {mode, transition, back} = useVisualMode(SHOW);
 
   const saveWishList = (list) => {
     props.onSave(list);
@@ -19,7 +20,11 @@ export default function WishList(props) {
 
   const editWishList = () => {
     transition(EDIT);
-  }
+  };
+
+  const onCancel = () => {
+    back();
+  };
 
   return (
     <>
@@ -30,6 +35,7 @@ export default function WishList(props) {
           user={props.user}
           wishes={props.wishes}
           removeWish={props.removeWish}
+          onCancel={onCancel}
         />
       )}
       {mode === SHOW && (

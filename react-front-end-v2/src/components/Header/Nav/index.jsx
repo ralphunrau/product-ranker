@@ -49,7 +49,7 @@ export default function Nav(props) {
     <ClickAwayListener onClickAway={handleClickAway}>
       <nav className="navBar">
         <div className="nav-left">
-          <img src='https://i.imgur.com/BM8SFkP.png' alt='logo' onClick={props.toggleBar}/>
+          <img src='logo.png' alt='logo' onClick={props.toggleBar}/>
         </div>
         <div className="nav-search">
           <SearchBar setSearch={props.onChange} searchProducts={searchProducts} searchTerm={props.searchTerm} />

@@ -42,6 +42,12 @@ export default function Edit(props) {
           }}
     >
       <div className="wish-list">
+        <header>
+          <h2><b>Wish List</b></h2>
+        </header>
+        <div className="edit-button">
+          <Button danger onClick={props.onCancel} className="edit-button">Cancel</Button>
+        </div>
         <Box sx={{ width: '80%' }} className="wish-list-box">          
           <Droppable droppableId='wishlist'>
             {(provided, snapshot) => (
@@ -77,6 +83,7 @@ export default function Edit(props) {
                             }}
                         >
                           <WishListItem
+                            key={`edit-wish-${i}`}
                             position={i + 1}
                             id={product.id}
                             image={product.image}
@@ -87,6 +94,7 @@ export default function Edit(props) {
                             rating={product.rating}
                             ratings_total={product.ratings_total}
                             removeWish={() => props.removeWish(product.product_id)}
+                            edit={true}
                           />                                                 
                         </ Item>
                     )} 
@@ -95,11 +103,10 @@ export default function Edit(props) {
               {provided.placeholder}
               </Stack>              
             )}                                    
-          </Droppable>
-                       
+          </Droppable>                  
         </Box>
         <div className='save-button'>
-          <Button onClick={() => saveList(list)} >Save</Button>
+          <Button confirm onClick={() => saveList(list)} >Save</Button>
         </div>
       </div>
   </DragDropContext>      
