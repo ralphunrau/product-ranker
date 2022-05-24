@@ -9,7 +9,11 @@ import useVisualMode from "../../hooks/useVisualMode";
 import {HIDDEN, SHOW} from '../../helper/modes';
 
 const sortProducts = (products) => {
-  return products.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+  const filteredProducts = products.filter((product) => {
+    console.log(product.rating)
+    return product.rating != null;
+  })
+  return filteredProducts.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
 };
 
 export default function TierList(props) {
