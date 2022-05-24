@@ -12,8 +12,6 @@ import useVisualMode from '../hooks/useVisualMode';
 import { HIDDEN, RANKER, WISHES } from '../helper/modes';
 
 export default function Body(props) {
-  console.log('USER', props.user?.id);
-
   const {mode, transition, back} = useVisualMode(props.user?.id ? WISHES : HIDDEN);
 
   const getProductsByCategory = (category) => {
