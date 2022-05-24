@@ -58,7 +58,7 @@ export default function useApplicationData() {
       }
       return;
     };
-    localStorage.clear();
+    localStorage.removeItem('user');
 
     axios.get(`api/categories?api_key=${process.env.REACT_APP_API_KEY}&domain=amazon.com`)
     .then((response) => {
@@ -93,7 +93,7 @@ export default function useApplicationData() {
           type: SET_USER,
           value: { user: null}
         });
-        localStorage.clear();
+        localStorage.removeItem('user');
       });
   };
 
