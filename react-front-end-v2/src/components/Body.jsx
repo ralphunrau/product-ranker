@@ -36,6 +36,11 @@ export default function Body(props) {
     props.getProductsByImageLabel(label);
     transition(RANKER);
   }
+
+  const signOutAndRedirect = () => {
+    transition(HOME);
+    props.signOut();
+  }
   
   useEffect(() => {
     if(!props.user?.id) transition(HOME);
@@ -55,7 +60,7 @@ export default function Body(props) {
         selectCategory={getProductsByCategory}
         user={props.user}
         setUser={props.setUser}
-        signOut={props.signOut}
+        signOut={signOutAndRedirect}
         getWishes={showWishList}
         wishes={props.wishes}
       />
