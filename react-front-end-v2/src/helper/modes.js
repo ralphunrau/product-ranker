@@ -12,6 +12,7 @@ const HORIZONTAL = 'HORIZONTAL';
 const VERTICAL = 'VERTICAL';
 const EDIT = 'EDIT';
 const HOME = 'HOME';
+const CONFIRM = 'CONFIRM';
 
 
 
@@ -28,5 +29,6 @@ module.exports = {
   HORIZONTAL,
   VERTICAL,
   EDIT,
-  HOME
+  HOME,
+  CONFIRM
 };

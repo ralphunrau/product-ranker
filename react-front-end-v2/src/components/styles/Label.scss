@@ -8,4 +8,11 @@
     @include flex-column;
     @include align-center;
   }
+
+  .star-wish-button {
+    position: absolute;
+    margin-top: 12rem;
+    font-size: 1.1rem;
+    color: $third-color;
+  }
 }

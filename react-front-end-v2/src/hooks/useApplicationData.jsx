@@ -100,7 +100,6 @@ export default function useApplicationData() {
   const getWishList = () => {
     return axios.get(`app/products/wishes/${state.user.id}`)
       .then((response) => {
-        console.log('RESPOI2',response)
         dispatch({
           type: SET_WISHES,
           value: { wishes: response.data }

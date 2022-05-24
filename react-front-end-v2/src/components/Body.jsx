@@ -73,6 +73,7 @@ export default function Body(props) {
         user={props.user}
         wishes={props.wishes}
         removeWish={props.removeWish}
+        addWish={props.addWish}
       />
     }
     {mode === RANKER && (
