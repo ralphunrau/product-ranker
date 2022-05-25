@@ -209,7 +209,6 @@ export default function useApplicationData() {
   };
 
   const setSearchTerm = (search) => {
-
     dispatch({
       type: SET_SEARCH,
       value: { searchTerm: search }
