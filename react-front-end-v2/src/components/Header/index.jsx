@@ -65,6 +65,8 @@ export default function Header(props) {
             setMainCategory={props.setMainCategory}
             selectCategory={onChange}
             toggleBar={toggleBar}
+            searchTerm={props.searchTerm}
+            setSearch={props.setSearch}
           />
         )}
         {mode === HIDDEN && <></>}

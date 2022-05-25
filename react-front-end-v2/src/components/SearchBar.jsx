@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch  } from '@fortawesome/free-solid-svg-icons';
 
 
+
 export default function SearchBar(props) {
 
   const onEnter = (event) => {
@@ -10,7 +11,7 @@ export default function SearchBar(props) {
       props.searchProducts();
     };
   };
-
+  
   return (
     <div className='search-bar'>
       <input
@@ -20,7 +21,8 @@ export default function SearchBar(props) {
         placeholder='Search...'
         className="search-bar--text"
         onChange={event =>  props.setSearch(event.target.value)}
-        data-testid="search-term" 
+        data-testid="search-term"
+        value={props.searchTerm ? props.searchTerm : ''}
       />
       <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={props.searchProducts}/>
     </div>
