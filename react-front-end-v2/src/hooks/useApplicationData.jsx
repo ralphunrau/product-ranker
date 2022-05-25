@@ -174,24 +174,6 @@ export default function useApplicationData() {
           })
           return;
         }).catch(err => console.error(err.message))
-
-    } else {
-      
-      const params = {
-        api_key: process.env.REACT_APP_API_KEY,
-        type: "category",
-        category_id: category,
-        amazon_domain: "amazon.com"
-      };
-
-      return axios.get('api/request', { params })
-        .then((res) => {
-          dispatch({
-            type: SET_PRODUCTS,
-            value: { products: res.data.category_results }
-          });
-        })
-        .catch(err => console.error(err.message))
     };
   };
 
