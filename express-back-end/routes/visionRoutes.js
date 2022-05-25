@@ -29,9 +29,12 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
   const client = new vision.ImageAnnotatorClient(options);
 
-  const [result] = await client.objectLocalization(`${process.env.FILE_PATH}${fileName}`);
-  const objects = result.localizedObjectAnnotations;
-  res.send({object: objects[0].name});
+  const [result1] = await client.objectLocalization(`${process.env.FILE_PATH}${fileName}`)
+  const [result2] = await client.logoDetection(`${process.env.FILE_PATH}${fileName}`);
+
+  const concatSearch = result1.localizedObjectAnnotations[0].name + ' ' + (result2.logoAnnotations[0]?.description || '');
+
+  res.send({object: concatSearch});
 });
 
 
