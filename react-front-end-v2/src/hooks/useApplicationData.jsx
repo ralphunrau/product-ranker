@@ -172,6 +172,7 @@ export default function useApplicationData() {
             type: SET_CATEGORIES,
             value: { category: category, childCategories: response.data.categories, childCategory: null, searchTerm: null }
           })
+          return;
         }).catch(err => console.error(err.message))
 
     } else {
