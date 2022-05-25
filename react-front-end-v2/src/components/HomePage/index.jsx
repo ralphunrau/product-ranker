@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ImageSubmitForm from '../TierList/ImageSubmitForm';
 import '../styles/HomePage.scss';
 import BackupRoundedIcon from '@mui/icons-material/BackupRounded';

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import '../styles/TierList.scss';
 import Dropzone from 'react-dropzone';
-import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 

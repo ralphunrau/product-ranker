@@ -41,6 +41,7 @@ export default function WishList(props) {
           user={props.user}
           wishes={props.wishes}
           removeWish={props.removeWish}
+          onBack={props.onBack}
         />
       )}
     </>

@@ -3,8 +3,8 @@
 .wish-list {
   @include flex-column;
   align-items: center;
-  justify-content: center;
-  margin-top: 5rem;
+  justify-content: flex-start;
+  margin-top: 8rem;
   margin-bottom: 5rem;
   width: 70%;
   min-height: calc(100vh - 5rem);
@@ -12,6 +12,16 @@
 
   header {
     margin-bottom: 2rem;
+
+    .back-icon {
+      position: absolute;
+      left: 0;
+      top: 5rem;
+      color: $danger-color;
+      height: 3rem;
+      width: 5rem;
+      cursor: pointer;
+    }
   }
 
   .edit-button {
@@ -23,6 +33,7 @@
 
     button {
       width: 5rem;
+      margin: 0 0.1rem 0 0.1rem;
       border-radius: 5px;
     }
   }

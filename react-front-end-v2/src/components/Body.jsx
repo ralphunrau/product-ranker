@@ -43,7 +43,7 @@ export default function Body(props) {
   }
   
   useEffect(() => {
-    if(!props.user?.id) transition(HOME);
+    if(!props.user?.id && mode === WISHES) transition(HOME);
   }, [props.user?.id])
 
   return (
@@ -79,6 +79,7 @@ export default function Body(props) {
         wishes={props.wishes}
         removeWish={props.removeWish}
         addWish={props.addWish}
+        onBack={() => back()}
       />
     }
     {mode === RANKER && (

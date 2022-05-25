@@ -8,6 +8,9 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Modal from '@mui/material/Modal';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+
 import WishListItem from './WishListItem';
 import Button from '../Button';
 import TabPanel from '../TierList/TabPanel';
@@ -121,6 +124,7 @@ export default function Show(props) {
   return (
       <div className="wish-list">
         <header>
+          <FontAwesomeIcon onClick={props.onBack} icon={ faArrowLeftLong } className="back-icon"/>
           <h2><b>Wish Basket</b></h2>
         </header>
         {props.wishes.length > 0 ? (

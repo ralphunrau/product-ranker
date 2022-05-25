@@ -343,10 +343,10 @@ export default function useApplicationData() {
           childCategories: state.childCategories,
           childCategory: state.childCategory
         }
-      })
+      });
     })
     .catch(error => console.error(error));
-  }
+  };
 
   return { 
     state,
@@ -363,4 +363,4 @@ export default function useApplicationData() {
     getReviewsByAsin,
     getProductsByImageLabel
   };
-}
+};
