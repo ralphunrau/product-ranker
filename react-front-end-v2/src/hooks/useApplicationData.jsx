@@ -77,7 +77,7 @@ export default function useApplicationData() {
           .then((response) => {
             dispatch({
               type: SET_USER,
-              value: {user: loginUser, products: response.data}
+              value: {user: loginUser, wishes: response.data}
             });
             const currentDate = new Date().getTime();
             window.localStorage.setItem('user', JSON.stringify({...loginUser, dateCreated: currentDate}));

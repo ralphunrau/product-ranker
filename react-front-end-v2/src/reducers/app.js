@@ -12,7 +12,7 @@ export default function reducer(state, action) {
     case SET_USER:
       return {...state,
         user: action.value.user,
-        products: action.value.products
+        wishes: action.value.products
       };
 
     case SET_SEARCH:
