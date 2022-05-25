@@ -4,6 +4,7 @@ import Dropzone from 'react-dropzone';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
+
 export default function ImageSubmitForm(props) {
 
   const handleFileChange = async (file) => {
@@ -22,7 +23,7 @@ export default function ImageSubmitForm(props) {
 
   return (
   <ClickAwayListener onClickAway={props.handleClickAway}>
-    <div className='css-i4bv87-MuiSvgIcon-root' >
+    <div className='image-submit-form' >
       <Dropzone onDrop={acceptedFiles => handleFileChange(acceptedFiles[0])}>
         {({getRootProps, getInputProps}) => (
         <section>
@@ -33,7 +34,6 @@ export default function ImageSubmitForm(props) {
         </section>
         )}
       </Dropzone>
-      <DisabledByDefaultIcon onClick={props.onClick}/>
     </div>
   </ClickAwayListener>
   );

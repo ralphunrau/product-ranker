@@ -60,41 +60,26 @@
 
     // css selector for upload image icon and upload image form
     .css-i4bv87-MuiSvgIcon-root {
-      display: flex;
       position: fixed;
-      width: 200px;
-      height: 200px;
-      bottom: 0;
-      right: 0;
-      margin-right: 0.5rem;
-      margin-bottom: 0.5rem;
+      display: flex;
+      font-size: 5rem;
+      align-items: center;
+      justify-content: center;
+      bottom: 1rem;
+      right: 1rem;
+      color: $third-color;
+      animation: bounce-1 3s;
+      animation-iteration-count: infinite;
+      transform-origin: bottom;
 
-      section {
-        border: solid;
-        border-color: $black;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        @include align-center;
-        background-color: $drop-zone-color;
-        border-radius: 0.25rem;
-
-        p {
-          font-size: 1rem;
-          text-align: center;
-          padding: 0.5rem;
-        }
-
-        .css-i4bv87-MuiSvgIcon-root {
-          height: 70px;
-          width: 70px;
-        }
+      .bounce-1 {
+        animation-name: bounce-1;
+        animation-timing-function: linear;
       }
 
-      // css selector for upload image form exit button
+      // css selector for the mui icon
       .css-i4bv87-MuiSvgIcon-root {
-        height: 30px;
-        width: 30px;
+        display: none;
       }
     }
   }

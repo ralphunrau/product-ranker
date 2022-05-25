@@ -16,33 +16,69 @@
     width: 100%;
     justify-content: flex-start;
     align-items: center;
-    margin-top: -2rem;
+    margin-bottom: 12rem;
     color: white;
   }
 
-  // css selector for image submission
   .css-i4bv87-MuiSvgIcon-root {
+    position: fixed;
     display: flex;
-    width: 100%;
+    font-size: 15rem;
     align-items: center;
     justify-content: center;
-    margin-top: 10rem;
+    bottom: 1rem;
+    right: 1rem;
+    color: $white;
+    animation: bounce-1 3s;
+    animation-iteration-count: infinite;
+    transform-origin: bottom;
 
-    section {
-      height: 15rem;
-      width: 30rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(245, 245, 245, 0.445);
-      border-radius: 1rem;
-      border: 2px;
-      border-style: dashed;
+    .bounce-1 {
+      animation-name: bounce-1;
+      animation-timing-function: linear;
     }
 
     // css selector for the mui icon
     .css-i4bv87-MuiSvgIcon-root {
       display: none;
     }
+  }
+}
+
+.image-submit-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 20rem;
+  height: 15rem;
+  right: 1rem;
+  bottom: 1rem;
+  background-color: $shade-color;
+  border-radius: 1rem;
+  border: 2px $white;
+  border-style: dashed;
+  color: $white;
+
+  .section {
+    text-align: center;
+    font-size: 1rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@keyframes bounce-1 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1rem);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
