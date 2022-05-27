@@ -44,7 +44,7 @@ export default function Body(props) {
   
   useEffect(() => {
     if(!props.user?.id && mode === WISHES) transition(HOME);
-  }, [props.user?.id])
+  }, [props.user?.id, mode, transition])
 
   return (
     <main className="container">

@@ -4,10 +4,6 @@ import '../../../styles/CategoryListItem.scss';
 import ChildCategoryListItem from './ChildCategoryListItem';
 import SidebarStatus from '../../../SidebarStatus';
 
-import useVisualMode from '../../../../hooks/useVisualMode';
-
-import { HIDDEN, LOADING } from '../../../../helper/modes'
-
 export default function CategoryListItem(props) {
 
   const childCategoryListItem = props.childCategories.map((childCategory) => {

@@ -26,6 +26,13 @@ export default function Login(props) {
     props.onLogin(input);
   }
 
+  const onEnter = (event) => {
+    if(event.keyCode === 13 && event.shiftKey === false) {
+      event.preventDefault();
+      validate();
+    };
+  }
+
   return (
     <main className="user-form">
       <h3>Sign In</h3>
@@ -36,6 +43,7 @@ export default function Login(props) {
           placeholder='Email'
           className="form-input--text"
           onChange={event =>  setEmail(event.target.value)}
+          onKeyDown={onEnter}
           data-testid="user-email"
         />
          <input
@@ -44,6 +52,7 @@ export default function Login(props) {
           placeholder='Password'
           className="form-input--text"
           onChange={event =>  setPassword(event.target.value)}
+          onKeyDown={onEnter}
           data-testid="user-password"
         />
       </section>

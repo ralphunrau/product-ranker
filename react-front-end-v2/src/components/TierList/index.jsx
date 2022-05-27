@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import HorizontalTabs from "./HorizontalTabs";
 import ImageSubmitForm from './ImageSubmitForm';
 import BackupRoundedIcon from '@mui/icons-material/BackupRounded';

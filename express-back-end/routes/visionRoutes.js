@@ -28,13 +28,18 @@ router.post('/upload', upload.single('file'), async (req, res) => {
   };
 
   const client = new vision.ImageAnnotatorClient(options);
+  let search = '';
 
   const [result1] = await client.objectLocalization(`${process.env.FILE_PATH}${fileName}`)
   const [result2] = await client.logoDetection(`${process.env.FILE_PATH}${fileName}`);
 
-  const concatSearch = result1.localizedObjectAnnotations[0].name + ' ' + (result2.logoAnnotations[0]?.description || '');
+  if (result2.logoAnnotations[0]?.description) {
+    search = `${result2.logoAnnotations[0]?.description} ${result1.localizedObjectAnnotations[0].name}`;
+  } else {
+    search = `${result1.localizedObjectAnnotations[0].name}`
+  }
 
-  res.send({object: concatSearch});
+  res.send({object: search});
 });
 
 

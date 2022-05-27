@@ -36,10 +36,10 @@
           <div>
             <h5 class="card-title"><%= product.title %></h5>
             <div class="product-rating">
-              <% for(let i = 0; i < Math.floor(product.rating); i++) { %>
+              <% for(let i = 0; i < Math.round(product.rating); i++) { %>
                 <span class="fa fa-star checked"></span>
               <% } %>
-              <% for(let i = 0; i < 5 - Math.floor(product.rating); i++) { %>
+              <% for(let i = 0; i < 5 - Math.round(product.rating); i++) { %>
                 <span class="fa fa-star"></span>
               <% } %>
             </div>        
