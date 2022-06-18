@@ -9,7 +9,6 @@ import Modal from '@mui/material/Modal';
 import TabPanel from './TabPanel';
 import ReviewsPanel from './ReviewsPanel';
 import Label from './Label';
-import Status from '../Status';
 
 import '../styles/HorizontalTabs.scss';
 

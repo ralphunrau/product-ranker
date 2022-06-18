@@ -20,6 +20,8 @@ export default function Show(props) {
       selected={category.id === props.category}
       setMainCategory={props.setMainCategory}
       selectCategory={props.selectCategory}
+      setSearch={props.setSearch}
+      searchTerm={props.searchTerm}
     />
     )
   })

@@ -15,6 +15,8 @@ export default function CategoryList(props) {
         childCategory={props.childCategory}
         setMainCategory={props.setMainCategory}
         selectCategory={props.selectCategory}
+        searchTerm={props.searchTerm}
+        setSearch={props.setSearch}
       />
       <section className="side-bar--button" onClick={props.toggleBar}>
         <FontAwesomeIcon icon={faClose} />

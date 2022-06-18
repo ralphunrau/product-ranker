@@ -4,13 +4,7 @@ import '../../../styles/CategoryListItem.scss';
 import ChildCategoryListItem from './ChildCategoryListItem';
 import SidebarStatus from '../../../SidebarStatus';
 
-import useVisualMode from '../../../../hooks/useVisualMode';
-
-import { HIDDEN, LOADING } from '../../../../helper/modes'
-
 export default function CategoryListItem(props) {
-
-  const {mode, transition} = useVisualMode(HIDDEN);
 
   const childCategoryListItem = props.childCategories.map((childCategory) => {
     return (
@@ -22,6 +16,8 @@ export default function CategoryListItem(props) {
         childCategories={props.childCategories}
         childCategory={props.childCategory}
         onChange={props.selectCategory}
+        setSearch={props.setSearch}
+        searchTerm={props.searchTerm}
       />
     )
   })
@@ -32,13 +28,7 @@ export default function CategoryListItem(props) {
   });
 
   const clickHandler = (category) => {
-    if (!props.selected) transition(LOADING);
-    
-    new Promise((res) => {
-      res(props.setMainCategory(category))
-    })
-    .then(transition(HIDDEN))
-    .catch((err) => console.error(err.message));
+    props.setMainCategory(category);
   };
 
   return (

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import HorizontalTabs from "./HorizontalTabs";
 import ImageSubmitForm from './ImageSubmitForm';
 import BackupRoundedIcon from '@mui/icons-material/BackupRounded';
@@ -9,15 +8,44 @@ import useVisualMode from "../../hooks/useVisualMode";
 import {HIDDEN, SHOW} from '../../helper/modes';
 
 const sortProducts = (products) => {
+  const output = {
+    sRank: [],
+    aRank: [],
+    bRank: [],
+    cRank: [],
+    dRank: [],
+    fRank: [],
+  };
+  
   const filteredProducts = products.filter((product) => {
     return product.rating != null;
-  })
-  return filteredProducts.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+  });
+
+  filteredProducts.forEach((product) => {
+    if (product.rating >= 4.7 && product.ratings_total >= 1000) {
+      output['sRank'].push(product);
+    } else if ((product.rating >= 4.4) && (product.ratings_total >= 300 )) {
+      output['aRank'].push(product);
+    } else if ((product.rating >= 4) && (product.ratings_total >= 200 )) {
+      output['bRank'].push(product);
+    } else if ((product.rating >= 3.7) && (product.ratings_total >= 100 )) {
+      output['cRank'].push(product);
+    } else if ((product.rating >= 3.5) && (product.ratings_total >= 50 )) {
+      output['dRank'].push(product);
+    } else {
+      output['fRank'].push(product);
+    }
+  });
+
+  return output;
 };
+
 
 export default function TierList(props) {
 
   const {mode, transition, back} = useVisualMode(HIDDEN);
+
+  const sortedProducts = sortProducts(props.products);
 
   const toggleImageForm = () => {
     mode === HIDDEN ? transition(SHOW) : back();
@@ -25,18 +53,6 @@ export default function TierList(props) {
 
   const handleClickAway = () => {
     transition(HIDDEN);
-  };
-
-  const getCategoryName = () => {
-    if (props.searchTerm) {
-      return props.searchTerm;
-    }
-
-    if (props.category) {
-      if (props.childCategory) return props.childCategories.find(category => category.id === props.childCategory)?.name;
-      return props.categories.find(category => category.id === props.category).name;
-    }
-    return 'CATEGORY';
   };
 
   return (
@@ -47,7 +63,7 @@ export default function TierList(props) {
             <img src='s.png' alt='s-rank'/>
           </div>
           <HorizontalTabs
-            products={sortProducts(props.products).slice(0, (props.products.length) / 6)}
+            products={sortedProducts.sRank}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
@@ -61,7 +77,7 @@ export default function TierList(props) {
           <img src='a.png' alt='a-rank'/>
           </div>
           <HorizontalTabs  
-            products={sortProducts(props.products).slice((props.products.length) / 6, (props.products.length) / 6 * 2)}
+            products={sortedProducts.aRank}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
@@ -75,7 +91,7 @@ export default function TierList(props) {
             <img src='b.png' alt='b-rank'/>
           </div>
           <HorizontalTabs
-            products={sortProducts(props.products).slice((props.products.length) / 6 * 2, (props.products.length) / 6 * 3)}
+            products={sortedProducts.bRank}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
@@ -89,7 +105,7 @@ export default function TierList(props) {
             <img src='c.png' alt='c-rank'/>
           </div>
           <HorizontalTabs    
-            products={sortProducts(props.products).slice((props.products.length) / 6 * 3, (props.products.length) / 6 * 4)}
+            products={sortedProducts.cRank}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
@@ -103,7 +119,7 @@ export default function TierList(props) {
             <img src='d.png' alt='d-rank'/>
           </div>
           <HorizontalTabs    
-            products={sortProducts(props.products).slice((props.products.length) / 6 * 4, (props.products.length) / 6 * 5)}
+            products={sortedProducts.dRank}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
@@ -117,7 +133,7 @@ export default function TierList(props) {
             <img src='f.png' alt='f-rank'/>
           </div>
           <HorizontalTabs    
-            products={sortProducts(props.products).slice((props.products.length) / 6 * 5, -1)}
+            products={sortedProducts.fRank}
             user={props.user}
             addWish={props.addWish}
             removeWish={props.removeWish}
