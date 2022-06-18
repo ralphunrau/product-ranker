@@ -8,7 +8,7 @@ Shoppers can decide on which product to buy when unsure if the product is the be
 
 ---
 
-### User Stories:
+## User Stories:
 
 - User can see where a product ranks amongst similar products
 - User can see related products and see where they tier amongst each other
@@ -19,8 +19,25 @@ Shoppers can decide on which product to buy when unsure if the product is the be
 
 ---
 
-### Tech Stack:
+## Tech Stack:
 
 - Front-End: React, HTML, SCSS, MUI, Axios,
 - Back-End: Node, Express, PostgreSQL, Knex Js
 - Testing: Cypress
+
+# Project Screenshots
+
+## Home page view
+!["Screenshot of the home page view"](https://github.com/ralphunrau/product-ranker/blob/main/project-screenshots/Homepage.png?raw=true)
+
+## Image submission view
+!["Screenshot of the image submission view"](https://github.com/ralphunrau/product-ranker/blob/main/project-screenshots/Image-submission.gif?raw=true)
+
+## Category selection view
+!["Screenshot of the category selection"](https://github.com/ralphunrau/product-ranker/blob/main/project-screenshots/category-selection.gif?raw=true)
+
+## Wish link page view
+!["Screenshot of the wish link page"](https://github.com/ralphunrau/product-ranker/blob/main/project-screenshots/sharable-wish-link.gif?raw=true)
+
+## Wish list page view
+!["Screenshot of the wish list page"](https://github.com/ralphunrau/product-ranker/blob/main/project-screenshots/wishlist-page.gif?raw=true)
